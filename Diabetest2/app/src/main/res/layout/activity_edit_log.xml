@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profesional.logros.EditLog">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView1392"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="id logro" />
+
+        <EditText
+            android:id="@+id/id2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:focusable="false"/>
+
+        <TextView
+            android:id="@+id/textView1402"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nombre logro" />
+
+        <EditText
+            android:id="@+id/nombre2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView1412"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="puntos"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/puntos2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/te12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="descripcion" />
+        <EditText
+            android:id="@+id/descripcion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/enviar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="enviar"
+            android:text="Button" />
+
+        <TextView
+            android:id="@+id/salida12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sald" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

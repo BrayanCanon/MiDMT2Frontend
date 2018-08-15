@@ -1,0 +1,4 @@
+#Wed Aug 15 14:07:41 UTC 2018
+base.0=/home/daryo/Documentos/github/Diabetest2/app/build/intermediates/transforms/dexMerger/debug/20
+path.0=classes.dex
+renamed.0=classes.dex
