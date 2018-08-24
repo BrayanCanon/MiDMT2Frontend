@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Mi DT2 con Psicoeducación</string>
+    <string name="Hombre" />
+    <string name="title_activity_menu">Menu</string>
+    <string name="acciones">Configuracion</string>
+    <string name="title_activity_prueba_menu">PruebaMenu</string>
+
+    <string name="title_activity_pasos_mision">PasosMision</string>
+
+    <string name="title_activity_seleccion_mp">Misiones profesional</string>
+    <string name="title_activity_general_mision">Misiones generales</string>
+    <string name="title_activity_mision_prof">MisionProf</string>
+    <string name="title_activity_mision_gen_prof">MisionGenProf</string>
+    <string name="logro_ag">agregar logro</string>
+    <string name="log_edit">editar logro</string>
+    <string name="logro_del">borrar logro</string>
+    <string name="title_activity_controles_log">controlesLog</string>
+    <string-array name="categorias">
+        <item>Educación en diabetes</item>
+        <item>Ejercicio</item>
+        <item>Dieta</item>
+        <item>Uso de los medicamentos</item>
+    </string-array>
+    <string-array name="tipo_mis">
+        <item>generico</item>
+        <item>especifica</item>
+    </string-array>
+    <string-array name="Weight">
+        <item>Basico</item>
+        <item>Medio</item>
+        <item>Avanzado</item>
+    </string-array>
+    <string-array name="nivel">
+        <item>Basico</item>
+        <item>Medio</item>
+        <item>Avanzado</item>
+    </string-array>
+
+
+</resources>
