@@ -143,8 +143,9 @@
         <activity android:name=".profesional.modmision.Modmisp" />
         <activity android:name=".profesional.modmision.Basico" />
         <activity android:name=".profesional.modmision.Pasosmod" />
-        <activity android:name=".profesional.Modpasmisg1"></activity>
-        <activity android:name=".profesional.misioncruds.Recursos_crud"></activity>
+        <activity android:name=".profesional.Modpasmisg1" />
+        <activity android:name=".profesional.misioncruds.Recursos_crud" />
+        <activity android:name=".profesional.modmision.Modpasos"></activity>
     </application>
 
 </manifest>

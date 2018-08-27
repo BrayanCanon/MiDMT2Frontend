@@ -7,12 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.util.Conexion;
@@ -22,20 +25,27 @@ import juan.example.com.diabetest2.util.misionesadapter;
 public class Pruebcon extends AppCompatActivity {
 
     RecyclerView vista;
+    EditText buscmisedit;
     misionesadapter n;
     Context este=this;
+    ArrayList<Mision> prueba=new ArrayList<>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pruebcon);
-        final ArrayList<Mision> prueba=new ArrayList<>();
+        buscmisedit=(EditText)findViewById(R.id.buscmisedit);
+        vista=(RecyclerView)findViewById(R.id.recycler_view45);
+        cargar();
 
+    }
+
+    public void cargar(){
 
         final Mision elemento2=new Mision();
 
-        vista=(RecyclerView)findViewById(R.id.recycler_view45);
         n=new misionesadapter(prueba,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         vista.setLayoutManager(mLayoutManager);
@@ -80,15 +90,28 @@ public class Pruebcon extends AppCompatActivity {
             }
         }).execute(new ArrayList<String>());
 
-
-
-
-
     }
 
 
 
     public void busqueda(View v){
 
+        Pattern p;
+        Matcher m;
+        for(int i=0;i<prueba.size();i++){
+            p = Pattern.compile(buscmisedit.getText().toString());
+            m = p.matcher(prueba.get(i).getNombre());
+            if(!m.find())
+            {
+                prueba.remove(i);
+                i--;
+            }
+            n.notifyDataSetChanged();
+        }
+
+    }
+    public void recargar(View v){
+        buscmisedit.setText("");
+        cargar();
     }
 }

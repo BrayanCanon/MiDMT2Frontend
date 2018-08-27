@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".profesional.modmision.Pasosmod">
 
+
+    <TextView
+        android:id="@+id/busc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Lista de pasos"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view452"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view452" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view452"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="8dp"
+        android:text="Finalizar"
+        app:layout_constraintStart_toEndOf="@+id/busc2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>
