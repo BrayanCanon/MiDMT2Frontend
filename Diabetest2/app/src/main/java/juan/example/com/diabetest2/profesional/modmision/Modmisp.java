@@ -21,5 +21,12 @@ public class Modmisp extends AppCompatActivity {
         startActivity(n);
     }
 
+    public void pasos(View v){
+        Intent pasolist=new Intent(this,Pasosmod.class);
+        pasolist.putExtra("mision",(Mision)getIntent().getParcelableExtra("mision"));
+        startActivity(pasolist);
+
+    }
+
 
 }
