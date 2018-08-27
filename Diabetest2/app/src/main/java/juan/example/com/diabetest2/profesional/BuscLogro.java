@@ -130,13 +130,18 @@ public class BuscLogro extends AppCompatActivity {
 
     public void creacion(View v){
         Intent n=new Intent(BuscLogro.this,ag_logro.class);
+        n.putExtra("categoria",getIntent().getStringExtra("categoria"));
+        n.putExtra("codcategoria",getIntent().getStringExtra("codcategoria"));
+        n.putExtra("codigo",getIntent().getStringExtra("codigo"));
         startActivity(n);
     }
 
     public void pasos(View v){
         Intent ne=new Intent(this,Crearmisg3.class);
         ne.putExtra("categoria",getIntent().getStringExtra("categoria"));
+        ne.putExtra("codcategoria",getIntent().getIntExtra("codcategoria", 1));
         ne.putExtra("codigo",getIntent().getStringExtra("codigo"));
+        Log.d("codcate",""+getIntent().getIntExtra("codcategoria", 1));
         startActivity(ne);
     }
 }

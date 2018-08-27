@@ -62,26 +62,6 @@ public class Crearmisg4 extends AppCompatActivity {
         ArrayList nombres=new ArrayList<String>();
         ArrayList valores=new ArrayList<String>();
         ListViewItems=new ArrayList<String>();
-        new Conexion("consultarLogros", nombres, new Conexion.Comunicado() {
-            @Override
-            public void salidas(String output) {
-                try {
-                    JSONArray jsonArray = new JSONArray(output);
-                    for(int a=0;a<jsonArray.length();a++){
-                        JSONObject n=jsonArray.getJSONObject(a);
-                        ListViewItems.add(n.get("nomLogro").toString());
-                    }
-                adapter=new ArrayAdapter<String>(este,android.R.layout.simple_spinner_dropdown_item,ListViewItems);
-                logros.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-
-                }
-                catch (Exception e){
-
-                }
-
-            }
-        }).execute(valores);
 
     }
 
@@ -121,9 +101,12 @@ public class Crearmisg4 extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             Intent a = new Intent(this,Crearmisg3.class);
-            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Bundle slida= getIntent().getExtras();
+            int catcod=slida.getInt("catcod");
+            nomcat=slida.getString("cadnom");
             a.putExtra("categoria",nomcat);
             a.putExtra("codigo",codmision);
+            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(a);
             return true;
         }
