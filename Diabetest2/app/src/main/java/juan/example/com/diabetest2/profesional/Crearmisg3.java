@@ -78,7 +78,8 @@ public class Crearmisg3 extends AppCompatActivity {
                 JsonArray salida=gson.fromJson(output,JsonArray.class);
                 for (int a=0;a<salida.size();a++){
                     JsonObject logros=salida.get(a).getAsJsonObject();
-                    ListViewItems.add(logros.get("nomLogro").toString());
+                    ListViewItems.add(logros.get("nomLogro").getAsString());
+                    Log.d("comilla",logros.get("nomLogro").getAsString());
                     listId.add(logros.get("idLogro").getAsInt());
                 }
 
