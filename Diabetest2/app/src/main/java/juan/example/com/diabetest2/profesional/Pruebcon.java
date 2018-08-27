@@ -35,6 +35,12 @@ public class Pruebcon extends AppCompatActivity {
 
         final Mision elemento2=new Mision();
 
+        vista=(RecyclerView)findViewById(R.id.recycler_view45);
+        n=new misionesadapter(prueba,this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        vista.setLayoutManager(mLayoutManager);
+        vista.setAdapter(n);
+
         new Conexion("consultarMisiones",new ArrayList<String>(), new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
@@ -47,7 +53,7 @@ public class Pruebcon extends AppCompatActivity {
                         if(em.has("nombre")) {
                             if (em.has("idCategoria")) {
                                 JSONObject categoria = em.getJSONObject("idCategoria");
-                                JSONObject tipomision= em.getJSONObject("idTipoMision");
+                                //JSONObject tipomision= em.getJSONObject("idTipoMision");
                                 JSONObject niv = em.getJSONObject("idNivel");
 
                                 Mision elemento = new Mision();
@@ -55,21 +61,17 @@ public class Pruebcon extends AppCompatActivity {
                                 elemento.setNombre(em.get("nombre").toString());
                                 elemento.setIdCategoria(Integer.parseInt(categoria.get("idCategoria").toString()));
                                 elemento.setCategoria(categoria.get("nombreCategoria").toString());
-                                elemento.setTipo(tipomision.getString("nombreTipoMision"));
+                                //elemento.setTipo(tipomision.getString("nombreTipoMision"));
                                 elemento.setNomnivel(niv.getString("nombre"));
 
                                 //elemento.setCategoria("sal");
                                 prueba.add(elemento);
-                                n = new misionesadapter(prueba, este);
                             }
                         }
 
                     }
-                    vista=(RecyclerView)findViewById(R.id.recycler_view45);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                    vista.setLayoutManager(mLayoutManager);
-                    vista.setAdapter(n);
 
+                    n.notifyDataSetChanged();
 
                 }catch (Exception e){
                     Log.d("consul111",e.toString());

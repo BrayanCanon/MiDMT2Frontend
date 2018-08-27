@@ -26,7 +26,6 @@ public class Crearmisg4 extends AppCompatActivity {
 
     Button abrir;
     TextView nom,desc,dias;
-    Spinner logros;
     ArrayList<String> ListViewItems ;
     ArrayAdapter<String> adapter;
     Context este=this;
@@ -57,7 +56,6 @@ public class Crearmisg4 extends AppCompatActivity {
         nom=(TextView)findViewById(R.id.nom);
         desc=(TextView)findViewById(R.id.desc);
         dias=(TextView)findViewById(R.id.dias);
-        logros=(Spinner)findViewById(R.id.logros);
 
         ArrayList nombres=new ArrayList<String>();
         ArrayList valores=new ArrayList<String>();
