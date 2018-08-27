@@ -92,6 +92,9 @@ public class ag_logro extends AppCompatActivity {
             if (success == true) {
                 Intent volver=new Intent(n,BuscLogro.class);
                 volver.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                volver.putExtra("categoria",getIntent().getStringExtra("categoria"));
+                volver.putExtra("codigo",getIntent().getStringExtra("codigo"));
+                volver.putExtra("codcategoria",getIntent().getStringExtra("codcategoria"));
                 Toast.makeText(getApplicationContext(), respuesta, Toast.LENGTH_LONG).show();
                 startActivity(volver);
             }
