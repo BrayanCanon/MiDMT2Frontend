@@ -64,6 +64,7 @@ public class Crearmisg3 extends AppCompatActivity {
         nomcategoria=getIntent().getStringExtra("categoria");
         codmision=getIntent().getStringExtra("codigo");
         Log.d("estele",codmision);
+        Log.d("nommision",nomcategoria);
         Intent parametros=getIntent();
         if (parametros != null) {
             //
@@ -111,7 +112,8 @@ public class Crearmisg3 extends AppCompatActivity {
 
         nombres.add("nomCategoria");
         valores.add(getIntent().getStringExtra("categoria"));
-
+        codcategoria=getIntent().getIntExtra("codcategoria", 1);
+        Log.d("codigoenvio",""+getIntent().getIntExtra("codcategoria", 1));
         new Conexion("consultarpanom", nombres, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
@@ -123,10 +125,6 @@ public class Crearmisg3 extends AppCompatActivity {
 
                     for(int a=0;a<jsonArray.length();a++){
                         JSONObject salida=jsonArray.getJSONObject(a);
-                        if(primero){
-                            codcategoria=Integer.parseInt(salida.get("categoria").toString());
-                            primero=false;
-                        }
                         Movie movie = new Movie(salida.get("nombre").toString(), salida.get("descripcion").toString(), "0",0,false,salida.getInt("idPaso"),salida.getInt("diasDuracion"),salida.getInt("categoria"),-1);
                         movieList.add(movie);
 
@@ -159,6 +157,7 @@ public class Crearmisg3 extends AppCompatActivity {
         Intent ag=new Intent(this,Crearmisg4.class);
         Bundle datos=new Bundle();
         datos.putInt("catcod",codcategoria);
+        Log.d("codcategoria",String.valueOf(codcategoria));
         datos.putString("cadnom",nomcategoria);
         datos.putString("codmision",codmision);
         Log.d("codmision",codmision);
