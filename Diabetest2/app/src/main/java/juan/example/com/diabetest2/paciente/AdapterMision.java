@@ -26,7 +26,7 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolderMision holder, int position) {
-        holder.titulo.setText(listaMisiones.get(position).getCategoria());
+        holder.titulo.setText(listaMisiones.get(position).getTitulo());
         holder.dificultad.setText(listaMisiones.get(position).getDificultad());
         holder.categoria.setText(listaMisiones.get(position).getCategoria());
 

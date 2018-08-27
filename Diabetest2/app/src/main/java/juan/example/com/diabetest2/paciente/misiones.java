@@ -85,7 +85,7 @@ public class misiones extends AppCompatActivity {
                         mision = salida.get("idMision").getAsJsonObject();
                         categoria = mision.get("idCategoria").getAsJsonObject();
                         nivel= mision.get("idNivel").getAsJsonObject();
-                        MisionVo mis = new MisionVo(mision.get("nombre").getAsString(),categoria.get("nombreCategoria").getAsString(),nivel.get("idNivel").getAsString());
+                        MisionVo mis = new MisionVo(mision.get("nombre").getAsString(),categoria.get("nombreCategoria").getAsString(),nivel.get("nombre").getAsString());
                         listaMisiones.add(mis);
 
 
