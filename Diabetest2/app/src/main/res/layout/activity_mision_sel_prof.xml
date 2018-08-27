@@ -31,12 +31,5 @@
             android:background="@drawable/genericas"
             android:onClick="abrir_crud_generico" />
 
-        <Button
-            android:id="@+id/button32"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Componentes"
-            android:onClick="abrir_componentes" />
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
