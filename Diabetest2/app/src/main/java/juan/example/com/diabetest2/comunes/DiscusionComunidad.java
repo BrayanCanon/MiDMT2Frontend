@@ -77,9 +77,9 @@ public class DiscusionComunidad extends AppCompatActivity {
                 int i = 0;
                 if(listadoX != null) {
                     while (i < listadoX.size()) {
-                        fechas.add(listadoX.get(i));
-                        participante.add(listadoX.get(i + 1));
-                        mensajes.add(listadoX.get(i + 2));
+                        fechas.add(listadoX.get(i).toString());
+                        participante.add(listadoX.get(i + 1).toString());
+                        mensajes.add(listadoX.get(i + 2).toString());
                         i = i + 3;
                     }
                     //Llenado del ListView principal --------------------------------------------------------------------

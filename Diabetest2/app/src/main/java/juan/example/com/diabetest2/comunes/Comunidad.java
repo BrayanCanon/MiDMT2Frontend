@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -70,20 +71,25 @@ public class Comunidad extends AppCompatActivity {
                 int i = 0;
                 if(listadoX != null) {
                     while (i < listadoX.size()) {
-                        fechas.add(listadoX.get(i));
-                        tema.add(listadoX.get(i+1));
-                        idAutor.add(listadoX.get(i + 2));
-                        participante.add(listadoX.get(i + 3));
-                        mensajes.add(listadoX.get(i + 4));
+                        fechas.add(listadoX.get(i).toString());
+                        tema.add(listadoX.get(i+1).toString());
+                        idAutor.add(listadoX.get(i + 2).toString());
+                        participante.add(listadoX.get(i + 3).toString());
+                        mensajes.add(listadoX.get(i + 4).toString());
                         i = i + 5;
-                    }
-                    //Llenado del ListView principal --------------------------------------------------------------------
 
+                    }
+
+                    //Llenado del ListView principal --------------------------------------------------------------------
+                    Log.d("pruebita","prueba");
                     ListView lv = (ListView) findViewById(R.id.id_publicaciones);
+
                     lv.setAdapter(new AaTema((Activity) ctx,
                             (String[]) fechas.toArray(new String[fechas.size()]),
                             (String[]) tema.toArray(new String[tema.size()])
                     ));
+                    Log.d("pruebita","prueba");
+
                     // Cambio de partes
 
 
