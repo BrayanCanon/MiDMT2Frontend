@@ -1,5 +1,6 @@
 package juan.example.com.diabetest2.profesional.modmision;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class Basico extends AppCompatActivity {
     Mision seleccion;
     EditText modTextnom;
     Spinner categoria,tipo,nivel;
+    Context este=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class Basico extends AppCompatActivity {
         JsonObject nivel1=new JsonObject();
         JsonObject tipomis1=new JsonObject();
         nombre.add("idMision");valores.add(seleccion.getIdMision());
+        nombre.add("descripcion");valores.add("");
         nombre.add("nombre");valores.add(modTextnom.getText());
         nombre.add("estado");valores.add("a");
         categoria1.addProperty("idCategoria",categoria.getSelectedItemPosition()+1);
@@ -74,6 +77,10 @@ public class Basico extends AppCompatActivity {
         new Conexion("modificarMision", nombre, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
+
+                Intent volver=new Intent(este,Pruebcon.class);
+                volver.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(volver);
 
             }
         }).execute(valores);
