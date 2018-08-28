@@ -22,7 +22,8 @@
             android:id="@+id/button39"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="pasos" />
+            android:text="pasos"
+            android:onClick="pasos"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

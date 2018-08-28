@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 
-public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolderMision> {
+public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolderMision> implements View.OnClickListener{
     ArrayList<MisionVo> listaMisiones;
+    private View.OnClickListener listener;
 
     public AdapterMision(ArrayList<MisionVo> listaMisiones){
         this.listaMisiones=listaMisiones;
@@ -37,6 +38,11 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
     @Override
     public int getItemCount() {
         return listaMisiones.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     public class ViewHolderMision extends RecyclerView.ViewHolder {

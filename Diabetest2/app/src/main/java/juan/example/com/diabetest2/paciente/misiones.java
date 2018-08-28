@@ -89,6 +89,7 @@ public class misiones extends AppCompatActivity {
                         listaMisiones.add(mis);
 
 
+
                     }
                     adapter.notifyDataSetChanged();
 
