@@ -63,7 +63,7 @@ public class Pruebcon extends AppCompatActivity {
                         if(em.has("nombre")) {
                             if (em.has("idCategoria")) {
                                 JSONObject categoria = em.getJSONObject("idCategoria");
-                                //JSONObject tipomision= em.getJSONObject("idTipoMision");
+                                JSONObject tipomision= em.getJSONObject("idTipoMision");
                                 JSONObject niv = em.getJSONObject("idNivel");
 
                                 Mision elemento = new Mision();
@@ -71,7 +71,7 @@ public class Pruebcon extends AppCompatActivity {
                                 elemento.setNombre(em.get("nombre").toString());
                                 elemento.setIdCategoria(Integer.parseInt(categoria.get("idCategoria").toString()));
                                 elemento.setCategoria(categoria.get("nombreCategoria").toString());
-                                //elemento.setTipo(tipomision.getString("nombreTipoMision"));
+                                elemento.setTipo(tipomision.getString("nombreTipoMision"));
                                 elemento.setNomnivel(niv.getString("nombre"));
 
                                 //elemento.setCategoria("sal");
