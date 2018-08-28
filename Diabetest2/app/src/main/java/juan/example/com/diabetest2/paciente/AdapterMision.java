@@ -22,6 +22,7 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
     @Override
     public ViewHolderMision onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.mision_list,null,false);
+        view.setOnClickListener(this);
         return new ViewHolderMision(view);
     }
 
@@ -39,10 +40,15 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
     public int getItemCount() {
         return listaMisiones.size();
     }
-
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
     @Override
     public void onClick(View view) {
-
+        if(listener!=null)
+        {
+            listener.onClick(view);
+        }
     }
 
     public class ViewHolderMision extends RecyclerView.ViewHolder {
@@ -53,6 +59,7 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
             titulo=  itemView.findViewById(R.id.titulo);
             dificultad= itemView.findViewById(R.id.dificultad);
             categoria=itemView.findViewById(R.id.categoria);
+
         }
     }
 }
