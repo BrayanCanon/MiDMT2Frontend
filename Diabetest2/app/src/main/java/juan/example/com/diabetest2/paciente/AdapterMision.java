@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 
-public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolderMision> {
+public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolderMision> implements View.OnClickListener{
     ArrayList<MisionVo> listaMisiones;
+    private View.OnClickListener listener;
 
     public AdapterMision(ArrayList<MisionVo> listaMisiones){
         this.listaMisiones=listaMisiones;
@@ -21,12 +22,13 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
     @Override
     public ViewHolderMision onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.mision_list,null,false);
+        view.setOnClickListener(this);
         return new ViewHolderMision(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolderMision holder, int position) {
-        holder.titulo.setText(listaMisiones.get(position).getCategoria());
+        holder.titulo.setText(listaMisiones.get(position).getTitulo());
         holder.dificultad.setText(listaMisiones.get(position).getDificultad());
         holder.categoria.setText(listaMisiones.get(position).getCategoria());
 
@@ -38,6 +40,16 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
     public int getItemCount() {
         return listaMisiones.size();
     }
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
+    @Override
+    public void onClick(View view) {
+        if(listener!=null)
+        {
+            listener.onClick(view);
+        }
+    }
 
     public class ViewHolderMision extends RecyclerView.ViewHolder {
         TextView titulo,dificultad,categoria;
@@ -47,6 +59,7 @@ public class AdapterMision extends RecyclerView.Adapter<AdapterMision.ViewHolder
             titulo=  itemView.findViewById(R.id.titulo);
             dificultad= itemView.findViewById(R.id.dificultad);
             categoria=itemView.findViewById(R.id.categoria);
+
         }
     }
 }

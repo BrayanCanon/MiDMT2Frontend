@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_metas"
+    tools:context=".paciente.BasicInfoMision">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Informacion basica"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+
+            android:textColor="@color/blanco" />
+
+        <ImageView
+            android:id="@+id/imageView50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/borrarmision" />
+
+        <TextView
+            android:id="@+id/textView150"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Descripción:" />
+
+        <TextView
+            android:id="@+id/descripcionMision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView145"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Categoria:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/catMision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView152"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Dificultad:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/difMision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+</FrameLayout>

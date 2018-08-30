@@ -42,6 +42,20 @@ public class misiones extends AppCompatActivity {
         listaMisiones= new ArrayList<>();
         recylerMisiones=findViewById(R.id.recyclerMisiones);
         adapter = new AdapterMision(listaMisiones);
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intento = new Intent(misiones.this,VerMisionPaciente.class);
+                startActivity(intento);
+                Bundle envio = new Bundle();
+                MisionVo mision = listaMisiones.get(recylerMisiones.getChildAdapterPosition(view));
+                envio.putSerializable("mision",mision);
+                intento.putExtras(envio);
+                startActivity(intento);
+
+
+            }
+        });
         recylerMisiones.setAdapter(adapter);
         recylerMisiones.setItemAnimator(new DefaultItemAnimator());
         recylerMisiones.setLayoutManager(new LinearLayoutManager(this));
@@ -85,8 +99,9 @@ public class misiones extends AppCompatActivity {
                         mision = salida.get("idMision").getAsJsonObject();
                         categoria = mision.get("idCategoria").getAsJsonObject();
                         nivel= mision.get("idNivel").getAsJsonObject();
-                        MisionVo mis = new MisionVo(mision.get("nombre").getAsString(),categoria.get("nombreCategoria").getAsString(),nivel.get("idNivel").getAsString());
+                        MisionVo mis = new MisionVo(mision.get("nombre").getAsString(),categoria.get("nombreCategoria").getAsString(),nivel.get("nombre").getAsString(),salida.get("idMisionPaciente").getAsString());
                         listaMisiones.add(mis);
+
 
 
                     }

@@ -145,6 +145,14 @@
         <activity android:name=".profesional.modmision.Pasosmod" />
         <activity android:name=".profesional.Modpasmisg1" />
         <activity android:name=".profesional.misioncruds.Recursos_crud" />
+        <activity
+            android:name=".paciente.VerMisionPaciente"
+            android:label="@string/title_activity_ver_mision_paciente"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".paciente.MisionPaciente"
+            android:label="@string/title_activity_mision_paciente"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".profesional.modmision.Modpasos"></activity>
     </application>
 

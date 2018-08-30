@@ -1,13 +1,20 @@
 package juan.example.com.diabetest2.paciente;
 
-public class MisionVo {
+import java.io.Serializable;
+
+public class MisionVo implements Serializable {
     private String titulo;
     private String categoria;
     private String dificultad;
-    public MisionVo(String titulo,String categoria,String dificultad){
+    private String idMision;
+
+
+
+    public MisionVo(String titulo, String categoria, String dificultad,String idMision){
         this.titulo=titulo;
         this.categoria=categoria;
         this.dificultad=dificultad;
+        this.idMision=idMision;
 
     }
     public String getTitulo() {
@@ -32,5 +39,12 @@ public class MisionVo {
 
     public void setDificultad(String dificultad) {
         this.dificultad = dificultad;
+    }
+    public String getIdMision() {
+        return idMision;
+    }
+
+    public void setIdMision(String idMision) {
+        this.idMision = idMision;
     }
 }
