@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
 
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Descripción:" />
+            android:text="Descripción:"
+            android:textColor="@color/blanco"/>
 
         <TextView
             android:id="@+id/descripcionMision"
@@ -47,7 +48,7 @@
             android:id="@+id/textView145"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:textColor="@color/colorAccent"
             android:text="Categoria:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -61,7 +62,7 @@
             android:id="@+id/textView152"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:textColor="@color/colorAccent"
             android:text="Dificultad:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 

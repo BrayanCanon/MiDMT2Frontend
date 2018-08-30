@@ -7,13 +7,16 @@ public class MisionVo implements Serializable {
     private String categoria;
     private String dificultad;
     private String idMision;
+    private String descripcion;
 
 
 
-    public MisionVo(String titulo, String categoria, String dificultad,String idMision){
+
+    public MisionVo(String titulo, String categoria, String dificultad, String idMision, String descripcion){
         this.titulo=titulo;
         this.categoria=categoria;
         this.dificultad=dificultad;
+        this.descripcion=descripcion;
         this.idMision=idMision;
 
     }
@@ -46,5 +49,12 @@ public class MisionVo implements Serializable {
 
     public void setIdMision(String idMision) {
         this.idMision = idMision;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
