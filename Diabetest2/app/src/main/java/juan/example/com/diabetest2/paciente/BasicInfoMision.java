@@ -25,7 +25,7 @@ public class BasicInfoMision extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     View vista;
-    TextView descripcion, categoria, dificultad;
+    TextView descripcion, categoria, dificultad,titulo;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,11 +71,14 @@ public class BasicInfoMision extends Fragment {
         // Inflate the layout for this fragment
         Bundle envio = getArguments();
         MisionVo mision  = (MisionVo) envio.getSerializable("mision");
+
         vista=inflater.inflate(R.layout.fragment_basic_info_mision, container, false);
+        titulo=vista.findViewById(R.id.titulo);
         descripcion=vista.findViewById(R.id.descripcionMision);
         categoria = vista.findViewById(R.id.catMision);
-        dificultad=vista.findViewById(R.id.descripcionMision);
-        descripcion.setText(mision.getTitulo());
+        dificultad=vista.findViewById(R.id.difMision);
+        descripcion.setText(mision.getDescripcion());
+        titulo.setText(mision.getTitulo());
         categoria.setText(mision.getCategoria());
         dificultad.setText(mision.getDificultad());
         return  vista;

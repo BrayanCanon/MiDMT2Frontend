@@ -60,9 +60,12 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:adjustViewBounds="true"
+                    android:onClick="misiones"
                     android:background="@android:color/background_light"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/misiones" />
+                    app:srcCompat="@drawable/misiones"
+
+                     />
 
                 <ImageButton
                     android:id="@+id/imageButton21"
@@ -71,9 +74,11 @@
                     android:layout_margin="4dp"
                     android:adjustViewBounds="true"
                     android:background="@android:color/background_light"
-                    android:onClick="misiones"
+
+                    app:srcCompat="@drawable/encuestas"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/encuestas" />
+
+                   />
             </LinearLayout>
 
             <LinearLayout
