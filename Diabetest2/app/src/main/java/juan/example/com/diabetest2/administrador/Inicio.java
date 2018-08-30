@@ -49,7 +49,7 @@ public class Inicio extends AppCompatActivity {
     //public static final String url = "http://192.168.1.5:8080/DT2/Procesos?wsdl";
     //public static final String urlImagenes = "http://18.218.252.83:8080/DT2/Imagenes/";
     public static final String url = "http://192.168.1.7" +
-            ":8080/DT2/Procesos?wsdl";
+            ":8080/DT3/Procesos?wsdl";
     public static final String urlImagenes = "http://18.218.252.83:8080/DT5/Imagenes/";
 
     public static long id,idPaciente;
@@ -133,6 +133,7 @@ public class Inicio extends AppCompatActivity {
                     ServicioDT2.idLocal = Long.valueOf(r[0].trim());
                     id = Long.valueOf(r[0].trim());
                     rol = r[1];
+                    Log.d("rol",r[1]);
                     consentimiento = Integer.valueOf(r[2]);
                     completado = Integer.decode(r[3].trim());
                     if (rol.contains("paciente")) {
@@ -210,22 +211,22 @@ public class Inicio extends AppCompatActivity {
                 if (rol.contains("paciente") && completado == 5 && preguntarAnimo.contains("0")) {
                     intento = new Intent(this, MenuPaciente.class);
                 }
-                if (rol.contains("paciente") && completado == 7 && preguntarAnimo.contains("1")) {
+                if (rol.contains("paciente") && completado == 6 && preguntarAnimo.contains("1")) {
                     intento = new Intent(this, Animo.class);
                 }
-                if (rol.contains("paciente") && completado == 7 && preguntarAnimo.contains("0")) {
+                if (rol.contains("paciente") && completado == 6 && preguntarAnimo.contains("0")) {
                     intento = new Intent(this, MenuPaciente.class);
                 }
-                if (rol.contains("paciente") && completado == 7 && preguntarAnimo.contains("0") && preguntarPeso.contains("1")) {
+                if (rol.contains("paciente") && completado == 6 && preguntarAnimo.contains("0") && preguntarPeso.contains("1")) {
                     intento = new Intent(this, PesoIMC.class);
                 }
-                if (rol.contains("paciente") && completado == 7 && preguntarAnimo.contains("0") && preguntarPeso.contains("0")) {
+                if (rol.contains("paciente") && completado == 6 && preguntarAnimo.contains("0") && preguntarPeso.contains("0")) {
                     intento = new Intent(this, MenuPaciente.class);
                 }
-                if (rol.contains("paciente") && completado == 7 && preguntarAnimo.contains("0") && preguntarHba1c.contains("1")) {
+                if (rol.contains("paciente") && completado == 6 && preguntarAnimo.contains("0") && preguntarHba1c.contains("1")) {
                     intento = new Intent(this, Hba1c.class);
                 }
-                if (rol.contains("paciente") && completado == 7 && preguntarAnimo.contains("0") && preguntarHba1c.contains("0")) {
+                if (rol.contains("paciente") && completado == 6 && preguntarAnimo.contains("0") && preguntarHba1c.contains("0")) {
                     intento = new Intent(this, MenuPaciente.class);
                 }
             }
