@@ -50,6 +50,8 @@ public class misiones extends AppCompatActivity {
                 Bundle envio = new Bundle();
                 MisionVo mision = listaMisiones.get(recylerMisiones.getChildAdapterPosition(view));
                 envio.putSerializable("mision",mision);
+                intento.putExtras(envio);
+                startActivity(intento);
 
 
             }

@@ -33,6 +33,7 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private Bundle objeto;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -48,10 +49,13 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),getIntent().getExtras());
+
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -100,6 +104,7 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static Fragment fragment;
 
         public PlaceholderFragment() {
         }
@@ -109,9 +114,15 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
          * number.
          */
         public static Fragment newInstance(int sectionNumber) {
-            Fragment fragment= null;
+
+
+
             switch(sectionNumber ){
-                case 1: fragment= new BasicInfoMision();
+                case 1:
+
+
+                    fragment= new BasicInfoMision();
+
                 break;
                 case 2: fragment= new pasosLogrosMision();
                     break;
@@ -126,9 +137,11 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-                View rootView = inflater.inflate(R.layout.fragment_ver_mision_paciente, container, false);
+                View rootView = inflater.inflate(R.layout.fragment_basic_info_mision, container, false);
                 TextView textView = (TextView) rootView.findViewById(R.id.section_label);
                 textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                fragment= null;
+                fragment.setArguments(this.getArguments());
                 return rootView;
         }
     }
@@ -138,16 +151,21 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        Bundle mision;
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(FragmentManager fm, Bundle mision) {
             super(fm);
+            this.mision=mision;
         }
+
 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+           Fragment frag = PlaceholderFragment.newInstance(position + 1);
+            frag.setArguments(mision);
+            return frag;
         }
 
         @Override
