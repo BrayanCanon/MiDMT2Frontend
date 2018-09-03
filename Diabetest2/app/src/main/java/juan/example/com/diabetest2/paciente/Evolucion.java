@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.graphics.*;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -154,7 +155,7 @@ public class Evolucion extends AppCompatActivity {
 
 
 
-//Graficos ---------------
+    //Graficos ---------------
     Vector <String> tablaPesoImc = new Vector<>();
     Vector <String> tablaAnimo = new Vector<>();
     Vector <String> tablaHba1c = new Vector<>();
@@ -171,7 +172,11 @@ public class Evolucion extends AppCompatActivity {
                 sobre.setOutputSoapObject(solicitud);
                 HttpTransportSE transporte = new HttpTransportSE(Inicio.url);
                 transporte.call("http://Servicios/consultarPesoImc", sobre);
-                tablaPesoImc = (Vector) sobre.getResponse();
+                SoapObject temp=(SoapObject) sobre.bodyIn;
+
+                for(int a=0;a<temp.getPropertyCount();a++){
+                    tablaPesoImc.add(temp.getProperty(a).toString());
+                }
 
                 //Consulta del animo
                 solicitud = new SoapObject(Inicio.namespace, "consultarAnimo");
@@ -179,7 +184,8 @@ public class Evolucion extends AppCompatActivity {
                 sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 sobre.setOutputSoapObject(solicitud);
                 transporte.call("http://Servicios/consultarAnimo", sobre);
-                tablaAnimo = (Vector) sobre.getResponse();
+                temp=(SoapObject)sobre.bodyIn;
+                for(int a=0;a<temp.getPropertyCount();a++) tablaAnimo.add(temp.getProperty(a).toString());
 
                 //Consulta del HbA1c
                 solicitud = new SoapObject(Inicio.namespace, "consultarHba1c");
@@ -187,7 +193,8 @@ public class Evolucion extends AppCompatActivity {
                 sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 sobre.setOutputSoapObject(solicitud);
                 transporte.call("http://Servicios/consultarHba1c", sobre);
-                tablaHba1c = (Vector) sobre.getResponse();
+                temp=(SoapObject)sobre.bodyIn;
+                for(int a=0;a<temp.getPropertyCount();a++) tablaHba1c.add(temp.getProperty(a).toString());
 
                 //Consulta del Glucosa
                 solicitud = new SoapObject(Inicio.namespace, "consultarGlucosa");
@@ -195,7 +202,8 @@ public class Evolucion extends AppCompatActivity {
                 sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 sobre.setOutputSoapObject(solicitud);
                 transporte.call("http://Servicios/consultarGlucosa", sobre);
-                tablaGlucosa = (Vector) sobre.getResponse();
+                temp=(SoapObject)sobre.bodyIn;
+                for(int a=0;a<temp.getPropertyCount();a++) tablaGlucosa.add(temp.getProperty(a).toString());
             } catch (Exception e) {}
             return true;
         }
@@ -212,8 +220,8 @@ public class Evolucion extends AppCompatActivity {
                 if(tablaPesoImc.size()>24){ i = tablaPesoImc.size()-24;}
                 while(i< tablaPesoImc.size()){
                     fechasX.add(tablaPesoImc.get(i));
-                    pesoX.add(Integer.parseInt(tablaPesoImc.get(i+1)));
-                    imcX.add(Integer.parseInt(tablaPesoImc.get(i+2)));
+                    pesoX.add((int)Double.parseDouble(tablaPesoImc.get(i+1)) );
+                    imcX.add((int)Double.parseDouble(tablaPesoImc.get(i+2)));
                     i = i+3;
                 }
                 //Vectores Animo
@@ -223,7 +231,7 @@ public class Evolucion extends AppCompatActivity {
                 if(tablaAnimo.size()>30){ i = tablaAnimo.size()-30;}
                 while(i< tablaAnimo.size()){
                     fechasX2.add(tablaAnimo.get(i));
-                    animoX.add(Integer.parseInt(tablaAnimo.get(i+1)));
+                    animoX.add((int)Double.parseDouble(tablaAnimo.get(i+1)));
                     i = i+2;
                 }
                 //Vectores Hba1c
@@ -243,7 +251,7 @@ public class Evolucion extends AppCompatActivity {
                 if(tablaGlucosa.size()>30 ){ i = tablaGlucosa.size()-30;}
                 while(i< tablaGlucosa.size()){
                     fechasX4.add(tablaGlucosa.get(i).substring(5,16));
-                    glucosaX.add(Integer.parseInt(tablaGlucosa.get(i+1)));
+                    glucosaX.add((int)Double.parseDouble(tablaGlucosa.get(i+1)));
                     i = i+2;
                 }
 
@@ -358,7 +366,7 @@ public class Evolucion extends AppCompatActivity {
 
 
 
-// Datos generales del paciente  ---------------------------
+    // Datos generales del paciente  ---------------------------
     Vector datosPaciente = new Vector();
 
     private class ConsultarPaciente extends AsyncTask<Void, Void, Boolean> {
@@ -372,7 +380,8 @@ public class Evolucion extends AppCompatActivity {
                 sobre.setOutputSoapObject(solicitud);
                 HttpTransportSE transporte = new HttpTransportSE(Inicio.url);
                 transporte.call("http://Servicios/paciente", sobre);
-                datosPaciente = (Vector) sobre.getResponse();
+                SoapObject temp=(SoapObject)sobre.bodyIn;
+                for(int a=0;a<temp.getPropertyCount();a++) datosPaciente.add(temp.getProperty(a).toString());
             } catch (Exception e) {}
             return true;
         }
@@ -399,7 +408,7 @@ public class Evolucion extends AppCompatActivity {
         }
     }
 
-//Borrar al paciente ---------------
+    //Borrar al paciente ---------------
     Vector respuesta;
     private class borrar extends AsyncTask<Void, Void, Boolean> {
         @Override
@@ -412,7 +421,7 @@ public class Evolucion extends AppCompatActivity {
                 sobre.setOutputSoapObject(solicitud);
                 HttpTransportSE transporte = new HttpTransportSE(Inicio.url);
                 transporte.call("http://Servicios/paciente", sobre);
-                respuesta = (Vector) sobre.getResponse();
+                respuesta = (Vector) sobre.bodyIn;
             } catch (Exception e) {}
             return true;
         }
@@ -450,14 +459,14 @@ public class Evolucion extends AppCompatActivity {
         alertDialog.show();
     }
 
-// Enviar mensaje
+    // Enviar mensaje
     public void enviarMensaje(View v) {
         CrearMensaje.idDestino = id;
         CrearMensaje.destinatario = datosPaciente.get(1) +" "+ datosPaciente.get(2);
         Intent intento = new Intent(this, CrearMensaje.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
-// Ver plantilla_detalle del paciente
+    // Ver plantilla_detalle del paciente
     public void abrirDetalle(View v) {
         Intent intento = new Intent(this, DetallePaciente.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
