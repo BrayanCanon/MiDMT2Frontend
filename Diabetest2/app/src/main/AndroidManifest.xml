@@ -14,9 +14,7 @@
     <protected-broadcast android:name="android.intent.action.MEDIA.MOUNTED" />
 
     <application
-
-
-    android:allowBackup="true"
+        android:allowBackup="true"
         android:icon="@drawable/icono_normal"
         android:label="Mi DT2 con Psicoeducación"
         android:largeHeap="true"
