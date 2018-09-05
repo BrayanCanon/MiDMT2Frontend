@@ -104,7 +104,9 @@ public class Mensajes extends AppCompatActivity {
             sobre.setOutputSoapObject(solicitud);
             HttpTransportSE transporte = new HttpTransportSE(Inicio.url);
             transporte.call("http://Servicios/listaMensajes", sobre);
-            listadoX = (Vector) sobre.getResponse();
+            SoapObject temp=(SoapObject) sobre.bodyIn;
+            for(int a=0;a<temp.getPropertyCount();a++) listadoX.add(temp.getProperty(a).toString());
+
         } catch (Exception e) {}
         return true;
     }

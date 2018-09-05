@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -64,7 +65,8 @@ String mensaje;
                 transporte.call("http://Servicios/crearMensaje", sobre);
                 SoapPrimitive resultado = (SoapPrimitive) sobre.getResponse();
                 respuesta = resultado.toString();
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                Log.d("errormensje",e.toString());}
             return true;
         }
         @Override
@@ -79,7 +81,12 @@ String mensaje;
 
     public void abrir(View v) {
         Intent intento = new Intent(this, Mensajes.class);
-        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); this.finish(); }
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{
+
+            startActivity(intento); this.finish();
+
+
+        }
     }
     //Chequear conexion a internet  ----------------------------------
     public boolean probarInternet() {

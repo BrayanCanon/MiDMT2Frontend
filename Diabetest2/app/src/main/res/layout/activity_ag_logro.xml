@@ -55,12 +55,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="abrir"
-            android:text="Button" />
+            android:text="Crear" />
 
         <TextView
             android:id="@+id/salida1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="sald" />
+            android:text="" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -279,13 +279,6 @@
                 android:text="Inactivar permanentemente"
                 android:textSize="12sp" />
 
-            <Button
-                android:id="@+id/id_bt_vermetas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="abrirMetas"
-                android:text="Ver metas"
-                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/id_bt_medicinas"
