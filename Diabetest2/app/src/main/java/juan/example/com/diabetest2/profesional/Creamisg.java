@@ -72,7 +72,7 @@ public class Creamisg extends AppCompatActivity {
                 codigonivel.addProperty("idNivel",1+nivelmis.getSelectedItemPosition());
 
 
-                nombres.add("nombre");valores.add(nombre.getText().toString());
+            nombres.add("nombre");valores.add(nombre.getText().toString());
             nombres.add("estado");valores.add("a");
             nombres.add("misionPasoLogroList");valores.add(new JsonArray());
             nombres.add("misionTipoRecursoList");valores.add(new JsonArray());

@@ -65,8 +65,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/reload"
         android:onClick="recargar"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/agregar45"
         app:layout_constraintTop_toTopOf="parent" />
