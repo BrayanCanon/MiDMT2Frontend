@@ -4,21 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
-import java.util.ArrayList;
-
 import juan.example.com.diabetest2.R;
-import juan.example.com.diabetest2.util.Conexion;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,9 +29,6 @@ public class pasosLogrosMision extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    RecyclerView recyclerPasos ;
-    ArrayList<PasoVo> listaPasos;
-    AdaptadorPasos adapter;
 
     public pasosLogrosMision() {
         // Required empty public constructor
@@ -78,46 +65,7 @@ public class pasosLogrosMision extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Bundle envio = getArguments();
-        MisionVo mision = (MisionVo) envio.getSerializable("mision");
-        View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
-        listaPasos=new ArrayList<>();
-        adapter = new AdaptadorPasos(listaPasos);
-        recyclerPasos=vista.findViewById(R.id.recyclerPasos);
-        recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerPasos.setAdapter(adapter);
-        recyclerPasos.setItemAnimator(new DefaultItemAnimator());
-
-        llenarLista(mision);
-        return vista;
-    }
-
-    private void llenarLista(MisionVo mision) {
-        ArrayList<String> nombres= new ArrayList<>();
-        ArrayList valores= new ArrayList();
-        nombres.add("idMision");
-        valores.add(mision.getIdMision());
-        new Conexion("consultarTodosPasos", nombres, new Conexion.Comunicado() {
-            @Override
-            public void salidas(String output) {
-                if (!output.equals("null")) {
-                    Gson gson = new Gson();
-                    JsonArray arreglo = gson.fromJson(output, JsonArray.class);
-                    JsonObject salida;
-                    JsonObject paso;
-                    for(int i =0;i<arreglo.size(); i++){
-                        salida=arreglo.get(i).getAsJsonObject();
-                        paso=salida.get("paso").getAsJsonObject();
-                        PasoVo pasoVo =new PasoVo(paso.get("descripcion").getAsString(),paso.get("nombre").getAsString(),salida.get("pasoNumero").getAsInt());
-                        listaPasos.add(pasoVo);
-
-
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        }).execute(valores);
-
+        return inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

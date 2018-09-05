@@ -152,7 +152,7 @@ public class Evolucion extends AppCompatActivity {
 
 
 
-    //Graficos ---------------
+//Graficos ---------------
     Vector <String> tablaPesoImc = new Vector<>();
     Vector <String> tablaAnimo = new Vector<>();
     Vector <String> tablaHba1c = new Vector<>();
@@ -171,7 +171,7 @@ public class Evolucion extends AppCompatActivity {
                 transporte.call("http://Servicios/consultarPesoImc", sobre);
                 SoapObject temp=(SoapObject) sobre.bodyIn;
                 for(int a=0;a<temp.getPropertyCount();a++){
-                    tablaPesoImc.add(temp.getProperty(a).toString());
+                   tablaPesoImc.add(temp.getProperty(a).toString());
                 }
 
                 //Consulta del animo
@@ -362,7 +362,7 @@ public class Evolucion extends AppCompatActivity {
 
 
 
-    // Datos generales del paciente  ---------------------------
+// Datos generales del paciente  ---------------------------
     Vector datosPaciente = new Vector();
 
     private class ConsultarPaciente extends AsyncTask<Void, Void, Boolean> {
@@ -404,7 +404,7 @@ public class Evolucion extends AppCompatActivity {
         }
     }
 
-    //Borrar al paciente ---------------
+//Borrar al paciente ---------------
     Vector respuesta;
     private class borrar extends AsyncTask<Void, Void, Boolean> {
         @Override
@@ -455,14 +455,14 @@ public class Evolucion extends AppCompatActivity {
         alertDialog.show();
     }
 
-    // Enviar mensaje
+// Enviar mensaje
     public void enviarMensaje(View v) {
         CrearMensaje.idDestino = id;
         CrearMensaje.destinatario = datosPaciente.get(1) +" "+ datosPaciente.get(2);
         Intent intento = new Intent(this, CrearMensaje.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
-    // Ver plantilla_detalle del paciente
+// Ver plantilla_detalle del paciente
     public void abrirDetalle(View v) {
         Intent intento = new Intent(this, DetallePaciente.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
