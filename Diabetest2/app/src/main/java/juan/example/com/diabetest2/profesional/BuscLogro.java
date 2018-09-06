@@ -100,7 +100,7 @@ public class BuscLogro extends AppCompatActivity {
                     }
                      adapter = new ArrayAdapter<String>
                             (BuscLogro.this,
-                                    android.R.layout.simple_list_item_multiple_choice,
+                                    android.R.layout.simple_spinner_dropdown_item,
                                     android.R.id.text1, ListViewItems );
                     listview.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
