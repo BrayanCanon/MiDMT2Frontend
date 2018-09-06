@@ -25,13 +25,13 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolderPasos holder, int position) {
+
         holder.desc.setText(listaPasos.get(position).getDescripcion());
         holder.nombre.setText(listaPasos.get(position).getNombre());
-        if(String.valueOf(listaPasos.get(position).getOrden()).equals("-1")){
-            holder.orden.setText("-");
-        }else{
-        holder.orden.setText(String.valueOf(listaPasos.get(position).getOrden()));}
+
+        holder.orden.setText(String.valueOf(listaPasos.get(position).getOrden()));
     }
+
 
     @Override
     public int getItemCount() {
