@@ -11,9 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.util.Conexion;
+import juan.example.com.diabetest2.util.RecursoVo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +41,7 @@ public class RecursosMision extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerRecursos;
-    ArrayList<RecursosVo> listaRecursos;
+    ArrayList<RecursoVo> listaRecursos;
     AdaptadorRecursos adapter;
 
     public RecursosMision() {
@@ -76,7 +82,7 @@ public class RecursosMision extends Fragment {
         MisionVo mision= (MisionVo) envio.getSerializable("mision");
         View vista =inflater.inflate(R.layout.fragment_recursos_mision, container, false);
         listaRecursos= new ArrayList<>();
-        adapter= new AdaptadorRecursos(listaRecursos);
+        adapter= new AdaptadorRecursos(listaRecursos,vista.getContext());
         recyclerRecursos=vista.findViewById(R.id.recRecPac);
         recyclerRecursos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerRecursos.setAdapter(adapter);
@@ -91,6 +97,21 @@ public class RecursosMision extends Fragment {
         ArrayList valores= new ArrayList();
         nombres.add("idMision");
         valores.add(mision.getIdMision());
+        new Conexion("consultarRecursoMision", nombres, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+                Gson gson = new Gson();
+                JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                JsonObject salida;
+                for(int i = 0; i<arreglo.size();i++){
+                    salida=arreglo.get(i).getAsJsonObject();
+                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),salida.get("contenidoApoyo").getAsString(),Integer.parseInt(salida.get("imagen").getAsString()));
+                    listaRecursos.add(rec);
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }).execute(valores);
 
 
 
