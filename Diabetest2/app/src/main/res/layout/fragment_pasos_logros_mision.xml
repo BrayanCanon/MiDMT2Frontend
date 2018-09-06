@@ -3,29 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_metas"
     tools:context=".paciente.pasosLogrosMision">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Mis Pasos"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textSize="40sp" />
-
-        <android.support.v7.widget.RecyclerView
-
-            android:id="@+id/recyclerPasos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+        android:text="paso y logros de la mision" />
 
 </FrameLayout>

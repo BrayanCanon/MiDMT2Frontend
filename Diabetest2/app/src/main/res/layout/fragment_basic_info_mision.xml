@@ -9,77 +9,69 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Informacion basica"
+            android:textAppearance="?android:attr/textAppearanceLarge"
 
-            <TextView
-                android:id="@+id/titulo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Informacion basica"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textSize="35sp" />
+            android:textColor="@color/blanco" />
 
-            <ImageView
-                android:id="@+id/imageView50"
+        <ImageView
+            android:id="@+id/imageView50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/borrarmision" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:src="@drawable/ejer" />
+        <TextView
+            android:id="@+id/textView150"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            <TextView
-                android:id="@+id/textView150"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Descripción:"
+            android:textColor="@color/blanco"/>
 
-                android:text="Descripción:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="25sp" />
+        <TextView
+            android:id="@+id/descripcionMision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
-            <TextView
-                android:id="@+id/descripcionMision"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/textView145"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:text="Categoria:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/textView145"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Categoria:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="25sp" />
+        <TextView
+            android:id="@+id/catMision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
-            <TextView
-                android:id="@+id/catMision"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/textView152"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:text="Dificultad:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/textView152"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dificultad:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="25sp" />
+        <TextView
+            android:id="@+id/difMision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
-            <TextView
-                android:id="@+id/difMision"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </FrameLayout>
