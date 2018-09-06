@@ -45,7 +45,7 @@ public class Pruebcon extends AppCompatActivity {
     public void cargar(){
 
         final Mision elemento2=new Mision();
-
+        prueba=new ArrayList<>();
         n=new misionesadapter(prueba,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         vista.setLayoutManager(mLayoutManager);

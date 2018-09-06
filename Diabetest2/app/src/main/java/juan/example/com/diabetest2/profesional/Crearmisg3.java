@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -271,6 +272,17 @@ public class Crearmisg3 extends AppCompatActivity {
            toast1.show();
        }
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Toast toast1 =
+                    Toast.makeText(this,
+                            "Por favor termine el proceso antes de continuar", Toast.LENGTH_SHORT);
+            toast1.show();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 

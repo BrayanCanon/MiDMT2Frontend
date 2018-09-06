@@ -71,8 +71,7 @@ public class Creamisg extends AppCompatActivity {
                 codigomis.addProperty("idTipoMision",1+tipomis.getSelectedItemPosition());
                 codigonivel.addProperty("idNivel",1+nivelmis.getSelectedItemPosition());
 
-
-            nombres.add("nombre");valores.add(nombre.getText().toString());
+                nombres.add("nombre");valores.add(nombre.getText().toString());
             nombres.add("estado");valores.add("a");
             nombres.add("misionPasoLogroList");valores.add(new JsonArray());
             nombres.add("misionTipoRecursoList");valores.add(new JsonArray());
@@ -117,4 +116,6 @@ public class Creamisg extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+
 }
