@@ -105,14 +105,14 @@ public class pasosLogrosMision extends Fragment {
                     JsonArray arreglo = gson.fromJson(output, JsonArray.class);
                     JsonObject salida;
                     JsonObject paso;
-                    for(int i =0;i<arreglo.size(); i++){
-                        salida=arreglo.get(i).getAsJsonObject();
+
+                        salida=arreglo.get(1).getAsJsonObject();
                         paso=salida.get("paso").getAsJsonObject();
-                        PasoVo pasoVo =new PasoVo(paso.get("descripcion").getAsString(),paso.get("nombre").getAsString(),salida.get("pasoNumero").getAsInt());
+                        PasoVo pasoVo =new PasoVo(paso.get("descripcion").getAsString(),paso.get("nombre").getAsString(),arreglo.size());
                         listaPasos.add(pasoVo);
 
 
-                    }
+
                     adapter.notifyDataSetChanged();
                 }
             }
