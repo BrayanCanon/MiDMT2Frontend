@@ -1,33 +1,45 @@
 package juan.example.com.diabetest2.paciente;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.administrador.Inicio;
+import juan.example.com.diabetest2.util.RecursoVo;
 
-public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.ViewHolderRecursos>  {
-    ArrayList<RecursosVo> recursos;
+public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.ViewHolderRecursos> {
+    ArrayList<RecursoVo> recursos;
+    Context contexto;
 
-    public AdaptadorRecursos(ArrayList<RecursosVo> recursos) {
+    public AdaptadorRecursos(ArrayList<RecursoVo> recursos, Context con) {
         this.recursos = recursos;
+        this.contexto = con;
     }
 
     @Override
     public AdaptadorRecursos.ViewHolderRecursos onCreateViewHolder(ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_pasos,null,false);
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.plantilla_recursos, null, false);
         return new ViewHolderRecursos(vista);
     }
 
     @Override
     public void onBindViewHolder(AdaptadorRecursos.ViewHolderRecursos holder, int position) {
-        holder.descripcion.setText(recursos.get(position).getDescripcion());
-        holder.nombre.setText(recursos.get(position).getNombre());
-        holder.orden.setText(String.valueOf(position));
+        String urlImagenes = Inicio.urlImagenes + recursos.get(position).getFoto();
+        ;
+        Log.d("urlimagenes", urlImagenes);
+        holder.titulo.setText(recursos.get(position).getTitulo());
+        holder.descripcion.setText(recursos.get(position).getDecripcion());
+        Picasso.with(contexto).load(urlImagenes).fit().noFade().into(holder.imagen);
 
 
     }
@@ -38,13 +50,14 @@ public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.V
     }
 
     public class ViewHolderRecursos extends RecyclerView.ViewHolder {
-        TextView orden,nombre,descripcion;
-        public ViewHolderRecursos(View itemView) {
+        TextView titulo, descripcion;
+        ImageView imagen;
 
+        public ViewHolderRecursos(View itemView) {
             super(itemView);
-            orden=itemView.findViewById(R.id.orden);
-            nombre=itemView.findViewById(R.id.nombre);
-            descripcion=itemView.findViewById(R.id.descripcion);
+            titulo = itemView.findViewById(R.id.t1);
+            descripcion = itemView.findViewById(R.id.t2);
+            imagen = itemView.findViewById(R.id.id_im2);
         }
     }
 }
