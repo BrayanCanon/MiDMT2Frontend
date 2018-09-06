@@ -70,7 +70,6 @@ public class Evolucion extends AppCompatActivity {
         borrar = (Button) findViewById(R.id.id_borrar_paciente);
         chatear = (Button) findViewById(R.id.id_msj_privado);
         detalle = (Button) findViewById(R.id.id_detalle_paciente);
-        metas = (Button) findViewById(R.id.id_bt_vermetas);
         observaciones = (Button) findViewById(R.id.id_bt_observaciones_pro);
         medicamentos = (Button) findViewById(R.id.id_bt_medicinas);
 
@@ -79,7 +78,6 @@ public class Evolucion extends AppCompatActivity {
             id = ServicioDT2.idLocal;
             borrar.setVisibility(View.INVISIBLE);
             observaciones.setVisibility(View.INVISIBLE);
-            metas.setText("VER METAS PERSONALES");
             //Cambios del botón iniciarChat
             chatear.setText("GLUCOSA");
             chatear.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +93,6 @@ public class Evolucion extends AppCompatActivity {
             observaciones.setVisibility(View.INVISIBLE);
             medicamentos.setVisibility(View.INVISIBLE);
             detalle.setVisibility(View.INVISIBLE);
-            metas.setVisibility(View.INVISIBLE);
         }
 
         Evolucion.Consultar co = new Evolucion.Consultar();
