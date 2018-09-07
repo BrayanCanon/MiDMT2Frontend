@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -105,10 +106,20 @@ public class pasosLogrosMision extends Fragment {
                     JsonArray arreglo = gson.fromJson(output, JsonArray.class);
                     JsonObject salida;
                     JsonObject paso;
+                    JsonObject verif;
 
-                        salida=arreglo.get(1).getAsJsonObject();
-                        paso=salida.get("paso").getAsJsonObject();
-                        PasoVo pasoVo =new PasoVo(paso.get("descripcion").getAsString(),paso.get("nombre").getAsString(),arreglo.size());
+                    int numDias=5,num;
+                    salida=arreglo.get(1).getAsJsonObject();
+                    paso=salida.get("paso").getAsJsonObject();
+                  /*  for(int i=0;i<arreglo.size();i++){
+                        verif=arreglo.get(i).getAsJsonObject().getAsJsonObject("idVerficacion");
+                         num =  verif.get("idVerficacion").getAsInt();
+                        numDias= numDias+num;
+                    }*/
+
+
+
+                        PasoVo pasoVo =new PasoVo(paso.get("descripcion").getAsString(),paso.get("nombre").getAsString(),numDias);
                         listaPasos.add(pasoVo);
 
 
