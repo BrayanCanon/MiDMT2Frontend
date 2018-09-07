@@ -152,8 +152,10 @@
         <activity
             android:name=".paciente.MisionPaciente"
             android:label="@string/title_activity_mision_paciente"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".profesional.modmision.Modpasos"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".profesional.modmision.Modpasos" />
+        <activity android:name=".paciente.VerRecursosMision" />
+        <activity android:name=".paciente.VerRecursosMisionPaciente"></activity>
     </application>
 
 </manifest>

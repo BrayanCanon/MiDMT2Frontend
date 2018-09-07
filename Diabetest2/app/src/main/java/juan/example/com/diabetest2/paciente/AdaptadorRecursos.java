@@ -17,9 +17,11 @@ import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
 import juan.example.com.diabetest2.util.RecursoVo;
 
-public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.ViewHolderRecursos> {
+public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.ViewHolderRecursos> implements View.OnClickListener {
     ArrayList<RecursoVo> recursos;
     Context contexto;
+    private View.OnClickListener listener;
+
 
     public AdaptadorRecursos(ArrayList<RecursoVo> recursos, Context con) {
         this.recursos = recursos;
@@ -29,6 +31,7 @@ public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.V
     @Override
     public AdaptadorRecursos.ViewHolderRecursos onCreateViewHolder(ViewGroup parent, int viewType) {
         View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.plantilla_recursos, null, false);
+        vista.setOnClickListener(this);
         return new ViewHolderRecursos(vista);
     }
 
@@ -43,11 +46,19 @@ public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.V
 
 
     }
-
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
+    public void onClick(View view) {
+        if(listener!=null)
+        {
+            listener.onClick(view);
+        }
+    }
     @Override
     public int getItemCount() {
         return recursos.size();
-    }
+}
 
     public class ViewHolderRecursos extends RecyclerView.ViewHolder {
         TextView titulo, descripcion;
