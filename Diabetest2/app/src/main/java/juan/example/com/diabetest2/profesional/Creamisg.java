@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -39,6 +40,7 @@ public class Creamisg extends AppCompatActivity {
     List<String> catlist;
     Context este=this;
     Intent intento;
+    TextView desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class Creamisg extends AppCompatActivity {
         //-------------------------------------
         tipomis=(Spinner) findViewById(R.id.spinner3);
         nivelmis=(Spinner)findViewById(R.id.spinner4);
+        desc=(TextView)findViewById(R.id.textView155);
+
 
 
     }
@@ -72,6 +76,7 @@ public class Creamisg extends AppCompatActivity {
                 codigonivel.addProperty("idNivel",1+nivelmis.getSelectedItemPosition());
 
                 nombres.add("nombre");valores.add(nombre.getText().toString());
+            nombres.add("descripcion");valores.add(desc.getText());
             nombres.add("estado");valores.add("a");
             nombres.add("misionPasoLogroList");valores.add(new JsonArray());
             nombres.add("misionTipoRecursoList");valores.add(new JsonArray());
