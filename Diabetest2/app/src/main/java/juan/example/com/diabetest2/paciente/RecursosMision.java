@@ -1,6 +1,7 @@
 package juan.example.com.diabetest2.paciente;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.comunes.VerRecurso;
 import juan.example.com.diabetest2.util.Conexion;
 import juan.example.com.diabetest2.util.RecursoVo;
 
@@ -83,11 +85,31 @@ public class RecursosMision extends Fragment {
         View vista =inflater.inflate(R.layout.fragment_recursos_mision, container, false);
         listaRecursos= new ArrayList<>();
         adapter= new AdaptadorRecursos(listaRecursos,vista.getContext());
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intento;
+                intento = new Intent(getContext(),VerRecursosMisionPaciente.class);
+                startActivity(intento);
+                Bundle envio = new Bundle();
+                RecursoVo recurso = listaRecursos.get(recyclerRecursos.getChildAdapterPosition(view));
+                envio.putSerializable("recurso",recurso);
+
+
+                intento.putExtras(envio);
+                startActivity(intento);
+
+
+            }
+        });
+
         recyclerRecursos=vista.findViewById(R.id.recRecPac);
         recyclerRecursos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerRecursos.setAdapter(adapter);
         recyclerRecursos.setItemAnimator(new DefaultItemAnimator());
         llenarLista(mision);
+
+
         // Inflate the layout for this fragment
         return vista ;
     }
@@ -102,10 +124,11 @@ public class RecursosMision extends Fragment {
             public void salidas(String output) {
                 Gson gson = new Gson();
                 JsonArray arreglo = gson.fromJson(output, JsonArray.class);
-                JsonObject salida;
+                JsonObject salida,usuario;
                 for(int i = 0; i<arreglo.size();i++){
                     salida=arreglo.get(i).getAsJsonObject();
-                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),salida.get("contenidoApoyo").getAsString(),Integer.parseInt(salida.get("imagen").getAsString()));
+                    usuario=salida.get("nomUsuario").getAsJsonObject();
+                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),usuario.get("nomUsuario").getAsString(),salida.get("contenidoApoyo").getAsString(),Integer.parseInt(salida.get("imagen").getAsString()),salida.get("fecha").getAsString(),salida.get("video").getAsString());
                     listaRecursos.add(rec);
 
                 }
