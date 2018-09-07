@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -55,24 +59,26 @@ public class Pruebcon extends AppCompatActivity {
             @Override
             public void salidas(String output) {
                 try {
-                    JSONArray salida=new JSONArray(output);
-                    Log.d("salidatam",String.valueOf(salida.length()));
-                    for(int ajisnnef=0;ajisnnef<salida.length();ajisnnef++){
-                        JSONObject em=salida.getJSONObject(ajisnnef);
+                    Gson gson=new Gson();
+                    JsonArray salida=gson.fromJson(output,JsonArray.class);
+                    Log.d("salidatam",String.valueOf(salida.size()));
+                    for(int ajisnnef=0;ajisnnef<salida.size();ajisnnef++){
+                       JsonObject em=salida.get(ajisnnef).getAsJsonObject();
 
                         if(em.has("nombre")) {
                             if (em.has("idCategoria")) {
-                                JSONObject categoria = em.getJSONObject("idCategoria");
-                                JSONObject tipomision= em.getJSONObject("idTipoMision");
-                                JSONObject niv = em.getJSONObject("idNivel");
+                                JsonObject categoria = em.get("idCategoria").getAsJsonObject();
+                                JsonObject tipomision= em.get("idTipoMision").getAsJsonObject();
+                                JsonObject niv = em.get("idNivel").getAsJsonObject();
 
                                 Mision elemento = new Mision();
-                                elemento.setIdMision(Integer.parseInt(em.get("idMision").toString()));
-                                elemento.setNombre(em.get("nombre").toString());
-                                elemento.setIdCategoria(Integer.parseInt(categoria.get("idCategoria").toString()));
-                                elemento.setCategoria(categoria.get("nombreCategoria").toString());
-                                elemento.setTipo(tipomision.getString("nombreTipoMision"));
-                                elemento.setNomnivel(niv.getString("nombre"));
+                                elemento.setIdMision(em.get("idMision").getAsInt());
+                                elemento.setNombre(em.get("nombre").getAsString());
+                                elemento.setDescripcion(em.get("descripcion").getAsString());
+                                elemento.setIdCategoria(Integer.parseInt(categoria.get("idCategoria").getAsString()));
+                                elemento.setCategoria(categoria.get("nombreCategoria").getAsString());
+                                elemento.setTipo(tipomision.get("nombreTipoMision").getAsString());
+                                elemento.setNomnivel(niv.get("nombre").getAsString());
 
                                 //elemento.setCategoria("sal");
                                 prueba.add(elemento);

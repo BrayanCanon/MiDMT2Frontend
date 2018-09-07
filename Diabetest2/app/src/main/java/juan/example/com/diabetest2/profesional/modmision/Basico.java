@@ -26,6 +26,7 @@ public class Basico extends AppCompatActivity {
 
     Mision seleccion;
     EditText modTextnom;
+    EditText desc;
     Spinner categoria,tipo,nivel;
     Context este=this;
 
@@ -40,6 +41,7 @@ public class Basico extends AppCompatActivity {
         categoria=(Spinner)findViewById(R.id.modspinner1);
         tipo=(Spinner)findViewById(R.id.modspinner3);
         nivel=(Spinner)findViewById(R.id.modspinner4);
+        desc=(EditText)findViewById(R.id.desc);
         //-------------
         ArrayAdapter cat1 = (ArrayAdapter) categoria.getAdapter();
         ArrayAdapter tip1 = (ArrayAdapter) tipo.getAdapter();
@@ -52,6 +54,7 @@ public class Basico extends AppCompatActivity {
         modTextnom.setText(seleccion.getNombre());
         categoria.setSelection(pos);
         tipo.setSelection(pos2);
+        desc.setText(seleccion.getDescripcion());
         nivel.setSelection(pos3);
 
 
@@ -64,7 +67,7 @@ public class Basico extends AppCompatActivity {
         JsonObject nivel1=new JsonObject();
         JsonObject tipomis1=new JsonObject();
         nombre.add("idMision");valores.add(seleccion.getIdMision());
-        nombre.add("descripcion");valores.add("");
+        nombre.add("descripcion");valores.add(desc.getText());
         nombre.add("nombre");valores.add(modTextnom.getText());
         nombre.add("estado");valores.add("a");
         categoria1.addProperty("idCategoria",categoria.getSelectedItemPosition()+1);
