@@ -40,7 +40,7 @@ public class Creamisg extends AppCompatActivity {
     List<String> catlist;
     Context este=this;
     Intent intento;
-    TextView desc;
+    EditText desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class Creamisg extends AppCompatActivity {
         //-------------------------------------
         tipomis=(Spinner) findViewById(R.id.spinner3);
         nivelmis=(Spinner)findViewById(R.id.spinner4);
-        desc=(TextView)findViewById(R.id.textView155);
+        desc=(EditText)findViewById(R.id.editText);
 
 
 

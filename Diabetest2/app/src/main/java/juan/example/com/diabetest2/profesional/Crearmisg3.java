@@ -229,17 +229,12 @@ public class Crearmisg3 extends AppCompatActivity {
                //--------------------------------
                for(int a=0;a<respuestas.size();a++) {
                    JsonObject adaptador = new JsonObject();
-                   JsonObject adap_paso = new JsonObject();
-                   JsonObject adap_mision=new JsonObject();
-                   JsonObject adap_logro=new JsonObject();
                    Movie salida=respuestas.get(a);
                    //-----------------------------------------
-                   adap_paso.addProperty("idPaso",salida.getId());
-                   adap_mision.addProperty("idMision",codmision);
-                   adap_logro.addProperty("idLogro",1);
-                   adaptador.add("mision",adap_mision);
-                   adaptador.add("paso",adap_paso);
-                   adaptador.add("logro",adap_logro);
+
+                   adaptador.addProperty("mision",codmision);
+                   adaptador.addProperty("paso",salida.getId());
+                   adaptador.addProperty("logro",salida.getLogro());
                    adaptador.addProperty("pasoNumero",Integer.parseInt(salida.getYear()));
                    adaptador.addProperty("estado","a");
 

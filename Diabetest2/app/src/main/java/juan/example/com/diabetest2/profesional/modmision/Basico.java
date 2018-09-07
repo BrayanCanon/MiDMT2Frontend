@@ -54,6 +54,7 @@ public class Basico extends AppCompatActivity {
         modTextnom.setText(seleccion.getNombre());
         categoria.setSelection(pos);
         tipo.setSelection(pos2);
+        desc.setText(seleccion.getDescripcion());
         nivel.setSelection(pos3);
 
 
