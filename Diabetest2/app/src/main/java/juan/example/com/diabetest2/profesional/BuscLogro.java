@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -144,4 +145,17 @@ public class BuscLogro extends AppCompatActivity {
         Log.d("codcate",""+getIntent().getIntExtra("codcategoria", 1));
         startActivity(ne);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Toast toast1 =
+                    Toast.makeText(this,
+                            "Por favor termine el proceso antes de continuar", Toast.LENGTH_SHORT);
+            toast1.show();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }
