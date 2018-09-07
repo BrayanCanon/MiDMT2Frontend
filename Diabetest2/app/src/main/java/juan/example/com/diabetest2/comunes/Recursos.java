@@ -30,6 +30,7 @@ public class Recursos extends AppCompatActivity {
 
     Context ctx;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

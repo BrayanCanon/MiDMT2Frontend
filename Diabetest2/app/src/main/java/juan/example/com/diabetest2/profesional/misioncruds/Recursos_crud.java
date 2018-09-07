@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -52,23 +55,16 @@ public class Recursos_crud extends AppCompatActivity {
             @Override
             public void salidas(String output) {
 
-                try {
-                    JSONArray jsonArray = new JSONArray(output);
+                Gson gson = new Gson();
+                JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                JsonObject salida;
+                for(int i = 0; i<arreglo.size();i++){
+                    salida=arreglo.get(i).getAsJsonObject();
+                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),salida.get("nomUsuario").getAsString(),salida.get("contenidoApoyo").getAsString(),Integer.parseInt(salida.get("imagen").getAsString()),salida.get("fecha").getAsString(),salida.get("video").getAsString());
+                    listaRecursos.add(rec);
 
-                    for(int a=0;a<jsonArray.length();a++){
-                        JSONObject salida=jsonArray.getJSONObject(a);
-
-
-
-                        RecursoVo rec = new RecursoVo(salida.get("tituloRec").toString(),salida.get("contenidoApoyo").toString(),Integer.parseInt(salida.get("imagen").toString()));
-                        listaRecursos.add(rec);
-
-
-                    }
-                    adapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+                adapter.notifyDataSetChanged();
 
 
             }

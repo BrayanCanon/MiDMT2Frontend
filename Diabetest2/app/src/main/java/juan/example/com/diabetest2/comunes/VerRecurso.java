@@ -36,6 +36,7 @@ public class VerRecurso extends AppCompatActivity {
     static String titulo, link, contenido, fecha, urlImagen, autor;
     Button modificar,borrar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
