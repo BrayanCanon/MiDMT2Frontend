@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.Date;
 
 public class Mision implements Parcelable {
-    String nombre,tipo,categoria,nomnivel;
+    String nombre,tipo,categoria,nomnivel,descripcion;
     Date fechainicio,fechafinal;
     int nivel,idMision,idCategoria;
 
@@ -19,6 +19,7 @@ public class Mision implements Parcelable {
         nivel = in.readInt();
         idMision = in.readInt();
         idCategoria = in.readInt();
+        descripcion = in.readString();
     }
 
     public static final Creator<Mision> CREATOR = new Creator<Mision>() {
@@ -32,6 +33,14 @@ public class Mision implements Parcelable {
             return new Mision[size];
         }
     };
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public String getNomnivel() {
         return nomnivel;
@@ -120,5 +129,6 @@ public class Mision implements Parcelable {
         parcel.writeInt(nivel);
         parcel.writeInt(idMision);
         parcel.writeInt(idCategoria);
+        parcel.writeString(descripcion);
     }
 }

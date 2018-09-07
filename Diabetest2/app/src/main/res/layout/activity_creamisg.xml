@@ -29,6 +29,19 @@
                 android:inputType="textPersonName" />
 
             <TextView
+                android:id="@+id/textView155"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="descripcion" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="124dp"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+            <TextView
                 android:id="@+id/textView138"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
