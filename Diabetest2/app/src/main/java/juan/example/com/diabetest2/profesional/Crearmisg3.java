@@ -175,7 +175,7 @@ public class Crearmisg3 extends AppCompatActivity {
             }
         });
 
-       int tam =respuestas.size();
+        int tam =respuestas.size();
        int contador=0;
        Boolean cortar=true;
        int comparador=Integer.parseInt(respuestas.get(0).getYear());
@@ -186,30 +186,27 @@ public class Crearmisg3 extends AppCompatActivity {
            }
        }
        if(!vacio) {
-           while (contador < tam && Integer.parseInt(respuestas.get(contador).getYear()) > 0) {
-               Log.d("compar", respuestas.get(contador).getYear() + " " + comparador);
-               if (Integer.parseInt(respuestas.get(contador).getYear()) == comparador) {
-                   contador++;
-                   comparador--;
-               } else {
-                   cortar = false;
-                   Toast toast1 =
-                           Toast.makeText(this,
-                                   "ordene los pasos desde el primero al ultimo en orden ", Toast.LENGTH_SHORT);
-                   toast1.show();
+           while (contador < tam )
+           {
+               if(Integer.parseInt(respuestas.get(contador).getYear()) > 0) {
+                   Log.d("compar", respuestas.get(contador).getYear() + " " + comparador);
+                   if (Integer.parseInt(respuestas.get(contador).getYear()) == comparador) {
+                       contador++;
+                       comparador--;
+                   } else {
+                       cortar = false;
+                       Toast toast1 =
+                               Toast.makeText(this,
+                                       "ordene los pasos desde el primero al ultimo en orden ", Toast.LENGTH_SHORT);
+                       toast1.show();
+                       break;
+                   }
+               }
+               else{
                    break;
                }
 
            }
-           Log.d("compar2", respuestas.get(contador).getYear() + " " + comparador);
-           if(comparador!=0){
-               cortar = false;
-               Toast toast1 =
-                       Toast.makeText(this,
-                               "ordene los pasos desde el primero al ultimo en orden ", Toast.LENGTH_SHORT);
-               toast1.show();
-           }
-           contador=0;
            if (cortar) {
                for(int comp=0;comp<respuestas.size();comp++){
                    if (respuestas.get(comp).getYear().equals("0")) {
