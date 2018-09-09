@@ -7,9 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.util.Conexion;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +31,7 @@ public class BasicInfoMision extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     View vista;
     TextView descripcion, categoria, dificultad,titulo;
+    Button empezarMision;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -70,18 +76,58 @@ public class BasicInfoMision extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Bundle envio = getArguments();
-        MisionVo mision  = (MisionVo) envio.getSerializable("mision");
-
+        final MisionVo mision  = (MisionVo) envio.getSerializable("mision");
+        final String idPaciente = envio.getString("codPaciente");
+        boolean habEmpezarMision=envio.getBoolean("habEmpezarMision");
         vista=inflater.inflate(R.layout.fragment_basic_info_mision, container, false);
         titulo=vista.findViewById(R.id.titulo);
         descripcion=vista.findViewById(R.id.descripcionMision);
         categoria = vista.findViewById(R.id.catMision);
         dificultad=vista.findViewById(R.id.difMision);
+        empezarMision=vista.findViewById(R.id.empMision);
         descripcion.setText(mision.getDescripcion());
         titulo.setText(mision.getTitulo());
         categoria.setText(mision.getCategoria());
         dificultad.setText(mision.getDificultad());
+        if(habEmpezarMision==false){
+            empezarMision.setVisibility(View.INVISIBLE);
+        }
+        empezarMision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                asignarMision(mision.getIdMision(),idPaciente);
+            }
+        });
+
         return  vista;
+    }
+
+    private void asignarMision(String idmision,String codPaciente) {
+        ArrayList<String> nombres= new ArrayList<>();
+        ArrayList<String> valores= new ArrayList<>();
+        nombres.add("idMision");
+        nombres.add("codPaciente");
+        valores.add(idmision);
+        valores.add(codPaciente);
+        new Conexion("asignarMisionPaciente", nombres, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+          int duration = Toast.LENGTH_SHORT;
+                String text;
+                Context context = getContext();
+                if (output==null){
+                    text  = "No se ha iniciado la mision intenta mas tarde";
+                }else{
+                   text=output;
+                }
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }).execute(valores);{
+
+        }
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
