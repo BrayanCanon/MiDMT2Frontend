@@ -36,9 +36,7 @@ public class AdapterPasoedit extends RecyclerView.Adapter<AdapterPasoedit.MyView
             genre = (TextView) view.findViewById(R.id.genre);
             year = (TextView) view.findViewById(R.id.year);
             pos=(TextView) view.findViewById(R.id.year);
-            butnot = (Button) view.findViewById(R.id.butnot);
             listeado1=(CheckBox) view.findViewById(R.id.listeado1);
-            down=(Button) view.findViewById(R.id.button40);
             edit=(Button)view.findViewById(R.id.button38);
         }
     }
