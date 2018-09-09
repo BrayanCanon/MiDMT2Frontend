@@ -34,6 +34,8 @@ public class misiones extends AppCompatActivity {
     RecyclerView recylerMisiones,recyclerNuevasMisiones;
     AdapterMision adapter,adapterNuevasMis;
     Context vista = this;
+    String idGuardado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,18 @@ public class misiones extends AppCompatActivity {
         recyclerNuevasMisiones=findViewById(R.id.recNuevasMis);
         adapterNuevasMis= new AdapterMision(listaNuevasMisiones);
         adapter = new AdapterMision(listaMisiones);
-
+        FileInputStream in2 = null;
+        try {
+            in2 = openFileInput("id.dt2");
+            ObjectInputStream ois2 = new ObjectInputStream(in2);
+           idGuardado =  ois2.readObject().toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +67,24 @@ public class misiones extends AppCompatActivity {
                 Bundle envio = new Bundle();
                 MisionVo mision = listaMisiones.get(recylerMisiones.getChildAdapterPosition(view));
                 envio.putSerializable("mision",mision);
+                envio.putString("codPaciente",idGuardado);
+                envio.putBoolean("habEmpezarMision",false);
+                intento.putExtras(envio);
+                startActivity(intento);
+
+
+            }
+        });
+        adapterNuevasMis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intento = new Intent(misiones.this,VerMisionPaciente.class);
+                startActivity(intento);
+                Bundle envio = new Bundle();
+                MisionVo mision = listaNuevasMisiones.get(recyclerNuevasMisiones.getChildAdapterPosition(view));
+                envio.putSerializable("mision",mision);
+                envio.putString("codPaciente",idGuardado);
+                envio.putBoolean("habEmpezarMision",true);
                 intento.putExtras(envio);
                 startActivity(intento);
 
@@ -84,10 +115,7 @@ public class misiones extends AppCompatActivity {
     private void llenarMisiones() throws IOException {
 
         FileInputStream in2 = null;
-        try {
-            in2 = openFileInput("id.dt2");
-        ObjectInputStream ois2 = new ObjectInputStream(in2);
-            String idGuardado =  ois2.readObject().toString();
+
             ArrayList<String> nombres= new ArrayList<>();
             ArrayList valores= new ArrayList();
             nombres.add("codPaciente");
@@ -119,9 +147,7 @@ public class misiones extends AppCompatActivity {
                 }}).execute(valores);
 
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
     }
     private void llenarNuevasMis() throws IOException, ClassNotFoundException {

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -43,6 +44,7 @@ public class pasosLogrosMision extends Fragment {
     RecyclerView recyclerPasos ;
     ArrayList<PasoVo> listaPasos;
     AdaptadorPasos adapter;
+    TextView nombre,descripcion,dias;
 
     public pasosLogrosMision() {
         // Required empty public constructor
@@ -83,12 +85,15 @@ public class pasosLogrosMision extends Fragment {
         MisionVo mision = (MisionVo) envio.getSerializable("mision");
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
+
         adapter = new AdaptadorPasos(listaPasos);
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);
         recyclerPasos.setItemAnimator(new DefaultItemAnimator());
-
+        nombre=vista.findViewById(R.id.nombre);
+        descripcion=vista.findViewById(R.id.descripcion);
+        dias=vista.findViewById(R.id.orden);
         llenarLista(mision);
         return vista;
     }
@@ -110,19 +115,20 @@ public class pasosLogrosMision extends Fragment {
 
                     int numDias=5,num;
                     salida=arreglo.get(1).getAsJsonObject();
-                    paso=salida.get("paso").getAsJsonObject();
-                  /*  for(int i=0;i<arreglo.size();i++){
-                        verif=arreglo.get(i).getAsJsonObject().getAsJsonObject("idVerficacion");
-                         num =  verif.get("idVerficacion").getAsInt();
-                        numDias= numDias+num;
-                    }*/
+                    paso=salida.get("idPaso").getAsJsonObject();
+                    String nom=paso.get("nombre").getAsString();
+                    String desc =paso.get("descripcion").getAsString();
+                    String dia =paso.get("diasDuracion").getAsString();
+                    nombre.setText(nom);
+                    descripcion.setText(desc);
+                    dias.setText(dia);
 
 
-
-                        PasoVo pasoVo =new PasoVo(paso.get("descripcion").getAsString(),paso.get("nombre").getAsString(),numDias);
+                    for(int i=1;i<=arreglo.size();i++) {
+                        PasoVo pasoVo = new PasoVo(nom, desc,i);
                         listaPasos.add(pasoVo);
 
-
+                    }
 
                     adapter.notifyDataSetChanged();
                 }
