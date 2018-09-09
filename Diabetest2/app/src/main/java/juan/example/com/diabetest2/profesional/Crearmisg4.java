@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.util.Conexion;
+import juan.example.com.diabetest2.util.Movie;
 
 public class Crearmisg4 extends AppCompatActivity {
 
@@ -67,7 +68,7 @@ public class Crearmisg4 extends AppCompatActivity {
         //{"descripcion":"vase","nombre":"otrko","diasDuracion":1,"estado":"a","categoria":2,"misionPasoLogroList":[]}
 
         Bundle slida= getIntent().getExtras();
-        int catcod=slida.getInt("catcod");
+        final int catcod=slida.getInt("catcod");
         nomcat=slida.getString("cadnom");
         Log.d("paramet",catcod+" "+nomcat);
         ArrayList nombres=new ArrayList<String>();
@@ -81,12 +82,20 @@ public class Crearmisg4 extends AppCompatActivity {
         nombres.add("categoria");valores.add(""+catcod);
         nombres.add("misionPasoLogroList");valores.add(ja);
 
+        final int diasnum=Integer.parseInt(dias.getText().toString());
         new Conexion("crearPaso",nombres,new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
                 Intent creado=new Intent(este,Crearmisg3.class);
+                ArrayList<Movie> sal=new ArrayList<>();
+                for(int a=0;a<diasnum;a++) {
+                    Movie movie = new Movie((a+1)+"."+nom.getText().toString(), desc.getText().toString(), String.valueOf(a+1), 0, false, Integer.parseInt(output), Integer.parseInt(dias.getText().toString()), catcod, -1);
+                    sal.add(movie);
+                }
                 creado.putExtra("categoria",nomcat);
                 creado.putExtra("codigo",codmision);
+                creado.putExtra("noexiste",1);
+               creado.putParcelableArrayListExtra("parc",sal);
                 creado.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(creado);
             }
@@ -104,6 +113,7 @@ public class Crearmisg4 extends AppCompatActivity {
             nomcat=slida.getString("cadnom");
             a.putExtra("categoria",nomcat);
             a.putExtra("codigo",codmision);
+            a.putExtra("noexiste",1);
             a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(a);
             return true;

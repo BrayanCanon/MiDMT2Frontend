@@ -52,11 +52,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             genre = (TextView) view.findViewById(R.id.genre);
             year = (TextView) view.findViewById(R.id.year);
             pos=(TextView) view.findViewById(R.id.year);
-            butnot = (Button) view.findViewById(R.id.butnot);
-            listeado1=(CheckBox) view.findViewById(R.id.listeado1);
-            down=(Button) view.findViewById(R.id.button40);
             edit=(Button)view.findViewById(R.id.button38);
-            //logros=(Spinner)view.findViewById(R.id.logrs);
             este=view.getContext();
             estep=view;
 
@@ -90,68 +86,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         holder.title.setText(movie.getTitle());
         holder.genre.setText(movie.getGenre());
         holder.year.setText("");
-        holder.listeado1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Boolean checkeado =holder.listeado1.isChecked();
-                movie.setSel(checkeado);
-                if (!checkeado){
-                    movie.setYear("0");
-                    holder.year.setText("");
-                    moviesList.set(position,movie);
-
-                }
-                else {
-                    movie.setYear("1");
-                    holder.year.setText("1");
-                    moviesList.set(position,movie);
-
-                }
-
-
-
-            }
-        });
-
-        holder.butnot.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if(holder.listeado1.isChecked() && Integer.parseInt(movie.getYear())!=-1) {
-                    /*Toast toast1 =
-                            Toast.makeText(este,
-                                    "Toast por defecto " + position, Toast.LENGTH_SHORT);
-                                     toast1.show();*/
-                    movie.setYear(String.valueOf(Integer.parseInt(movie.getYear()) + 1));
-                    holder.year.setText(String.valueOf(movie.getYear()));
-                    moviesList.set(position, movie);
-
-                }
-                else if(holder.listeado1.isChecked() && Integer.parseInt(movie.getYear())==-1){
-                    movie.setYear("1");
-                    holder.year.setText("1");
-                    moviesList.set(position, movie);
-                }
-            }
-        });
-
-        holder.down.setOnClickListener(new  View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if(holder.listeado1.isChecked() && Integer.parseInt(movie.getYear())>1 ) {
-
-                    movie.setYear(String.valueOf(Integer.parseInt(movie.getYear()) - 1));
-                    holder.year.setText(String.valueOf(movie.getYear()));
-                    moviesList.set(position, movie);
-
-                }
-                else if(holder.listeado1.isChecked()) {
-                    movie.setYear(String.valueOf(-1));
-                    holder.year.setText("sin orden");
-                    moviesList.set(position, movie);
-                }
-            }
-        });
-
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,6 +111,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                         dialog.dismiss();
                         movie.setLogro(numeritos.get(which));
                         moviesList.set(position,movie);
+                        //-------------------------------------
+                        Toast.makeText(este, "Logro asignado!", Toast.LENGTH_LONG).show();
+                        //-------------------------------------
                         //Log.d("numeritosel",""+nombres.get(which));
                     }
 

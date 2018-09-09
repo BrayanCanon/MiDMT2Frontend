@@ -1,7 +1,9 @@
 package juan.example.com.diabetest2.profesional;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -44,6 +46,8 @@ public class Crearmisg3 extends AppCompatActivity {
     private String nomcategoria;
     private String codmision;
     private Context contexto=this;
+    private ArrayList<Movie> salida;
+
 
     @Override
     protected void onResume() {
@@ -60,8 +64,8 @@ public class Crearmisg3 extends AppCompatActivity {
         ListViewItems=new ArrayList<>();
         ctrear=(Button)findViewById(R.id.agregar45);
         seguir=(Button)findViewById(R.id.button43);
-        ctrear.setEnabled(false);
-        seguir.setEnabled(false);
+        ctrear.setEnabled(true);
+        seguir.setEnabled(true);
         nomcategoria=getIntent().getStringExtra("categoria");
         codmision=getIntent().getStringExtra("codigo");
         Log.d("estele",codmision);
@@ -88,12 +92,7 @@ public class Crearmisg3 extends AppCompatActivity {
         }).execute(new ArrayList<String>());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view45);
 
-        mAdapter = new MoviesAdapter(movieList,ListViewItems,listId,contexto);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerView.setAdapter(mAdapter);
         //-------------
 
         //------------
@@ -116,33 +115,17 @@ public class Crearmisg3 extends AppCompatActivity {
         valores.add(getIntent().getStringExtra("categoria"));
         codcategoria=getIntent().getIntExtra("codcategoria", 1);
         Log.d("codigoenvio",""+getIntent().getIntExtra("codcategoria", 1));
-        new Conexion("consultarpanom", nombres, new Conexion.Comunicado() {
-            @Override
-            public void salidas(String output) {
-                try {
-                    Log.d("salidad",output);
-
-                   JSONArray jsonArray=new JSONArray(output);
-                   Boolean primero=true;
-
-                    for(int a=0;a<jsonArray.length();a++){
-                        JSONObject salida=jsonArray.getJSONObject(a);
-                        Movie movie = new Movie(salida.get("nombre").toString(), salida.get("descripcion").toString(), "0",0,false,salida.getInt("idPaso"),salida.getInt("diasDuracion"),salida.getInt("categoria"),-1);
-                        movieList.add(movie);
-
-                    }
-
-                    mAdapter.notifyDataSetChanged();
-                    ctrear.setEnabled(true);
-                    seguir.setEnabled(true);
-
-                }
-                catch (Exception e){
-                    Log.d("errorsito",e.getLocalizedMessage() == null ? "" : e.getLocalizedMessage());
-                }
-            }
-        }).execute(valores);
-
+        if(getIntent().getParcelableArrayListExtra("parc")!=null) {
+            salida=getIntent().getParcelableArrayListExtra("parc");
+            mAdapter = new MoviesAdapter(salida,ListViewItems,listId,contexto);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            ctrear.setEnabled(true);
+            seguir.setEnabled(true);
+        }
 
 
 
@@ -156,7 +139,47 @@ public class Crearmisg3 extends AppCompatActivity {
 
 
     public void agregar(View v){
-        Intent ag=new Intent(this,Crearmisg4.class);
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        ArrayList<String> nombre=new ArrayList<>();
+                        ArrayList valores=new ArrayList<>();
+                        nombre.add("idPaso");valores.add(salida.get(0).getId());
+                            new Conexion("borrarPaso", nombre, new Conexion.Comunicado() {
+                                @Override
+                                public void salidas(String output) {
+
+                                }
+                            }).execute(valores);
+                        creador();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        if(getIntent().getParcelableArrayListExtra("parc")!=null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
+            builder.setMessage("¿Está seguro que desea asignar otro paso?").setPositiveButton("Si", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
+        else {
+            creador();
+        }
+
+    }
+
+    public void creador(){
+        Intent ag=new Intent(contexto
+
+                ,Crearmisg4.class);
         Bundle datos=new Bundle();
         datos.putInt("catcod",codcategoria);
         Log.d("codcategoria",String.valueOf(codcategoria));
@@ -165,59 +188,10 @@ public class Crearmisg3 extends AppCompatActivity {
         Log.d("codmision",codmision);
         ag.putExtras(datos);
         startActivity(ag);
+
     }
     public void seguirbot(View v){
         ArrayList<Movie> respuestas= new ArrayList<>(mAdapter.res());
-        Collections.sort(respuestas, new Comparator<Movie>() {
-            @Override
-            public int compare(Movie movie, Movie t1) {
-                return t1.getYear().compareToIgnoreCase(movie.getYear());
-            }
-        });
-
-        int tam =respuestas.size();
-       int contador=0;
-       Boolean cortar=true;
-       int comparador=Integer.parseInt(respuestas.get(0).getYear());
-        boolean vacio=true;
-       for(int a=0;a<tam;a++){
-           if(!respuestas.get(a).getYear().matches("0")){
-               vacio=false;
-           }
-       }
-       if(!vacio) {
-           while (contador < tam )
-           {
-               if(Integer.parseInt(respuestas.get(contador).getYear()) > 0) {
-                   Log.d("compar", respuestas.get(contador).getYear() + " " + comparador);
-                   if (Integer.parseInt(respuestas.get(contador).getYear()) == comparador) {
-                       contador++;
-                       comparador--;
-                   } else {
-                       cortar = false;
-                       Toast toast1 =
-                               Toast.makeText(this,
-                                       "ordene los pasos desde el primero al ultimo en orden ", Toast.LENGTH_SHORT);
-                       toast1.show();
-                       break;
-                   }
-               }
-               else{
-                   break;
-               }
-
-           }
-           if (cortar) {
-               for(int comp=0;comp<respuestas.size();comp++){
-                   if (respuestas.get(comp).getYear().equals("0")) {
-                       respuestas.remove(comp);
-                       comp--;
-                   }
-
-               }
-
-
-
                ArrayList<String> nombres=new ArrayList<>();
                ArrayList valores=new ArrayList();
                 //new Conexion("")
@@ -228,13 +202,11 @@ public class Crearmisg3 extends AppCompatActivity {
                    JsonObject adaptador = new JsonObject();
                    Movie salida=respuestas.get(a);
                    //-----------------------------------------
-
                    adaptador.addProperty("mision",codmision);
                    adaptador.addProperty("paso",salida.getId());
                    adaptador.addProperty("logro",salida.getLogro());
                    adaptador.addProperty("pasoNumero",Integer.parseInt(salida.getYear()));
                    adaptador.addProperty("estado","a");
-
                    //-----------------------------------------
                    info.add(adaptador);
 
@@ -254,15 +226,6 @@ public class Crearmisg3 extends AppCompatActivity {
                envio.putExtra("seleccion", respuestas);
                envio.putExtra("codigo",String.valueOf(codmision));
                startActivity(envio);
-           }
-
-       }
-       else {
-           Toast toast1 =
-                   Toast.makeText(this,
-                           "seleccione al menos un paso", Toast.LENGTH_SHORT);
-           toast1.show();
-       }
 
     }
     @Override

@@ -109,6 +109,8 @@ public class Movie implements Parcelable {
         this.genre = genre;
     }
 
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -120,6 +122,8 @@ public class Movie implements Parcelable {
         parcel.writeString(genre);
         parcel.writeString(year);
         parcel.writeInt(val);
+        parcel.writeInt(id);
+        parcel.writeInt(categoria);
         parcel.writeByte((byte) (sel ? 1 : 0));
     }
     public Movie(Parcel in) {
@@ -127,6 +131,8 @@ public class Movie implements Parcelable {
         this.genre=in.readString();
         this.year=in.readString();
         this.val=in.readInt();
+        this.id=in.readInt();
+        this.categoria=in.readInt();
         this.sel=in.readByte()==1;
     }
 

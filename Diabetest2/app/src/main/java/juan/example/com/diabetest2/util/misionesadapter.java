@@ -57,13 +57,19 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
 
            holder.nombre.setText(pos.getNombre());
            holder.categoria.setText(pos.getCategoria());
-           holder.nivel.setText(String.valueOf(pos.getNivel()));
+           holder.nivel.setText(" ");
            holder.itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
                    Intent modificar=new Intent(este, Modmisp.class);
                    modificar.putExtra("mision",pos);
                    este.startActivity(modificar);
+
+               }
+           });
+           holder.itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
 
                }
            });
