@@ -25,11 +25,9 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolderPasos holder, int position) {
+        holder.dia.setText(Integer.toString(listaPasos.get(position).getOrden()));
 
-        holder.desc.setText(listaPasos.get(position).getDescripcion());
-        holder.nombre.setText(listaPasos.get(position).getNombre());
 
-        holder.orden.setText(String.valueOf(listaPasos.get(position).getOrden()));
     }
 
 
@@ -39,12 +37,11 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     }
 
     public class ViewHolderPasos extends RecyclerView.ViewHolder {
-        TextView orden,nombre,desc;
+        TextView dia ;
         public ViewHolderPasos(View itemView) {
             super(itemView);
-            orden=itemView.findViewById(R.id.orden);
-            nombre=itemView.findViewById(R.id.nombre);
-            desc=itemView.findViewById(R.id.descripcion);
+            dia=itemView.findViewById(R.id.diaMision);
+
         }
     }
 }
