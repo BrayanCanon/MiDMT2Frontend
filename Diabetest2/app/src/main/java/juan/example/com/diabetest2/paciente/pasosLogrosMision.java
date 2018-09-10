@@ -42,9 +42,12 @@ public class pasosLogrosMision extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerPasos ;
+    MisionVo mision;
     ArrayList<PasoVo> listaPasos;
+    ArrayList<VerificacionVo> listaverif ;
     AdaptadorPasos adapter;
     TextView nombre,descripcion,dias;
+
 
     public pasosLogrosMision() {
         // Required empty public constructor
@@ -82,11 +85,12 @@ public class pasosLogrosMision extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Bundle envio = getArguments();
-        MisionVo mision = (MisionVo) envio.getSerializable("mision");
+         mision  = (MisionVo) envio.getSerializable("mision");
+        boolean habCheckBox=envio.getBoolean("habEmpezarMision");
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
-
-        adapter = new AdaptadorPasos(listaPasos);
+        listaverif = new ArrayList<>();
+        adapter = new AdaptadorPasos(listaPasos,listaverif);
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);
@@ -94,13 +98,13 @@ public class pasosLogrosMision extends Fragment {
         nombre=vista.findViewById(R.id.nombre);
         descripcion=vista.findViewById(R.id.descripcion);
         dias=vista.findViewById(R.id.orden);
-        llenarLista(mision);
+        llenarLista(habCheckBox);
         return vista;
     }
 
-    private void llenarLista(MisionVo mision) {
+    private void llenarLista( final boolean habCheckBox) {
         ArrayList<String> nombres= new ArrayList<>();
-        ArrayList valores= new ArrayList();
+        final ArrayList valores= new ArrayList();
         nombres.add("idMision");
         valores.add(mision.getIdMision());
         new Conexion("consultarTodosPasos", nombres, new Conexion.Comunicado() {
@@ -122,10 +126,30 @@ public class pasosLogrosMision extends Fragment {
                     nombre.setText(nom);
                     descripcion.setText(desc);
                     dias.setText(dia);
+                    ArrayList<String> no= new ArrayList<>();
+                    ArrayList va= new ArrayList();
+                    no.add("idMisionPaciente");
+                    va.add(mision.getIdMisionPaciente());
+
+                    new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
+                        @Override
+                        public void salidas(String output) {
+                            Gson gson = new Gson();
+                            JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                            JsonObject verif ;
+                            for(int i =0;i<arreglo.size();i++){
+                                verif=arreglo.get(i).getAsJsonObject();
+                                VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(),verif.get("verifPaciente").getAsBoolean());
+                                listaverif.add(obj);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                    }).execute(va);
 
 
                     for(int i=1;i<=arreglo.size();i++) {
-                        PasoVo pasoVo = new PasoVo(nom, desc,i);
+                        PasoVo pasoVo = new PasoVo(nom, habCheckBox,i,mision.getIdMisionPaciente());
+
                         listaPasos.add(pasoVo);
 
                     }
