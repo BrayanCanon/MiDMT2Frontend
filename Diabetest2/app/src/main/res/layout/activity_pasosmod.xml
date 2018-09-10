@@ -11,16 +11,29 @@
         android:id="@+id/busc2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="72dp"
         android:text="Lista de pasos"
         app:layout_constraintBottom_toTopOf="@+id/recycler_view452"
         app:layout_constraintStart_toStartOf="@+id/recycler_view452" />
+
+    <TextView
+        android:id="@+id/mispaso9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text=""
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view452"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view452"
+        app:layout_constraintTop_toBottomOf="@+id/busc2"
+        app:layout_constraintVertical_bias="0.657" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view452"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="108dp"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,9 +44,8 @@
         android:id="@+id/button43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:text="Finalizar"
         app:layout_constraintStart_toEndOf="@+id/busc2"
         app:layout_constraintTop_toTopOf="parent" />

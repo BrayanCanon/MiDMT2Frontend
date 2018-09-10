@@ -101,7 +101,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                 final int[] n = {1};
                 AlertDialog.Builder b = new AlertDialog.Builder(este);
                 Object[] objectList = nombres.toArray();
-                String[] types = Arrays.copyOf(objectList,nombres.size(),String[].class);
+                final String[] types = Arrays.copyOf(objectList,nombres.size(),String[].class);
                 b.setTitle("Seleccione un logro");
                 b.setItems(types, new DialogInterface.OnClickListener() {
 
@@ -110,6 +110,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
                         dialog.dismiss();
                         movie.setLogro(numeritos.get(which));
+                        holder.genre.setText(types[which]);
                         moviesList.set(position,movie);
                         //-------------------------------------
                         Toast.makeText(este, "Logro asignado!", Toast.LENGTH_LONG).show();

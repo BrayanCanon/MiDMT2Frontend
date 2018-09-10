@@ -89,9 +89,10 @@ public class Crearmisg4 extends AppCompatActivity {
                 Intent creado=new Intent(este,Crearmisg3.class);
                 ArrayList<Movie> sal=new ArrayList<>();
                 for(int a=0;a<diasnum;a++) {
-                    Movie movie = new Movie((a+1)+"."+nom.getText().toString(), desc.getText().toString(), String.valueOf(a+1), 0, false, Integer.parseInt(output), Integer.parseInt(dias.getText().toString()), catcod, -1);
+                    Movie movie = new Movie("dia #"+(a+1), " ", String.valueOf(a+1), 0, false, Integer.parseInt(output), Integer.parseInt(dias.getText().toString()), catcod, -1);
                     sal.add(movie);
                 }
+                creado.putExtra("nompasus",nom.getText().toString());
                 creado.putExtra("categoria",nomcat);
                 creado.putExtra("codigo",codmision);
                 creado.putExtra("noexiste",1);
