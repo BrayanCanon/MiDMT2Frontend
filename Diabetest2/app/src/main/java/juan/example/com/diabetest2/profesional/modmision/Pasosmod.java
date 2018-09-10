@@ -1,11 +1,13 @@
 package juan.example.com.diabetest2.profesional.modmision;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -100,5 +102,11 @@ public class Pasosmod extends AppCompatActivity {
 
     public void cargar(){
 
+    }
+
+    public void modificar(View v){
+        Intent mod=new Intent(this,Modpaso.class);
+        mod.putExtra("mision",getIntent().getParcelableExtra("mision"));
+        startActivity(mod);
     }
 }
