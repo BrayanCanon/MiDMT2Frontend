@@ -70,6 +70,9 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
            holder.itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
+                   Intent seleccion=new Intent(este,Modmisp.class);
+                   seleccion.putExtra("mision",pos);
+                   este.startActivity(seleccion);
 
                }
            });

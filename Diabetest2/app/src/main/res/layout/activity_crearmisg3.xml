@@ -6,20 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".profesional.Crearmisg3">
 
-    <TextView
-        android:id="@+id/busc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Lista de pasos"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view45"
-        app:layout_constraintStart_toStartOf="@+id/recycler_view45" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view45"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="92dp"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,21 +21,19 @@
         android:id="@+id/agregar45"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
         android:onClick="agregar"
         android:text="agregar"
-        app:layout_constraintStart_toEndOf="@+id/busc"
+        app:layout_constraintStart_toEndOf="@+id/textView153"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:onClick="seguirbot"
         android:text="Finalizar"
         app:layout_constraintStart_toEndOf="@+id/agregar45"
@@ -54,11 +43,26 @@
         android:id="@+id/textView153"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:text="pasos"
         android:textColor="@color/negro"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView156"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
+        android:text=" "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/agregar45"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -47,6 +48,7 @@ public class Crearmisg3 extends AppCompatActivity {
     private String codmision;
     private Context contexto=this;
     private ArrayList<Movie> salida;
+    private TextView titulo;
 
 
     @Override
@@ -64,6 +66,7 @@ public class Crearmisg3 extends AppCompatActivity {
         ListViewItems=new ArrayList<>();
         ctrear=(Button)findViewById(R.id.agregar45);
         seguir=(Button)findViewById(R.id.button43);
+        titulo=(TextView)findViewById(R.id.textView156);
         ctrear.setEnabled(true);
         seguir.setEnabled(true);
         nomcategoria=getIntent().getStringExtra("categoria");
@@ -118,6 +121,7 @@ public class Crearmisg3 extends AppCompatActivity {
         if(getIntent().getParcelableArrayListExtra("parc")!=null) {
             salida=getIntent().getParcelableArrayListExtra("parc");
             mAdapter = new MoviesAdapter(salida,ListViewItems,listId,contexto);
+            titulo.setText(getIntent().getStringExtra("nompasus"));
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
