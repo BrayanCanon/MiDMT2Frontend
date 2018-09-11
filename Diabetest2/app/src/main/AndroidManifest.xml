@@ -155,7 +155,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".profesional.modmision.Modpasos" />
         <activity android:name=".paciente.VerRecursosMision" />
-        <activity android:name=".paciente.VerRecursosMisionPaciente"></activity>
+        <activity android:name=".paciente.VerRecursosMisionPaciente" />
+        <activity android:name=".profesional.modmision.Modpaso"></activity>
     </application>
 
 </manifest>

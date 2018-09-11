@@ -44,10 +44,23 @@
         android:id="@+id/button43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="4dp"
         android:text="Finalizar"
         app:layout_constraintStart_toEndOf="@+id/busc2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button32"
+        android:onClick=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:text="modificar"
+        app:layout_constraintEnd_toStartOf="@+id/button43"
         app:layout_constraintTop_toTopOf="parent" />
 
 
