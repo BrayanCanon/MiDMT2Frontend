@@ -67,36 +67,41 @@ public class Pasosmod extends AppCompatActivity {
 
 //-------------------------------------------------
         Mision sel=getIntent().getParcelableExtra("mision");
-        ArrayList<String> nombres=new ArrayList<>();
-        ArrayList valores=new ArrayList();
-        nombres.add("idMision");valores.add(sel.getIdMision());
-        new Conexion("consultarTodosPasos", nombres, new Conexion.Comunicado() {
-            @Override
-            public void salidas(String output) {
-                try {
-                    Gson gson=new Gson();
-                    JsonArray lista=gson.fromJson(output,JsonArray.class);
-                    Boolean primero=true;
-                    for (int a = 0; a < lista.size(); a++) {
-                        JsonObject sal = lista.get(a).getAsJsonObject();
-                        JsonObject salida = sal.get("idPaso").getAsJsonObject();
-                        if(primero){
-                            primero=false;
-                            pasosel.setText("paso:"+salida.get("nombre").getAsString());
+        if(getIntent().getParcelableArrayListExtra("parc")==null) {
+            ArrayList<String> nombres = new ArrayList<>();
+            ArrayList valores = new ArrayList();
+            nombres.add("idMision");
+            valores.add(sel.getIdMision());
+            new Conexion("consultarTodosPasos", nombres, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+                    try {
+                        Gson gson = new Gson();
+                        JsonArray lista = gson.fromJson(output, JsonArray.class);
+                        Boolean primero = true;
+                        for (int a = 0; a < lista.size(); a++) {
+                            JsonObject sal = lista.get(a).getAsJsonObject();
+                            JsonObject salida = sal.get("idPaso").getAsJsonObject();
+                            if (primero) {
+                                primero = false;
+                                pasosel.setText("paso:" + salida.get("nombre").getAsString());
+                            }
+                            Movie movie = new Movie("dia #" + (a + 1), salida.get("descripcion").getAsString(), "0", 0, false, salida.get("idPaso").getAsInt(), salida.get("diasDuracion").getAsInt(), 0, -1);
+                            movieList.add(movie);
+
                         }
-                        Movie movie = new Movie("dia #"+(a+1), salida.get("descripcion").getAsString(), "0", 0, false, salida.get("idPaso").getAsInt(), salida.get("diasDuracion").getAsInt(), 0, -1);
-                        movieList.add(movie);
+                        pasoedit.notifyDataSetChanged();
+                    } catch (Exception e) {
 
                     }
-                    pasoedit.notifyDataSetChanged();
-                }
-                catch (Exception e){
 
                 }
-
-            }
-        }).execute(valores);
-
+            }).execute(valores);
+        }
+        else {
+            movieList=getIntent().getParcelableArrayListExtra("parc");
+            pasoedit.notifyDataSetChanged();
+        }
 
     }
 
