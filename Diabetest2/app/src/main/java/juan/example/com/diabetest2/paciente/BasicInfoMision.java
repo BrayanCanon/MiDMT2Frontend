@@ -123,12 +123,8 @@ public class BasicInfoMision extends Fragment {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
-        }).execute(valores);{
-
+        }).execute(valores);
         }
-
-
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

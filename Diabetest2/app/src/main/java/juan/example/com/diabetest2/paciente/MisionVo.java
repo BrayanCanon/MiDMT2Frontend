@@ -6,7 +6,7 @@ public class MisionVo implements Serializable {
     private String titulo;
     private String categoria;
     private String dificultad;
-    private String idMision;
+    private String idMision,idMisionPaciente;
     private String descripcion;
 
 
@@ -20,6 +20,24 @@ public class MisionVo implements Serializable {
         this.idMision=idMision;
 
     }
+
+    public MisionVo(String titulo, String categoria, String dificultad, String idMision,  String descripcion,String idMisionPaciente) {
+        this.titulo = titulo;
+        this.categoria = categoria;
+        this.dificultad = dificultad;
+        this.idMision = idMision;
+        this.idMisionPaciente = idMisionPaciente;
+        this.descripcion = descripcion;
+    }
+
+    public String getIdMisionPaciente() {
+        return idMisionPaciente;
+    }
+
+    public void setIdMisionPaciente(String idMisionPaciente) {
+        this.idMisionPaciente = idMisionPaciente;
+    }
+
     public String getTitulo() {
         return titulo;
     }

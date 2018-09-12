@@ -2,13 +2,24 @@ package juan.example.com.diabetest2.paciente;
 
 public class PasoVo {
     private String descripcion;
-    private String nombre;
+    private Boolean habCheckbox;
     private int orden;
+    private String idMisionPaciente;
 
-    public PasoVo(String descripcion, String nombre, int orden) {
+
+    public PasoVo(String descripcion, Boolean  habCheckBox, int orden,String idMisionPaciente) {
         this.orden=orden;
         this.descripcion = descripcion;
-        this.nombre = nombre;
+        this.habCheckbox = habCheckBox;
+        this.idMisionPaciente= idMisionPaciente;
+    }
+
+    public String getIdMisionPaciente() {
+        return idMisionPaciente;
+    }
+
+    public void setIdMisionPaciente(String idMisionPaciente) {
+        this.idMisionPaciente = idMisionPaciente;
     }
 
     public String getDescripcion() {
@@ -19,12 +30,12 @@ public class PasoVo {
         this.descripcion = descripcion;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Boolean getHabCheckbox() {
+        return habCheckbox;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setHabCheckbox(Boolean habCheckbox) {
+        this.habCheckbox = habCheckbox;
     }
 
     public int getOrden() {
