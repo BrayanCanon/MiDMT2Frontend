@@ -76,6 +76,7 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
 
                }
            });
+
            holder.borrar.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
