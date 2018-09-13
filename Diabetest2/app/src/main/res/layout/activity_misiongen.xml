@@ -44,7 +44,7 @@
                     android:id="@+id/button30"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:background="@drawable/borrarmision" />
+                    android:background="@drawable/recursosMis" />
 
                 <Button
                     android:id="@+id/button31"

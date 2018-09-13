@@ -35,4 +35,5 @@ public class Mision_Gen_Prof extends AppCompatActivity {
     public void formugen(View v) {  Intent intento = new Intent(this, Creamisg.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
+
 }
