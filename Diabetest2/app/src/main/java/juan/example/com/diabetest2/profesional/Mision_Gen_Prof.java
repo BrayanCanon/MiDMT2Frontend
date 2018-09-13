@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.Recursos_crud;
 
 public class Mision_Gen_Prof extends AppCompatActivity {
 
@@ -36,4 +37,8 @@ public class Mision_Gen_Prof extends AppCompatActivity {
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
 
-}
+    public void recursosmision(View view) {
+        Intent intento = new Intent(this, Recursos_crud.class);
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento);
+        }
+}}
