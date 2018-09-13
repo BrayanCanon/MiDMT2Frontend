@@ -20,6 +20,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.Mision_Gen_Prof;
+import juan.example.com.diabetest2.profesional.Pruebcon;
 import juan.example.com.diabetest2.util.AdapterPasoedit;
 import juan.example.com.diabetest2.util.Conexion;
 import juan.example.com.diabetest2.util.Mision;
@@ -35,6 +37,7 @@ public class Pasosmod extends AppCompatActivity {
     private ArrayList<Movie> movieList = new ArrayList<>();
     ArrayList<Movie> paso=new ArrayList<>();
     TextView pasosel;
+    Mision seleccion;
 
 
     @Override
@@ -43,6 +46,12 @@ public class Pasosmod extends AppCompatActivity {
         setContentView(R.layout.activity_pasosmod);
         pasos=(RecyclerView)findViewById(R.id.recycler_view452);
         pasosel=(TextView)findViewById(R.id.mispaso9);
+        seleccion=(Mision) getIntent().getParcelableExtra("mision");
+        pasoedit=new AdapterPasoedit(movieList,logrosnNom,logrosId,this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        pasos.setLayoutManager(mLayoutManager);
+        pasos.setItemAnimator(new DefaultItemAnimator());
+        pasos.setAdapter(pasoedit);
 
         new Conexion("consultarLogros", new ArrayList(), new Conexion.Comunicado() {
             @Override
@@ -59,11 +68,7 @@ public class Pasosmod extends AppCompatActivity {
             }
         }).execute(new ArrayList<String>());
         //-----------------------------------------
-        pasoedit = new AdapterPasoedit(movieList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        pasos.setLayoutManager(mLayoutManager);
-        pasos.setItemAnimator(new DefaultItemAnimator());
-        pasos.setAdapter(pasoedit);
+
 
 //-------------------------------------------------
         Mision sel=getIntent().getParcelableExtra("mision");
@@ -82,11 +87,12 @@ public class Pasosmod extends AppCompatActivity {
                         for (int a = 0; a < lista.size(); a++) {
                             JsonObject sal = lista.get(a).getAsJsonObject();
                             JsonObject salida = sal.get("idPaso").getAsJsonObject();
+                            JsonObject logro= sal.get("idLogro").getAsJsonObject();
                             if (primero) {
                                 primero = false;
                                 pasosel.setText("paso:" + salida.get("nombre").getAsString());
                             }
-                            Movie movie = new Movie("dia #" + (a + 1), salida.get("descripcion").getAsString(), "0", 0, false, salida.get("idPaso").getAsInt(), salida.get("diasDuracion").getAsInt(), 0, -1);
+                            Movie movie = new Movie("dia #" + (a + 1), logro.get("nomLogro").getAsString(), "0", 0, false, salida.get("idPaso").getAsInt(), salida.get("diasDuracion").getAsInt(), 0, logro.get("idLogro").getAsInt());
                             movieList.add(movie);
 
                         }
@@ -99,13 +105,56 @@ public class Pasosmod extends AppCompatActivity {
             }).execute(valores);
         }
         else {
-            movieList=getIntent().getParcelableArrayListExtra("parc");
+
+            ArrayList<Movie> movieL=getIntent().getParcelableArrayListExtra("parc");
+            for(int a=0;a<movieL.size();a++){
+                movieList.add(movieL.get(a));
+            }
+
             pasoedit.notifyDataSetChanged();
         }
 
     }
 
     public void cargar(){
+
+    }
+
+    public void enviar(View v){
+        ArrayList<Movie> respuestas= new ArrayList<>(pasoedit.retsal());
+        ArrayList<String> nombres=new ArrayList<>();
+        ArrayList valores=new ArrayList();
+        //new Conexion("")
+        //----------------------------------------
+        JsonArray info=new JsonArray();
+        //--------------------------------
+        for(int a=0;a<respuestas.size();a++) {
+            JsonObject adaptador = new JsonObject();
+            Movie salida=respuestas.get(a);
+            //-----------------------------------------
+            adaptador.addProperty("mision",seleccion.getIdMision());
+            adaptador.addProperty("paso",salida.getId());
+            adaptador.addProperty("logro",salida.getLogro());
+            adaptador.addProperty("pasoNumero",Integer.parseInt(salida.getYear()));
+            adaptador.addProperty("estado","a");
+            //-----------------------------------------
+            info.add(adaptador);
+
+        }
+
+        String prueba=info.toString();
+        Log.d("asd",prueba);
+        nombres.add("cod");valores.add(info);
+        new Conexion("crearMPLogro", nombres, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+
+            }
+        }).execute(valores);
+        //--------------------------------
+        Intent envio = new Intent(this, Pruebcon.class);
+        startActivity(envio);
+
 
     }
 
