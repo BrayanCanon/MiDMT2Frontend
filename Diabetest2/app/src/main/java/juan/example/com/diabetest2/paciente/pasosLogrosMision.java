@@ -117,7 +117,7 @@ public class pasosLogrosMision extends Fragment {
                     JsonObject paso;
                     JsonObject verif;
 
-                    int numDias=5,num;
+
                     salida=arreglo.get(1).getAsJsonObject();
                     paso=salida.get("idPaso").getAsJsonObject();
                     String nom=paso.get("nombre").getAsString();

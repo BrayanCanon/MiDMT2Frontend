@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_metas"
+    android:background="@drawable/fondo"
     tools:context=".paciente.RecursosMision">
 
     <!-- TODO: Update blank fragment layout -->
@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:text="Información útil para tu misión "
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/blanco"
             android:textSize="20sp"
             android:layout_marginBottom="10dp"/>
 

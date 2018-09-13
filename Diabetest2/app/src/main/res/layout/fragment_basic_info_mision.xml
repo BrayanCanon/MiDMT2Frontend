@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_metas"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fondo"
     tools:context=".paciente.BasicInfoMision">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,74 +20,100 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/titulo"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Informacion basica"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textSize="35sp" />
+                android:layout_height="match_parent"
+                card_view:cardCornerRadius="19dp"
+                card_view:cardElevation="6dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView50"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:src="@drawable/ejer" />
+                    <ImageView
+                        android:id="@+id/imageView50"
 
-            <TextView
-                android:id="@+id/textView150"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:src="@drawable/ejer" />
 
-                android:text="Descripción:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="25sp" />
+                    <TextView
+                        android:id="@+id/titulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Informacion basica"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/darkblue"
+                        android:textSize="35sp" />
 
-            <TextView
-                android:id="@+id/descripcionMision"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <TextView
+                        android:id="@+id/textView150"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-            <TextView
-                android:id="@+id/textView145"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Categoria:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="25sp" />
+                        android:text="Descripción:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/negro"
+                        android:textSize="25sp" />
 
-            <TextView
-                android:id="@+id/catMision"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <TextView
+                        android:id="@+id/descripcionMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                       />
 
-            <TextView
-                android:id="@+id/textView152"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dificultad:"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="25sp" />
+                    <TextView
+                        android:id="@+id/textView145"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Categoria:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
 
-            <TextView
-                android:id="@+id/difMision"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                        android:textColor="@color/negro"
+                        android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/empMision"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Empezar Misión" />
+                    <TextView
+                        android:id="@+id/catMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                         />
 
+                    <TextView
+                        android:id="@+id/textView152"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dificultad:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/negro"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/difMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="TextView"
+                        />
+
+                    <Button
+                        android:id="@+id/empMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Empezar Misión" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
 
 </FrameLayout>
