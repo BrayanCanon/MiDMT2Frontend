@@ -1,5 +1,6 @@
 package juan.example.com.diabetest2.paciente;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,12 +36,14 @@ public class AdaptadorRecursos extends  RecyclerView.Adapter<AdaptadorRecursos.V
         return new ViewHolderRecursos(vista);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(AdaptadorRecursos.ViewHolderRecursos holder, int position) {
         String urlImagenes = Inicio.urlImagenes + recursos.get(position).getFoto();
         ;
         Log.d("urlimagenes", urlImagenes);
         holder.titulo.setText(recursos.get(position).getTitulo());
+        holder.titulo.setTextColor(R.color.negro);
         holder.descripcion.setText(recursos.get(position).getDecripcion());
         Picasso.with(contexto).load(urlImagenes).fit().noFade().into(holder.imagen);
 

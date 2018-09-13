@@ -12,7 +12,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@color/blanco75"
+        app:cardBackgroundColor="@color/blanco"
         app:cardElevation="10dp">
 
 
@@ -63,13 +63,6 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView49"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/line_gray_75" />
     </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
