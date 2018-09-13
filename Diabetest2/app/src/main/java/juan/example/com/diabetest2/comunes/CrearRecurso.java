@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -31,6 +33,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -165,19 +168,23 @@ public class CrearRecurso extends AppCompatActivity {
         Toast.makeText(CrearRecurso.this, "Cargando recurso, por favor espere", Toast.LENGTH_SHORT).show();
         //CrearRecurso.Consultar co = new CrearRecurso.Consultar();
         //co.execute();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        JsonObject usuario = new JsonObject();
         ArrayList nombres=new ArrayList();
         ArrayList valores=new ArrayList();
         java.util.Date date;
         date = new Date();
+
         FileInputStream in2 = openFileInput("correo.dt2");
         ObjectInputStream ois2 = new ObjectInputStream(in2);
         String correoGuardado = (String) ois2.readObject();
+        usuario.addProperty("nomUsuario",correoGuardado);
         nombres.add("tituloRec");valores.add(a1);
         nombres.add("contenidoApoyo");valores.add(b1);
         nombres.add("estado");valores.add("a");
-        nombres.add("fecha");valores.add(date);
+        nombres.add("fecha");valores.add(format.format(date));
         nombres.add("video");valores.add(c1);
-        nombres.add("nomUsuario");valores.add(correoGuardado);
+        nombres.add("nomUsuario");valores.add(usuario);
         nombres.add("imgCod");valores.add(imagen);
         new Conexion("crearRecurso",nombres, new Conexion.Comunicado() {
             @Override
