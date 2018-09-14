@@ -37,6 +37,33 @@
             android:ems="10"
             android:inputType="textPersonName" />
 
+            <RadioGroup
+                android:id="@+id/grupores"
+                android:checkedButton="@+id/radiono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <RadioButton
+                    android:id="@+id/radiosi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="si" />
+
+                <RadioButton
+                    android:id="@+id/radiono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="no" />
+
+            </RadioGroup>
+
         <TextView
             android:id="@+id/textView1473"
             android:layout_width="match_parent"
