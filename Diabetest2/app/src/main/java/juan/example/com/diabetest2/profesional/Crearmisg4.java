@@ -31,8 +31,11 @@ public class Crearmisg4 extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     Context este=this;
     int codcategoria;
+    Spinner diasmarc;
     String cadnom,codmision;
     String nomcat;
+    ArrayAdapter<String> adap;
+    ArrayList<String> adp=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class Crearmisg4 extends AppCompatActivity {
             codcategoria=params.getInt("catcod");
             cadnom=params.getString("cadnom");
             codmision=params.getString("codmision");
+
 
         }
         catch (Exception e){
@@ -56,8 +60,16 @@ public class Crearmisg4 extends AppCompatActivity {
         abrir=(Button)findViewById(R.id.creacionb1);
         nom=(TextView)findViewById(R.id.nom);
         desc=(TextView)findViewById(R.id.desc);
-        dias=(TextView)findViewById(R.id.dias);
-
+        diasmarc=(Spinner)findViewById(R.id.spinnermar);
+        for(int a=1;a<30;a++){
+            adp.add(String.valueOf(a));
+        }
+        adap = new ArrayAdapter<String>
+                (Crearmisg4.this,
+                        android.R.layout.simple_spinner_dropdown_item,
+                        android.R.id.text1, adp );
+        diasmarc.setAdapter(adap);
+        adap.notifyDataSetChanged();
         ArrayList nombres=new ArrayList<String>();
         ArrayList valores=new ArrayList<String>();
         ListViewItems=new ArrayList<String>();
@@ -77,19 +89,20 @@ public class Crearmisg4 extends AppCompatActivity {
         JsonArray ja = new JsonArray();
         nombres.add("descripcion");valores.add(desc.getText().toString());
         nombres.add("nombre");valores.add(nom.getText().toString());
-        nombres.add("diasDuracion");valores.add(dias.getText().toString());
+        nombres.add("diasDuracion");valores.add(diasmarc.getSelectedItem().toString());
         nombres.add("estado");valores.add("a");
         nombres.add("categoria");valores.add(""+catcod);
         nombres.add("misionPasoLogroList");valores.add(ja);
 
-        final int diasnum=Integer.parseInt(dias.getText().toString());
+        //final int diasnum=Integer.parseInt(dias.getText().toString());
+        final int diasnum=Integer.parseInt(diasmarc.getSelectedItem().toString());
         new Conexion("crearPaso",nombres,new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
                 Intent creado=new Intent(este,Crearmisg3.class);
                 ArrayList<Movie> sal=new ArrayList<>();
                 for(int a=0;a<diasnum;a++) {
-                    Movie movie = new Movie("dia #"+(a+1), " ", String.valueOf(a+1), 0, false, Integer.parseInt(output), Integer.parseInt(dias.getText().toString()), catcod, -1);
+                    Movie movie = new Movie("dia #"+(a+1), " ", String.valueOf(a+1), 0, false, Integer.parseInt(output), diasnum, catcod, -1);
                     sal.add(movie);
                 }
                 creado.putExtra("nompasus",nom.getText().toString());

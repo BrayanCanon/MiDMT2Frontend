@@ -70,13 +70,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="enviar"
-            android:text="Button" />
+            android:text="Enviar" />
 
         <TextView
             android:id="@+id/salida12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="sald" />
+            android:text=" " />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

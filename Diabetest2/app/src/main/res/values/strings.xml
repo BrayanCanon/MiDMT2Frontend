@@ -16,10 +16,8 @@
     <string name="logro_del">borrar logro</string>
     <string name="title_activity_controles_log">controlesLog</string>
     <string-array name="categorias">
-        <item>Educación en diabetes</item>
         <item>Ejercicio</item>
         <item>Dieta</item>
-        <item>Uso de los medicamentos</item>
     </string-array>
     <string-array name="tipo_mis">
         <item>generico</item>

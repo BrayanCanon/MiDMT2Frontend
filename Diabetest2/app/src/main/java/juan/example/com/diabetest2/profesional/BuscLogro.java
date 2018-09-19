@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
@@ -26,12 +27,16 @@ import java.util.regex.Pattern;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.util.Conexion;
+import juan.example.com.diabetest2.util.Mision;
 
 public class BuscLogro extends AppCompatActivity {
 
     ListView listview ;
     ArrayList<String> ListViewItems ;
     ArrayList<Integer> listId;
+    ArrayList<String> puntos=new ArrayList<>();
+    ArrayList<String> descripcion=new ArrayList<>();
+
     SparseBooleanArray sparseBooleanArray ;
     Button busqueda;
     EditText buscarcad;
@@ -96,20 +101,35 @@ public class BuscLogro extends AppCompatActivity {
                     int contador=0;
                     for(int a=0;a<tam2;a++) {
                             JSONObject explrObject = jsonArray.getJSONObject(a);
-                            listId.add(Integer.parseInt(explrObject.get("idLogro").toString()));
-                            ListViewItems.add(explrObject.get("nomLogro").toString());
-                    }
-                     adapter = new ArrayAdapter<String>
+                            if(!explrObject.get("nomLogro").toString().equals("Vacio")) {
+
+                                listId.add(Integer.parseInt(explrObject.get("idLogro").toString()));
+                                ListViewItems.add(explrObject.get("nomLogro").toString());
+                                if (explrObject.has("puntos")) {
+                                    Log.d("puntos", explrObject.get("puntos").toString());
+                                    puntos.add(explrObject.get("puntos").toString());
+                                } else {
+                                    puntos.add("0");
+                                }
+                                if (explrObject.has("descripcion")) {
+                                    descripcion.add(explrObject.get("descripcion").toString());
+                                } else {
+                                    descripcion.add("");
+                                }
+                            }}
+                    adapter = new ArrayAdapter<String>
                             (BuscLogro.this,
                                     android.R.layout.simple_spinner_dropdown_item,
                                     android.R.id.text1, ListViewItems );
                     listview.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
+
+                    } catch (JSONException e1) {
+                    e1.printStackTrace();
                 }
-                catch (Exception e){
-                    Log.d("errorraro",e.toString());
-                }
+
+
 
             }
         }).execute(valores);
@@ -122,6 +142,9 @@ public class BuscLogro extends AppCompatActivity {
                 Log.d("enviocontrol",""+listId.get(position));
                 b.putInt ("codigo",listId.get(position));
                 b.putString("nombre",ListViewItems.get(position));
+                b.putString("puntos",puntos.get(position));
+                b.putString("descripcion",descripcion.get(position));
+
                 controles.putExtras(b);
                 startActivity(controles);
             }
@@ -149,10 +172,8 @@ public class BuscLogro extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Toast toast1 =
-                    Toast.makeText(this,
-                            "Por favor termine el proceso antes de continuar", Toast.LENGTH_SHORT);
-            toast1.show();
+            Intent atras=new Intent(this, Mision_Gen_Prof.class);
+            startActivity(atras);
             return true;
         }
         return super.onKeyDown(keyCode, event);
