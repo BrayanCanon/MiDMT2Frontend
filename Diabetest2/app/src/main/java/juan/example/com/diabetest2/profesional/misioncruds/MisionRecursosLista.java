@@ -1,6 +1,5 @@
-package juan.example.com.diabetest2.profesional;
+package juan.example.com.diabetest2.profesional.misioncruds;
 
-import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,56 +8,57 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import juan.example.com.diabetest2.R;
-import juan.example.com.diabetest2.paciente.MisionVo;
 import juan.example.com.diabetest2.util.Conexion;
 import juan.example.com.diabetest2.util.Mision;
 import juan.example.com.diabetest2.util.misionesadapter;
 
-public class Pruebcon extends AppCompatActivity {
-
-   private RecyclerView vista;
-   private EditText buscmisedit;
-   private misionesadapter n;
-   private Context este=this;
-   private ArrayList<Mision> prueba=new ArrayList<>();
-
-
+public class MisionRecursosLista extends AppCompatActivity {
+   private   SwipeRefreshLayout refreshLayout;
+    private RecyclerView vista;
+    private EditText buscmisedit;
+    private misionesadapter n;
+    private ArrayList<Mision> prueba=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pruebcon);
+        setContentView(R.layout.activity_mision_recursos_lista);
         buscmisedit=(EditText)findViewById(R.id.buscmisedit);
-        vista=(RecyclerView)findViewById(R.id.recycler_view45);
+        vista=(RecyclerView)findViewById(R.id.recyclerMis);
+        // Obtener el refreshLayout
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         cargar();
+// Iniciar la tarea asíncrona al revelar el indicador
+        refreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        recargar(null);
+
+                    }
+                }
+        );
 
     }
-
     public void cargar(){
 
         final Mision elemento2=new Mision();
         prueba=new ArrayList<>();
-        n=new misionesadapter(prueba,this,false);
+        n=new misionesadapter(prueba,this,true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         vista.setLayoutManager(mLayoutManager);
         vista.setAdapter(n);
-
-        MisionVo mision= (MisionVo) getIntent().getParcelableExtra("mision");
-
 
         new Conexion("consultarMisiones",new ArrayList<String>(), new Conexion.Comunicado() {
             @Override
@@ -68,7 +68,7 @@ public class Pruebcon extends AppCompatActivity {
                     JsonArray salida=gson.fromJson(output,JsonArray.class);
                     Log.d("salidatam",String.valueOf(salida.size()));
                     for(int ajisnnef=0;ajisnnef<salida.size();ajisnnef++){
-                       JsonObject em=salida.get(ajisnnef).getAsJsonObject();
+                        JsonObject em=salida.get(ajisnnef).getAsJsonObject();
 
                         if(em.has("nombre")) {
                             if (em.has("idCategoria")) {
@@ -98,13 +98,11 @@ public class Pruebcon extends AppCompatActivity {
                     Log.d("consul111",e.toString());
                 }
 
+
             }
         }).execute(new ArrayList<String>());
 
     }
-
-
-
     public void busqueda(View v){
 
         Pattern p;
@@ -120,9 +118,14 @@ public class Pruebcon extends AppCompatActivity {
             n.notifyDataSetChanged();
         }
 
+
     }
     public void recargar(View v){
         buscmisedit.setText("");
         cargar();
+        refreshLayout.setRefreshing(false);
     }
-}
+
+
+    }
+
