@@ -6,11 +6,11 @@ import java.util.Date;
 public class RecursoVo  implements Serializable{
     private String titulo,autor;
     private String decripcion;
-    private int foto;
+    private String foto;
     private String fecha,video;
 
 
-    public RecursoVo(String titulo, String autor, String decripcion, int foto, String fecha,String video) {
+    public RecursoVo(String titulo, String autor, String decripcion, String foto, String fecha,String video) {
         this.titulo = titulo;
         this.autor = autor;
         this.decripcion = decripcion;
@@ -59,11 +59,11 @@ public class RecursoVo  implements Serializable{
         this.decripcion = decripcion;
     }
 
-    public int getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(int foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 }

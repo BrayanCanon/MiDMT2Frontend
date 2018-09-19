@@ -6,34 +6,27 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.util.Conexion;
+import juan.example.com.diabetest2.util.Mision;
 import juan.example.com.diabetest2.util.RecursoVo;
 
-public class Recursos_crud extends AppCompatActivity {
+public class RecursosAsignadosMis extends AppCompatActivity {
     ArrayList<RecursoVo> listaRecursos;
     RecyclerView recyclerRecursos;
     AdaptadorRecursos adapter;
     Context vista = this;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recursos_crud);
+        setContentView(R.layout.activity_recursos_asignados_mis);
         listaRecursos = new ArrayList<>();
         recyclerRecursos=findViewById(R.id.recyclerRecursos);
         recyclerRecursos.setItemAnimator(new DefaultItemAnimator());
@@ -41,9 +34,9 @@ public class Recursos_crud extends AppCompatActivity {
         adapter = new AdaptadorRecursos(listaRecursos,vista);
         recyclerRecursos.setAdapter(adapter);
         this.llenarRecursos();
-
     }
     private void llenarRecursos(){
+
 
 
 
@@ -51,7 +44,7 @@ public class Recursos_crud extends AppCompatActivity {
 
 
 
-        new Conexion("consultarRecursos", vacio, new Conexion.Comunicado() {
+        new Conexion("consultarRecursoMision", vacio, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
 

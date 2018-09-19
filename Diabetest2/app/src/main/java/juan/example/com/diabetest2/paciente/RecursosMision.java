@@ -128,7 +128,7 @@ public class RecursosMision extends Fragment {
                 for(int i = 0; i<arreglo.size();i++){
                     salida=arreglo.get(i).getAsJsonObject();
                     usuario=salida.get("nomUsuario").getAsJsonObject();
-                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),usuario.get("nomUsuario").getAsString(),salida.get("contenidoApoyo").getAsString(),Integer.parseInt(salida.get("imagen").getAsString()),salida.get("fecha").getAsString(),salida.get("video").getAsString());
+                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),usuario.get("nomUsuario").getAsString(),salida.get("contenidoApoyo").getAsString(),salida.get("imagen").getAsString(),salida.get("fecha").getAsString(),salida.get("video").getAsString());
                     listaRecursos.add(rec);
 
                 }

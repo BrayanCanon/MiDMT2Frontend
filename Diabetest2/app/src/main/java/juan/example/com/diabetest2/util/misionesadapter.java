@@ -13,18 +13,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.Recursos_crud;
 import juan.example.com.diabetest2.profesional.modmision.Modmisp;
 
 public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyViewHolder>  {
 
     ArrayList<Mision> misiones;
     Context este;
+    Boolean recursos= false;
     final RecyclerView.Adapter esteadap=this;
 
 
-    public misionesadapter(ArrayList<Mision> misiones, Context este){
+    public misionesadapter(ArrayList<Mision> misiones, Context este,Boolean recursos){
         this.misiones=misiones;
         this.este=este;
+        this.recursos=recursos;
     }
 
 
@@ -53,7 +56,11 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-           final Mision pos= misiones.get(position);
+        final Mision pos = misiones.get(position);
+        if (recursos == false) {
+
+
+            holder.borrar.setVisibility(View.VISIBLE);
 
            holder.nombre.setText(pos.getNombre());
            holder.categoria.setText(pos.getCategoria());
@@ -67,15 +74,7 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
 
                }
            });
-           holder.itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-                   Intent seleccion=new Intent(este,Modmisp.class);
-                   seleccion.putExtra("mision",pos);
-                   este.startActivity(seleccion);
 
-               }
-           });
 
            holder.borrar.setOnClickListener(new View.OnClickListener() {
                @Override
@@ -93,8 +92,25 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
                    misiones.remove(position);
                    esteadap.notifyDataSetChanged();
                }
-           });
-    }
+           });}
+
+    if(recursos==true){
+            holder.nombre.setText(pos.getNombre());
+            holder.categoria.setText(pos.getCategoria());
+            holder.nivel.setText(" ");
+            holder.borrar.setVisibility(View.INVISIBLE);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent seleccion=new Intent(este,Recursos_crud.class);
+                    seleccion.putExtra("mision",pos);
+                    este.startActivity(seleccion);
+
+                }
+            });
+
+        }
+}
 
     @Override
     public int getItemCount() {

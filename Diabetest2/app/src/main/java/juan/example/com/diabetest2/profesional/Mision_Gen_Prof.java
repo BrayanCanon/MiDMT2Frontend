@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.MisionRecursosLista;
+import juan.example.com.diabetest2.profesional.misioncruds.Recursos_crud;
 
 public class Mision_Gen_Prof extends AppCompatActivity {
 
@@ -35,4 +37,9 @@ public class Mision_Gen_Prof extends AppCompatActivity {
     public void formugen(View v) {  Intent intento = new Intent(this, Creamisg.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
-}
+
+    public void recursosmision(View view) {
+        Intent intento = new Intent(this, MisionRecursosLista.class);
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento);
+        }
+}}
