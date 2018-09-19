@@ -41,16 +41,17 @@
                     android:background="@drawable/modificarmision" />
 
                 <Button
-                    android:id="@+id/button30"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@drawable/borrarmision" />
-
-                <Button
                     android:id="@+id/button31"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:background="@drawable/buscarmision" />
+                    android:background="@drawable/logrosmis" />
+
+                <Button
+                    android:id="@+id/button30"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:onClick="recursosmision"
+                    android:background="@drawable/recursosmis" />
 
             </LinearLayout>
         </ScrollView>
