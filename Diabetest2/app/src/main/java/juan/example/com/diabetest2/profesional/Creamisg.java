@@ -60,59 +60,74 @@ public class Creamisg extends AppCompatActivity {
 
     }
     public void crear2(View v) {
-        intento = new Intent(this, Crearmisg3.class);
-        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); }
-        else{
-            Log.d("categoria sel",categmenu.getSelectedItem().toString());
+        if(!nombre.getText().toString().matches("") && !desc.getText().toString().matches("")) {
+            intento = new Intent(this, Crearmisg3.class);
+            if (probarInternet() == false) {
+                Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.d("categoria sel", categmenu.getSelectedItem().toString());
 
-            ArrayList<String> nombres=new ArrayList<>();
-            ArrayList valores=new ArrayList();
+                ArrayList<String> nombres = new ArrayList<>();
+                ArrayList valores = new ArrayList();
 
                 JsonObject codigo = new JsonObject();
                 JsonObject codigomis = new JsonObject();
-                JsonObject codigonivel=new JsonObject();
-                codigo.addProperty("idCategoria",2+categmenu.getSelectedItemPosition());
-                codigomis.addProperty("idTipoMision",1+tipomis.getSelectedItemPosition());
-                codigonivel.addProperty("idNivel",1+nivelmis.getSelectedItemPosition());
+                JsonObject codigonivel = new JsonObject();
+                codigo.addProperty("idCategoria", 2 + categmenu.getSelectedItemPosition());
+                codigomis.addProperty("idTipoMision", 1 + tipomis.getSelectedItemPosition());
+                codigonivel.addProperty("idNivel", 1 + nivelmis.getSelectedItemPosition());
 
-                nombres.add("nombre");valores.add(nombre.getText().toString());
-            nombres.add("descripcion");valores.add(desc.getText());
-            nombres.add("estado");valores.add("a");
-            nombres.add("misionPasoLogroList");valores.add(new JsonArray());
-            nombres.add("misionTipoRecursoList");valores.add(new JsonArray());
-            nombres.add("idCategoria");valores.add(codigo);
-            //nombres.add("idNivel");valores.add();
-            nombres.add("idTipoMision");valores.add(codigomis);
-            nombres.add("idNivel");valores.add(codigonivel);
-            nombres.add("misionPacienteList");valores.add(new JsonArray());
+                nombres.add("nombre");
+                valores.add(nombre.getText().toString());
+                nombres.add("descripcion");
+                valores.add(desc.getText());
+                nombres.add("estado");
+                valores.add("a");
+                nombres.add("misionPasoLogroList");
+                valores.add(new JsonArray());
+                nombres.add("misionTipoRecursoList");
+                valores.add(new JsonArray());
+                nombres.add("idCategoria");
+                valores.add(codigo);
+                //nombres.add("idNivel");valores.add();
+                nombres.add("idTipoMision");
+                valores.add(codigomis);
+                nombres.add("idNivel");
+                valores.add(codigonivel);
+                nombres.add("misionPacienteList");
+                valores.add(new JsonArray());
 
 
+                new Conexion("crearMision", nombres, new Conexion.Comunicado() {
+                    @Override
+                    public void salidas(String output) {
+                        try {
+                            JSONObject codigo = new JSONObject(output);
+                            codmision = codigo.get("cod").toString();
+                            Log.d("codigomision", codmision);
+                            Toast.makeText(este, "mision creada", Toast.LENGTH_SHORT).show();
+                            intento.putExtra("categoria", categmenu.getSelectedItem().toString());
+                            intento.putExtra("codigo", String.valueOf(codmision));
+                            intento.putExtra("codcategoria", categmenu.getSelectedItemPosition() + 1);
+                            intento.putParcelableArrayListExtra("pasoslista", new ArrayList<Movie>());
+                            Log.d("categoria", "" + categmenu.getSelectedItem());
+                            Log.d("codcategoria", "" + (categmenu.getSelectedItemPosition() + 1));
 
-            new Conexion("crearMision", nombres, new Conexion.Comunicado() {
-                @Override
-                public void salidas(String output) {
-                    try {
-                        JSONObject codigo = new JSONObject(output);
-                        codmision=codigo.get("cod").toString();
-                        Log.d("codigomision",codmision);
-                        Toast.makeText(este,"mision creada",Toast.LENGTH_SHORT).show();
-                        intento.putExtra("categoria",categmenu.getSelectedItem().toString());
-                        intento.putExtra("codigo",String.valueOf(codmision));
-                        intento.putExtra("codcategoria",categmenu.getSelectedItemPosition()+1);
-                        intento.putParcelableArrayListExtra("pasoslista",new ArrayList<Movie>());
-                        Log.d("categoria",""+categmenu.getSelectedItem());
-                        Log.d("codcategoria",""+(categmenu.getSelectedItemPosition()+1));
+                            startActivity(intento);
+                        } catch (Exception e) {
 
-                        startActivity(intento);
+                        }
                     }
-                    catch (Exception e){
-
-                    }
-                }
-            }).execute(valores);
+                }).execute(valores);
 
 
-
+            }
+        }
+        else {
+            Toast toast1 =
+                    Toast.makeText(this,
+                            "Por favor llene los datos antes de continuar", Toast.LENGTH_SHORT);
+            toast1.show();
         }
     }
     public boolean probarInternet() {

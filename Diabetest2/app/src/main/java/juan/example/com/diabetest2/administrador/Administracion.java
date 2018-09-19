@@ -38,7 +38,7 @@ public class Administracion extends AppCompatActivity {
 
         x = this;
         Administracion.consultar co = new Administracion.consultar();
-        co.execute();
+        //co.execute();
     }
 
     public void CrearProfesional(View v) {
@@ -74,7 +74,7 @@ public class Administracion extends AppCompatActivity {
                     //Acomodación de la consulta obtenida
                     int i = 0;
                     while (i < listadoX.size()) {
-                        usuarios.add(listadoX.subList(i, i + 3));
+                        usuarios.add(listadoX.subList(i, i + 3).toString());
                         i = i + 4;
                     }
                     i = 0;
