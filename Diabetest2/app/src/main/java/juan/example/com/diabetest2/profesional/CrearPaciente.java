@@ -89,7 +89,7 @@ public class CrearPaciente extends AppCompatActivity {
                     i.setType("message/rfc822");
                     i.putExtra(Intent.EXTRA_EMAIL, new String[]{a});
                     i.putExtra(Intent.EXTRA_SUBJECT, "Confirmación de acceso a MiDT2 con Psicoeducación");
-                    i.putExtra(Intent.EXTRA_TEXT, "Hola, bienvenido/a a la App MiDT2 con Psicoeducación, para poder acceder su usuario será su email y su clave temporal será: bosque \n La App, se puede descargar aquí:\nhttps://drive.google.com/drive/folders/0B2iBPDx1zU9vZnQzMmg3S2daaWM?usp=sharing\n\nCordialmente\n\nEquipo de Investigación de Ingeniería de sistemas y psicología");
+                    i.putExtra(Intent.EXTRA_TEXT, "Hola, bienvenido/a a la App MiDT2 con Psicoeducación, para poder acceder su usuario será su email y su clave temporal será: bosque \n La App, se puede descargar aquí:\nhttps://drive.google.com/drive/folders/1AiRVZBEQR7mObYK61FbDVyyNV4EE4y9g?usp=sharing\n\n\nCordialmente\n\nEquipo de Investigación de Ingeniería de sistemas y psicología");
                     try {
                         startActivity(Intent.createChooser(i, "Send mail..."));
                     } catch (android.content.ActivityNotFoundException ex) {

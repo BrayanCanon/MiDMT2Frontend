@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 
@@ -78,44 +79,56 @@ public class Crearmisg4 extends AppCompatActivity {
 
     public void creado(View v){
         //{"descripcion":"vase","nombre":"otrko","diasDuracion":1,"estado":"a","categoria":2,"misionPasoLogroList":[]}
+        if(!nom.getText().toString().matches("") && !desc.getText().toString().matches("")) {
+            Bundle slida = getIntent().getExtras();
+            final int catcod = slida.getInt("catcod");
+            nomcat = slida.getString("cadnom");
+            Log.d("paramet", catcod + " " + nomcat);
+            ArrayList nombres = new ArrayList<String>();
+            ArrayList valores = new ArrayList<String>();
 
-        Bundle slida= getIntent().getExtras();
-        final int catcod=slida.getInt("catcod");
-        nomcat=slida.getString("cadnom");
-        Log.d("paramet",catcod+" "+nomcat);
-        ArrayList nombres=new ArrayList<String>();
-        ArrayList valores=new ArrayList<String>();
+            JsonArray ja = new JsonArray();
+            nombres.add("descripcion");
+            valores.add(desc.getText().toString());
+            nombres.add("nombre");
+            valores.add(nom.getText().toString());
+            nombres.add("diasDuracion");
+            valores.add(diasmarc.getSelectedItem().toString());
+            nombres.add("estado");
+            valores.add("a");
+            nombres.add("categoria");
+            valores.add("" + catcod);
+            nombres.add("misionPasoLogroList");
+            valores.add(ja);
 
-        JsonArray ja = new JsonArray();
-        nombres.add("descripcion");valores.add(desc.getText().toString());
-        nombres.add("nombre");valores.add(nom.getText().toString());
-        nombres.add("diasDuracion");valores.add(diasmarc.getSelectedItem().toString());
-        nombres.add("estado");valores.add("a");
-        nombres.add("categoria");valores.add(""+catcod);
-        nombres.add("misionPasoLogroList");valores.add(ja);
-
-        //final int diasnum=Integer.parseInt(dias.getText().toString());
-        final int diasnum=Integer.parseInt(diasmarc.getSelectedItem().toString());
-        new Conexion("crearPaso",nombres,new Conexion.Comunicado() {
-            @Override
-            public void salidas(String output) {
-                Intent creado=new Intent(este,Crearmisg3.class);
-                ArrayList<Movie> sal=new ArrayList<>();
-                for(int a=0;a<diasnum;a++) {
-                    Movie movie = new Movie("dia #"+(a+1), " ", String.valueOf(a+1), 0, false, Integer.parseInt(output), diasnum, catcod, -1);
-                    sal.add(movie);
+            //final int diasnum=Integer.parseInt(dias.getText().toString());
+            final int diasnum = Integer.parseInt(diasmarc.getSelectedItem().toString());
+            new Conexion("crearPaso", nombres, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+                    Intent creado = new Intent(este, Crearmisg3.class);
+                    ArrayList<Movie> sal = new ArrayList<>();
+                    for (int a = 0; a < diasnum; a++) {
+                        Movie movie = new Movie("dia #" + (a + 1), " ", String.valueOf(a + 1), 0, false, Integer.parseInt(output), diasnum, catcod, -1);
+                        sal.add(movie);
+                    }
+                    creado.putExtra("nompasus", nom.getText().toString());
+                    creado.putExtra("categoria", nomcat);
+                    creado.putExtra("codigo", codmision);
+                    creado.putExtra("noexiste", 1);
+                    creado.putParcelableArrayListExtra("parc", sal);
+                    creado.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(creado);
                 }
-                creado.putExtra("nompasus",nom.getText().toString());
-                creado.putExtra("categoria",nomcat);
-                creado.putExtra("codigo",codmision);
-                creado.putExtra("noexiste",1);
-               creado.putParcelableArrayListExtra("parc",sal);
-                creado.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(creado);
-            }
-        }).execute(valores);
+            }).execute(valores);
 
-
+        }
+        else {
+            Toast toast1 =
+                    Toast.makeText(this,
+                            "Por favor llene los datos antes de continuar", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
     }
 
     @Override
