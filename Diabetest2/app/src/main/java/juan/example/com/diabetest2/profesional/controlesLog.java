@@ -1,6 +1,7 @@
 package juan.example.com.diabetest2.profesional;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public class controlesLog extends AppCompatActivity {
 
     TextView info;
     Bundle bundleInt;
+    Context este=this;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class controlesLog extends AppCompatActivity {
         Intent entrar=new Intent(controlesLog.this, EditLog.class);
         Bundle b= new Bundle();
         b.putInt("id",bundleInt.getInt("codigo"));
+        b.putString("nombre",bundleInt.getString("nombre"));
+        b.putString("puntos",bundleInt.getString("puntos"));
+        b.putString("descripcion",bundleInt.getString("descripcion"));
         Log.d("codigodel",""+bundleInt.getInt("codigo"));
         entrar.putExtras(b);
         startActivity(entrar);
@@ -61,6 +67,9 @@ public class controlesLog extends AppCompatActivity {
                         String salida=output;
                         Toast toast1 = Toast.makeText(getApplicationContext(), salida, Toast.LENGTH_SHORT);
                         toast1.show();
+                        Intent retrn=new Intent(este,BuscLogro.class);
+                        retrn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(retrn);
                     }
 
                 }).execute(val);

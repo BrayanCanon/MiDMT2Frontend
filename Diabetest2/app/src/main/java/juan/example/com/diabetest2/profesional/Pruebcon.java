@@ -1,15 +1,18 @@
 package juan.example.com.diabetest2.profesional;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -125,4 +128,17 @@ public class Pruebcon extends AppCompatActivity {
         buscmisedit.setText("");
         cargar();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent atras=new Intent(this,Mision_Gen_Prof.class);
+            startActivity(atras);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
 }

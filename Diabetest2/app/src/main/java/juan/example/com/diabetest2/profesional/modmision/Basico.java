@@ -70,7 +70,7 @@ public class Basico extends AppCompatActivity {
         nombre.add("descripcion");valores.add(desc.getText());
         nombre.add("nombre");valores.add(modTextnom.getText());
         nombre.add("estado");valores.add("a");
-        categoria1.addProperty("idCategoria",categoria.getSelectedItemPosition()+1);
+        categoria1.addProperty("idCategoria",categoria.getSelectedItemPosition()+2);
         nombre.add("idCategoria");valores.add(categoria1);
         nivel1.addProperty("idNivel",nivel.getSelectedItemPosition()+1);
         nombre.add("idNivel");valores.add(nivel1);
