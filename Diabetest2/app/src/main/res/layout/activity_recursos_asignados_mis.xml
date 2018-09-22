@@ -23,7 +23,7 @@
             android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:background="@color/blanco50"
-            android:text="Recursos de apoyo"
+            android:text="Recursos asignados"
             android:textAlignment="center"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="24sp"
@@ -35,7 +35,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <EditText
@@ -60,12 +60,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Nuevo " />
+            android:text="Asignar Nuevo Recurso" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerRecursos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
 
     </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.RecursosAsignadosMis;
 import juan.example.com.diabetest2.profesional.misioncruds.Recursos_crud;
 import juan.example.com.diabetest2.profesional.modmision.Modmisp;
 
@@ -102,7 +103,7 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent seleccion=new Intent(este,Recursos_crud.class);
+                    Intent seleccion=new Intent(este,RecursosAsignadosMis.class);
                     seleccion.putExtra("mision",pos);
                     este.startActivity(seleccion);
 

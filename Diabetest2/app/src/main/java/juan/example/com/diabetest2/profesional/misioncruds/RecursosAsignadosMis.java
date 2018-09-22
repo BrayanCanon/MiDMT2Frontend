@@ -23,6 +23,7 @@ public class RecursosAsignadosMis extends AppCompatActivity {
     RecyclerView recyclerRecursos;
     AdaptadorRecursos adapter;
     Context vista = this;
+    Mision mis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +34,23 @@ public class RecursosAsignadosMis extends AppCompatActivity {
         recyclerRecursos.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdaptadorRecursos(listaRecursos,vista);
         recyclerRecursos.setAdapter(adapter);
+        mis = getIntent().getParcelableExtra("mision");
         this.llenarRecursos();
+
     }
     private void llenarRecursos(){
 
 
 
 
-        ArrayList vacio = new ArrayList<>();
+        ArrayList nombres = new ArrayList<>();
+        nombres.add("idMision");
+
+        ArrayList valores = new ArrayList<>();
+        valores.add(mis.getIdMision());
 
 
-
-        new Conexion("consultarRecursoMision", vacio, new Conexion.Comunicado() {
+        new Conexion("consultarRecursoMision", nombres, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
 
@@ -62,7 +68,7 @@ public class RecursosAsignadosMis extends AppCompatActivity {
 
 
             }
-        }).execute(vacio);
+        }).execute(valores);
 
 
     }
