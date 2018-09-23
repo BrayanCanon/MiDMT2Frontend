@@ -6,40 +6,35 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.util.Conexion;
+import juan.example.com.diabetest2.util.Mision;
 import juan.example.com.diabetest2.util.RecursoVo;
 
-public class Recursos_crud extends AppCompatActivity {
+public class RecursosAsignadosMis extends AppCompatActivity {
     ArrayList<RecursoVo> listaRecursos;
     RecyclerView recyclerRecursos;
     AdaptadorRecursos adapter;
     Context vista = this;
-
-
+    Mision mis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recursos_crud);
+        setContentView(R.layout.activity_recursos_asignados_mis);
         listaRecursos = new ArrayList<>();
         recyclerRecursos=findViewById(R.id.recyclerRecursos);
         recyclerRecursos.setItemAnimator(new DefaultItemAnimator());
         recyclerRecursos.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdaptadorRecursos(listaRecursos,vista);
         recyclerRecursos.setAdapter(adapter);
+        mis = getIntent().getParcelableExtra("mision");
         this.llenarRecursos();
 
     }
@@ -47,11 +42,15 @@ public class Recursos_crud extends AppCompatActivity {
 
 
 
-        ArrayList vacio = new ArrayList<>();
+
+        ArrayList nombres = new ArrayList<>();
+        nombres.add("idMision");
+
+        ArrayList valores = new ArrayList<>();
+        valores.add(mis.getIdMision());
 
 
-
-        new Conexion("consultarRecursos", vacio, new Conexion.Comunicado() {
+        new Conexion("consultarRecursoMision", nombres, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
 
@@ -69,7 +68,7 @@ public class Recursos_crud extends AppCompatActivity {
 
 
             }
-        }).execute(vacio);
+        }).execute(valores);
 
 
     }

@@ -60,7 +60,7 @@ public class Creamisg extends AppCompatActivity {
 
     }
     public void crear2(View v) {
-        intento = new Intent(this, BuscLogro.class);
+        intento = new Intent(this, Crearmisg3.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); }
         else{
             Log.d("categoria sel",categmenu.getSelectedItem().toString());
@@ -71,7 +71,7 @@ public class Creamisg extends AppCompatActivity {
                 JsonObject codigo = new JsonObject();
                 JsonObject codigomis = new JsonObject();
                 JsonObject codigonivel=new JsonObject();
-                codigo.addProperty("idCategoria",1+categmenu.getSelectedItemPosition());
+                codigo.addProperty("idCategoria",2+categmenu.getSelectedItemPosition());
                 codigomis.addProperty("idTipoMision",1+tipomis.getSelectedItemPosition());
                 codigonivel.addProperty("idNivel",1+nivelmis.getSelectedItemPosition());
 

@@ -1,6 +1,8 @@
 package juan.example.com.diabetest2.profesional.modmision;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -8,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -38,6 +41,8 @@ public class Pasosmod extends AppCompatActivity {
     ArrayList<Movie> paso=new ArrayList<>();
     TextView pasosel;
     Mision seleccion;
+    boolean continuar = false;
+
 
 
     @Override
@@ -121,40 +126,61 @@ public class Pasosmod extends AppCompatActivity {
     }
 
     public void enviar(View v){
-        ArrayList<Movie> respuestas= new ArrayList<>(pasoedit.retsal());
-        ArrayList<String> nombres=new ArrayList<>();
-        ArrayList valores=new ArrayList();
-        //new Conexion("")
-        //----------------------------------------
-        JsonArray info=new JsonArray();
-        //--------------------------------
-        for(int a=0;a<respuestas.size();a++) {
-            JsonObject adaptador = new JsonObject();
-            Movie salida=respuestas.get(a);
-            //-----------------------------------------
-            adaptador.addProperty("mision",seleccion.getIdMision());
-            adaptador.addProperty("paso",salida.getId());
-            adaptador.addProperty("logro",salida.getLogro());
-            adaptador.addProperty("pasoNumero",Integer.parseInt(salida.getYear()));
-            adaptador.addProperty("estado","a");
-            //-----------------------------------------
-            info.add(adaptador);
-
-        }
-
-        String prueba=info.toString();
-        Log.d("asd",prueba);
-        nombres.add("cod");valores.add(info);
-        new Conexion("crearMPLogro", nombres, new Conexion.Comunicado() {
+        String[] si={"si","no"};
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        TextView textView = new TextView(this);
+        textView.setText("¿Si modifica los dias se borrara el progreso del paciente que esten realizando esta mision esta seguro? ");
+        b.setCustomTitle(textView);
+        b.setItems(si,new DialogInterface.OnClickListener() {
             @Override
-            public void salidas(String output) {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i){
+                    case 0:
+                        continuar =true;
+                        break;
+                    case 1:
+                        continuar =false;
+                        break;
+                }
+            }
+        });
+        b.show();
+        if(continuar) {
+            ArrayList<Movie> respuestas = new ArrayList<>(pasoedit.retsal());
+            ArrayList<String> nombres = new ArrayList<>();
+            ArrayList valores = new ArrayList();
+            //new Conexion("")
+            //----------------------------------------
+            JsonArray info = new JsonArray();
+            //--------------------------------
+            for (int a = 0; a < respuestas.size(); a++) {
+                JsonObject adaptador = new JsonObject();
+                Movie salida = respuestas.get(a);
+                //-----------------------------------------
+                adaptador.addProperty("mision", seleccion.getIdMision());
+                adaptador.addProperty("paso", salida.getId());
+                adaptador.addProperty("logro", salida.getLogro());
+                adaptador.addProperty("pasoNumero", Integer.parseInt(salida.getYear()));
+                adaptador.addProperty("estado", "a");
+                //-----------------------------------------
+                info.add(adaptador);
 
             }
-        }).execute(valores);
-        //--------------------------------
-        Intent envio = new Intent(this, Pruebcon.class);
-        startActivity(envio);
 
+            String prueba = info.toString();
+            Log.d("asd", prueba);
+            nombres.add("cod");
+            valores.add(info);
+            new Conexion("modificarMPLogro", nombres, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+
+                }
+            }).execute(valores);
+            //--------------------------------
+            Intent envio = new Intent(this, Pruebcon.class);
+            startActivity(envio);
+        }
 
     }
 

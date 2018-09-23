@@ -6,10 +6,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.MisionRecursosLista;
 import juan.example.com.diabetest2.profesional.misioncruds.Recursos_crud;
 
 public class Mision_Gen_Prof extends AppCompatActivity {
@@ -38,7 +40,26 @@ public class Mision_Gen_Prof extends AppCompatActivity {
     }
 
     public void recursosmision(View view) {
-        Intent intento = new Intent(this, Recursos_crud.class);
+        Intent intento = new Intent(this, MisionRecursosLista.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento);
         }
-}}
+}
+    public void logrosver(View v){
+        Intent intento=new Intent(this,BuscLogro.class);
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento);}
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent n=new Intent(this,MenuProfesional.class);
+            startActivity(n);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
+
+}
