@@ -31,7 +31,10 @@ public class Mision_Gen_Prof extends AppCompatActivity {
 
 
     public void modificarmision(View v) {  Intent intento = new Intent(this, Pruebcon.class);
-        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{
+            intento.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intento);
+        }
     }
 
 

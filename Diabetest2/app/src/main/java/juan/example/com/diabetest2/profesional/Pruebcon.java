@@ -59,6 +59,8 @@ public class Pruebcon extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         vista.setLayoutManager(mLayoutManager);
         vista.setAdapter(n);
+        vista.setNestedScrollingEnabled(false);
+
 
         MisionVo mision= (MisionVo) getIntent().getParcelableExtra("mision");
 
@@ -96,6 +98,7 @@ public class Pruebcon extends AppCompatActivity {
                     }
 
                     n.notifyDataSetChanged();
+
 
                 }catch (Exception e){
                     Log.d("consul111",e.toString());
