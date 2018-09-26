@@ -56,13 +56,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/nuevor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nuevo " />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerRecursos"
             android:layout_width="match_parent"
