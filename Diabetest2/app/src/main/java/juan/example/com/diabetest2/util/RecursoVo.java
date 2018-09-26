@@ -7,9 +7,18 @@ public class RecursoVo  implements Serializable{
     private String titulo,autor;
     private String decripcion;
     private String foto;
-    private String fecha,video;
+    private String fecha,video,idRecurso;
 
 
+    public RecursoVo(String titulo, String autor, String decripcion, String foto, String fecha,String video,String idRecurso) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.decripcion = decripcion;
+        this.foto = foto;
+        this.fecha = fecha;
+        this.video=video;
+        this.idRecurso=idRecurso;
+    }
     public RecursoVo(String titulo, String autor, String decripcion, String foto, String fecha,String video) {
         this.titulo = titulo;
         this.autor = autor;
@@ -17,6 +26,15 @@ public class RecursoVo  implements Serializable{
         this.foto = foto;
         this.fecha = fecha;
         this.video=video;
+
+    }
+
+    public String getIdRecurso() {
+        return idRecurso;
+    }
+
+    public void setIdRecurso(String idRecurso) {
+        this.idRecurso = idRecurso;
     }
 
     public String getVideo() {

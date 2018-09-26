@@ -2,6 +2,7 @@ package juan.example.com.diabetest2.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -104,7 +105,9 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
                 @Override
                 public void onClick(View view) {
                     Intent seleccion=new Intent(este,RecursosAsignadosMis.class);
-                    seleccion.putExtra("mision",pos);
+                    Bundle envio = new Bundle();
+                    envio.putParcelable("mision",pos);
+                    seleccion.putExtras(envio);
                     este.startActivity(seleccion);
 
                 }
