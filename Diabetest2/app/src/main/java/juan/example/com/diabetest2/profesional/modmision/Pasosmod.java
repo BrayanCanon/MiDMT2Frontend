@@ -1,5 +1,6 @@
 package juan.example.com.diabetest2.profesional.modmision;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -42,6 +43,7 @@ public class Pasosmod extends AppCompatActivity {
     TextView pasosel;
     Mision seleccion;
     boolean continuar = false;
+    Context este=this;
 
 
 
@@ -135,9 +137,44 @@ public class Pasosmod extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i){
-                    case 0:
-                        continuar =true;
+                    case 0: {
+                        continuar = true;
+                        ArrayList<Movie> respuestas = new ArrayList<>(pasoedit.retsal());
+                        ArrayList<String> nombres = new ArrayList<>();
+                        ArrayList valores = new ArrayList();
+                        //new Conexion("")
+                        //----------------------------------------
+                        JsonArray info = new JsonArray();
+                        //--------------------------------
+                        for (int a = 0; a < respuestas.size(); a++) {
+                            JsonObject adaptador = new JsonObject();
+                            Movie salida = respuestas.get(a);
+                            //-----------------------------------------
+                            adaptador.addProperty("mision", seleccion.getIdMision());
+                            adaptador.addProperty("paso", salida.getId());
+                            adaptador.addProperty("logro", salida.getLogro());
+                            adaptador.addProperty("pasoNumero", Integer.parseInt(salida.getYear()));
+                            adaptador.addProperty("estado", "a");
+                            //-----------------------------------------
+                            info.add(adaptador);
+
+                        }
+
+                        String prueba = info.toString();
+                        Log.d("asd", prueba);
+                        nombres.add("cod");
+                        valores.add(info);
+                        new Conexion("modificarMPLogro", nombres, new Conexion.Comunicado() {
+                            @Override
+                            public void salidas(String output) {
+
+                            }
+                        }).execute(valores);
+                        //--------------------------------
+                        Intent envio = new Intent(este, Pruebcon.class);
+                        startActivity(envio);
                         break;
+                    }
                     case 1:
                         continuar =false;
                         break;
@@ -145,42 +182,6 @@ public class Pasosmod extends AppCompatActivity {
             }
         });
         b.show();
-        if(continuar) {
-            ArrayList<Movie> respuestas = new ArrayList<>(pasoedit.retsal());
-            ArrayList<String> nombres = new ArrayList<>();
-            ArrayList valores = new ArrayList();
-            //new Conexion("")
-            //----------------------------------------
-            JsonArray info = new JsonArray();
-            //--------------------------------
-            for (int a = 0; a < respuestas.size(); a++) {
-                JsonObject adaptador = new JsonObject();
-                Movie salida = respuestas.get(a);
-                //-----------------------------------------
-                adaptador.addProperty("mision", seleccion.getIdMision());
-                adaptador.addProperty("paso", salida.getId());
-                adaptador.addProperty("logro", salida.getLogro());
-                adaptador.addProperty("pasoNumero", Integer.parseInt(salida.getYear()));
-                adaptador.addProperty("estado", "a");
-                //-----------------------------------------
-                info.add(adaptador);
-
-            }
-
-            String prueba = info.toString();
-            Log.d("asd", prueba);
-            nombres.add("cod");
-            valores.add(info);
-            new Conexion("modificarMPLogro", nombres, new Conexion.Comunicado() {
-                @Override
-                public void salidas(String output) {
-
-                }
-            }).execute(valores);
-            //--------------------------------
-            Intent envio = new Intent(this, Pruebcon.class);
-            startActivity(envio);
-        }
 
     }
 
