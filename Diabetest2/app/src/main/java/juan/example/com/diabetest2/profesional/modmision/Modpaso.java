@@ -71,57 +71,68 @@ public class Modpaso extends AppCompatActivity {
 
     }
 
-    public void modificacion(View v){
-
-        ArrayList<String> nombres=new ArrayList<>();
-        ArrayList valores=new ArrayList();
-        if(cambiodias) {
-            nombres.add("idMision");
-            valores.add(selec.getIdMision());
-            JsonObject paso = new JsonObject();
-            paso.addProperty("nombre", nombre.getText().toString());
-            paso.addProperty("descripcion", descripcion.getText().toString());
-            paso.addProperty("estado", "a");
-            paso.addProperty("diasDuracion", dias.getText().toString());
-            nombres.add("paso");
-            valores.add(paso);
-            new Conexion("modpasos", nombres, new Conexion.Comunicado() {
-                @Override
-                public void salidas(String output) {
-                    int diasnum = Integer.parseInt(dias.getText().toString());
-                    ArrayList<Movie> sal = new ArrayList<>();
-                    for (int a = 0; a < diasnum; a++) {
-                        Movie movie = new Movie("dia #" + (a + 1), " ", String.valueOf(a + 1), 0, false, Integer.parseInt(output), Integer.parseInt(dias.getText().toString()), selec.getIdCategoria(), -1);
-                        sal.add(movie);
+    public void modificacion(View v) {
+        if (!nombre.getText().toString().matches("") && !descripcion.getText().toString().matches("")) {
+            ArrayList<String> nombres = new ArrayList<>();
+            ArrayList valores = new ArrayList();
+            if (cambiodias) {
+                nombres.add("idMision");
+                valores.add(selec.getIdMision());
+                JsonObject paso = new JsonObject();
+                paso.addProperty("nombre", nombre.getText().toString());
+                paso.addProperty("descripcion", descripcion.getText().toString());
+                paso.addProperty("estado", "a");
+                paso.addProperty("diasDuracion", dias.getText().toString());
+                nombres.add("paso");
+                valores.add(paso);
+                new Conexion("modpasos", nombres, new Conexion.Comunicado() {
+                    @Override
+                    public void salidas(String output) {
+                        int diasnum = Integer.parseInt(dias.getText().toString());
+                        ArrayList<Movie> sal = new ArrayList<>();
+                        for (int a = 0; a < diasnum; a++) {
+                            Movie movie = new Movie("dia #" + (a + 1), " ", String.valueOf(a + 1), 0, false, Integer.parseInt(output), Integer.parseInt(dias.getText().toString()), selec.getIdCategoria(), -1);
+                            sal.add(movie);
+                        }
+                        Intent devolverse = new Intent(este, Pasosmod.class);
+                        devolverse.putParcelableArrayListExtra("parc", sal);
+                        devolverse.putExtra("mision", getIntent().getParcelableExtra("mision"));
+                        startActivity(devolverse);
                     }
-                    Intent devolverse = new Intent(este, Pasosmod.class);
-                    devolverse.putParcelableArrayListExtra("parc", sal);
-                    devolverse.putExtra("mision", getIntent().getParcelableExtra("mision"));
-                    startActivity(devolverse);
-                }
-            }).execute(valores);
-        }
-        else {
-            ArrayList<String> nombres1=new ArrayList<>();
-            ArrayList valores1=new ArrayList<>();
-            nombres1.add("idPaso");valores1.add(codpaso);
-            nombres1.add("nombre");valores1.add( nombre.getText().toString());
-            nombres1.add("descripcion");valores1.add( descripcion.getText().toString());
-            nombres1.add("estado");valores1.add( "a");
-            nombres1.add("diasDuracion");valores1.add( dias.getText().toString());
-            new Conexion("modificarPaso", nombres1, new Conexion.Comunicado() {
-                @Override
-                public void salidas(String output) {
-                    Intent msa=new Intent(este,Pasosmod.class);
-                    msa.putExtra("mision",getIntent().getParcelableExtra("mision"));
-                    msa.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(msa);
-                }
-            }).execute(valores1);
-        }
+                }).execute(valores);
+            } else {
+                ArrayList<String> nombres1 = new ArrayList<>();
+                ArrayList valores1 = new ArrayList<>();
+                nombres1.add("idPaso");
+                valores1.add(codpaso);
+                nombres1.add("nombre");
+                valores1.add(nombre.getText().toString());
+                nombres1.add("descripcion");
+                valores1.add(descripcion.getText().toString());
+                nombres1.add("estado");
+                valores1.add("a");
+                nombres1.add("diasDuracion");
+                valores1.add(dias.getText().toString());
+                new Conexion("modificarPaso", nombres1, new Conexion.Comunicado() {
+                    @Override
+                    public void salidas(String output) {
+                        Intent msa = new Intent(este, Pasosmod.class);
+                        msa.putExtra("mision", getIntent().getParcelableExtra("mision"));
+                        msa.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(msa);
+                    }
+                }).execute(valores1);
+            }
       /*
         }
     */
+        }
+        else{
+            Toast toast1 =
+                    Toast.makeText(this,
+                            "Por favor llene los datos antes de continuar", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
     }
     public void onRadioButtonClicked(View view) {
 

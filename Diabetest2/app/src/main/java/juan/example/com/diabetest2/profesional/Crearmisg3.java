@@ -46,6 +46,7 @@ public class Crearmisg3 extends AppCompatActivity {
     private int codcategoria;
     private String nomcategoria;
     private String codmision;
+    private Button finalizar;
     private Context contexto=this;
     private ArrayList<Movie> salida;
     private TextView titulo;
@@ -71,6 +72,7 @@ public class Crearmisg3 extends AppCompatActivity {
         seguir.setEnabled(true);
         nomcategoria=getIntent().getStringExtra("categoria");
         codmision=getIntent().getStringExtra("codigo");
+
         Log.d("estele",codmision);
         Log.d("nommision",nomcategoria);
         Intent parametros=getIntent();
@@ -129,6 +131,9 @@ public class Crearmisg3 extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
             ctrear.setEnabled(true);
             seguir.setEnabled(true);
+        }
+        else{
+            seguir.setEnabled(false);
         }
 
 
