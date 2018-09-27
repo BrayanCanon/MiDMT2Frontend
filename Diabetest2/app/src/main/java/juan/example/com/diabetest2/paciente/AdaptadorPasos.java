@@ -18,9 +18,11 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     ArrayList<PasoVo> listaPasos;
     ArrayList<VerificacionVo> listaverif;
 
+
     public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif) {
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
+
     }
 
     @Override
@@ -31,11 +33,12 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolderPasos holder, final int position) {
+
         VerificacionVo verificacion= new VerificacionVo(position,false);
         holder.dia.setText(Integer.toString(listaPasos.get(position).getOrden()));
         if(listaPasos.get(position).getHabCheckbox()==true){
             holder.verif.setVisibility(View.INVISIBLE);
-        }
+        }else{
         for(int i=0;i<listaverif.size();i++){
             if(listaPasos.get(position).getOrden()==listaverif.get(i).getNumDia()){
                 verificacion=listaverif.get(i);
@@ -75,7 +78,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
                 }
             }
-        });
+        });}
 
                                                 }
 
