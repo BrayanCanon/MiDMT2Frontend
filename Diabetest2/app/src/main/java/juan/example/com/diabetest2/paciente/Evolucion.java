@@ -246,33 +246,41 @@ public class Evolucion extends AppCompatActivity {
                 Vector <Integer> glucosaX = new Vector();
                 i = 0;
                 if(tablaGlucosa.size()>30 ){ i = tablaGlucosa.size()-30;}
-                while(i< tablaGlucosa.size()){
+                while(i< tablaGlucosa.size() && tablaGlucosa.size()>1){
                     fechasX4.add(tablaGlucosa.get(i).substring(5,16));
                     glucosaX.add((int)Double.parseDouble(tablaGlucosa.get(i+1)));
                     i = i+2;
                 }
+                if(tablaGlucosa.size()>1) {
+                    //Grafico glucosa ---------------------------------------------------------------------
+                    Number[] glucosaValores = glucosaX.toArray(new Number[glucosaX.size()]);
+                    XYSeries s0 = new SimpleXYSeries(Arrays.asList(glucosaValores), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Glucosa");
 
-                //Grafico glucosa ---------------------------------------------------------------------
-                Number[] glucosaValores = glucosaX.toArray(new Number[glucosaX.size()]);
-                XYSeries s0 = new SimpleXYSeries(Arrays.asList(glucosaValores), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Glucosa" );
+                    LineAndPointFormatter f1x = new LineAndPointFormatter(Color.argb(50, 163, 0, 0), Color.rgb(85, 0, 0), Color.argb(254, 255, 181, 181), new PointLabelFormatter(Color.DKGRAY));
+                    glucosa.getGraphWidget().getBackgroundPaint().setColor(Color.WHITE); // fondo de los ejes
+                    glucosa.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE); //fondo del grafico
+                    glucosa.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);//Intervalo del dominio
+                    glucosa.setRangeValueFormat(new DecimalFormat("0")); //Quitar el decimal de las etiquetas del rango
+                    glucosa.addSeries(s0, f1x);
+                    glucosa.redraw();
+                    //Cambio valores del eje x
+                    glucosa.setDomainValueFormat(new NumberFormat() {
+                        @Override
+                        public StringBuffer format(double value, StringBuffer buffer, FieldPosition field) {
+                            return new StringBuffer(fechasX4.get((int) value));
+                        }
 
-                LineAndPointFormatter f1x = new LineAndPointFormatter(Color.argb(50, 163, 0, 0), Color.rgb(85, 0, 0),  Color.argb(254, 255, 181, 181), new PointLabelFormatter(Color.DKGRAY));
-                glucosa.getGraphWidget().getBackgroundPaint().setColor(Color.WHITE); // fondo de los ejes
-                glucosa.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE); //fondo del grafico
-                glucosa.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);//Intervalo del dominio
-                glucosa.setRangeValueFormat(new DecimalFormat("0")); //Quitar el decimal de las etiquetas del rango
-                glucosa.addSeries(s0, f1x);
-                glucosa.redraw();
-                //Cambio valores del eje x
-                glucosa.setDomainValueFormat(new NumberFormat() {
-                    @Override
-                    public StringBuffer format(double value, StringBuffer buffer, FieldPosition field) { return new StringBuffer(fechasX4.get((int) value)); }
-                    @Override
-                    public StringBuffer format(long value, StringBuffer buffer, FieldPosition field) { return null; }
-                    @Override
-                    public Number parse(String string, ParsePosition position) { return null; }
-                });
+                        @Override
+                        public StringBuffer format(long value, StringBuffer buffer, FieldPosition field) {
+                            return null;
+                        }
 
+                        @Override
+                        public Number parse(String string, ParsePosition position) {
+                            return null;
+                        }
+                    });
+                }
                 //Graficos Peso e IMC (2 en 1)-----------------------------------------------------------------
                 Number[] peso = pesoX.toArray(new Number[pesoX.size()]);
                 Number[] imc =  imcX.toArray(new Number[imcX.size()]);
@@ -392,7 +400,7 @@ public class Evolucion extends AppCompatActivity {
                     nombre.setText((CharSequence)datosPaciente.get(i+1) +" "+ (CharSequence)datosPaciente.get(i+2));
                     if((datosPaciente.get(i+3)).equals("1")){estado.setText("Activo");}else {estado.setText("Inactivo");} //Cambio de valor numero a texto activo o inactivo en el estado
                     telefono.setText((CharSequence)datosPaciente.get(i+4));
-                    if(((String) datosPaciente.get(i+12)).contains("F")){
+                    if(((String) datosPaciente.get(i+11)).contains("Femenino")){
                         emoticon.setImageResource(R.drawable.woman);
                     }
                     String f = ((String) datosPaciente.get(i+8)).substring(0,4);// Fecha de nacimiento

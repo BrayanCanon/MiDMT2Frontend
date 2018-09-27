@@ -108,15 +108,20 @@ public class Crearmisg4 extends AppCompatActivity {
                 public void salidas(String output) {
                     Intent creado = new Intent(este, Crearmisg3.class);
                     ArrayList<Movie> sal = new ArrayList<>();
+
                     for (int a = 0; a < diasnum; a++) {
                         Movie movie = new Movie("dia #" + (a + 1), " ", String.valueOf(a + 1), 0, false, Integer.parseInt(output), diasnum, catcod, -1);
                         sal.add(movie);
                     }
+
                     creado.putExtra("nompasus", nom.getText().toString());
                     creado.putExtra("categoria", nomcat);
                     creado.putExtra("codigo", codmision);
                     creado.putExtra("noexiste", 1);
                     creado.putParcelableArrayListExtra("parc", sal);
+                    creado.putExtra("diasnum",diasnum);
+                    creado.putExtra("cadcod",catcod);
+                    creado.putExtra("output",output);
                     creado.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(creado);
                 }
