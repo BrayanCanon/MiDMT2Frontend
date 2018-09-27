@@ -400,14 +400,18 @@ public class Evolucion extends AppCompatActivity {
                     nombre.setText((CharSequence)datosPaciente.get(i+1) +" "+ (CharSequence)datosPaciente.get(i+2));
                     if((datosPaciente.get(i+3)).equals("1")){estado.setText("Activo");}else {estado.setText("Inactivo");} //Cambio de valor numero a texto activo o inactivo en el estado
                     telefono.setText((CharSequence)datosPaciente.get(i+4));
-                    if(((String) datosPaciente.get(i+11)).contains("Femenino")){
-                        emoticon.setImageResource(R.drawable.woman);
+                    try {
+                        if (((String) datosPaciente.get(i + 11)).contains("Femenino")) {
+                            emoticon.setImageResource(R.drawable.woman);
+                        }
+                        String f = ((String) datosPaciente.get(i + 8)).substring(0, 4);// Fecha de nacimiento
+                        Date dt = new Date();
+                        f = String.valueOf((1900 + dt.getYear()) - Integer.parseInt(f));
+                        edad.setText(f);
                     }
-                    String f = ((String) datosPaciente.get(i+8)).substring(0,4);// Fecha de nacimiento
+                    catch (Exception e){}
                     i = 20;
-                    Date dt = new Date();
-                    f = String.valueOf((1900+dt.getYear())-Integer.parseInt(f));
-                    edad.setText(f);
+
                 }
             }
         }
