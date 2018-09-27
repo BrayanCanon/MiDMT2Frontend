@@ -45,7 +45,7 @@
                 android:id="@+id/textView138"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="categoria" />
+                android:text="categoría" />
 
             <Spinner
                 android:id="@+id/spinner1"

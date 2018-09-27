@@ -20,16 +20,16 @@
         <item>Dieta</item>
     </string-array>
     <string-array name="tipo_mis">
-        <item>generico</item>
-        <item>especifica</item>
+        <item>Genérico</item>
+        <item>Especifica</item>
     </string-array>
     <string-array name="Weight">
-        <item>Basico</item>
+        <item>Básico</item>
         <item>Medio</item>
         <item>Avanzado</item>
     </string-array>
     <string-array name="nivel">
-        <item>Basico</item>
+        <item>Básico</item>
         <item>Medio</item>
         <item>Avanzado</item>
     </string-array>
