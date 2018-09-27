@@ -98,10 +98,28 @@ public class pasosLogrosMision extends Fragment {
         nombre=vista.findViewById(R.id.nombre);
         descripcion=vista.findViewById(R.id.descripcion);
         dias=vista.findViewById(R.id.orden);
-        llenarLista(habCheckBox);
+
+            llenarLista(habCheckBox);
+
         return vista;
     }
 
+    private void mostrarDias() {
+        ArrayList<String> nombres = new ArrayList<>();
+        ArrayList valores = new ArrayList();
+        nombres.add("idMision");
+        valores.add(mision.getIdMision());
+        new Conexion("consultarTodosPasos", nombres, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+                Gson gson = new Gson();
+                JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                JsonObject salida;
+                JsonObject paso;
+
+            }
+        }).execute(valores);
+    }
     private void llenarLista( final boolean habCheckBox) {
         ArrayList<String> nombres= new ArrayList<>();
         final ArrayList valores= new ArrayList();
@@ -118,7 +136,7 @@ public class pasosLogrosMision extends Fragment {
                     JsonObject verif;
 
 
-                    salida=arreglo.get(1).getAsJsonObject();
+                    salida=arreglo.get(0).getAsJsonObject();
                     paso=salida.get("idPaso").getAsJsonObject();
                     String nom=paso.get("nombre").getAsString();
                     String desc =paso.get("descripcion").getAsString();
@@ -126,27 +144,29 @@ public class pasosLogrosMision extends Fragment {
                     nombre.setText(nom);
                     descripcion.setText(desc);
                     dias.setText(dia);
-                    ArrayList<String> no= new ArrayList<>();
-                    ArrayList va= new ArrayList();
-                    no.add("idMisionPaciente");
-                    va.add(mision.getIdMisionPaciente());
+                    if( habCheckBox==false) {
+                        ArrayList<String> no = new ArrayList<>();
+                        ArrayList va = new ArrayList();
+                        no.add("idMisionPaciente");
+                        va.add(mision.getIdMisionPaciente());
 
-                    new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
-                        @Override
-                        public void salidas(String output) {
-                            Gson gson = new Gson();
-                            JsonArray arreglo = gson.fromJson(output, JsonArray.class);
-                            JsonObject verif ;
-                            for(int i =0;i<arreglo.size();i++){
-                                verif=arreglo.get(i).getAsJsonObject();
-                                VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(),verif.get("verifPaciente").getAsBoolean());
-                                listaverif.add(obj);
+
+                        new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
+                            @Override
+                            public void salidas(String output) {
+                                Gson gson = new Gson();
+                                JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                                JsonObject verif;
+                                for (int i = 0; i < arreglo.size(); i++) {
+                                    verif = arreglo.get(i).getAsJsonObject();
+                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean());
+                                    listaverif.add(obj);
+                                }
+                                adapter.notifyDataSetChanged();
                             }
-                            adapter.notifyDataSetChanged();
-                        }
-                    }).execute(va);
+                        }).execute(va);
 
-
+                    }
                     for(int i=1;i<=arreglo.size();i++) {
                         PasoVo pasoVo = new PasoVo(nom, habCheckBox,i,mision.getIdMisionPaciente());
 

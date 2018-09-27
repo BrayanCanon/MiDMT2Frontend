@@ -1,6 +1,7 @@
 package juan.example.com.diabetest2.paciente;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.Recursos_crud;
 import juan.example.com.diabetest2.util.Conexion;
 
 /**
@@ -96,6 +98,9 @@ public class BasicInfoMision extends Fragment {
             @Override
             public void onClick(View view) {
                 asignarMision(mision.getIdMision(),idPaciente);
+                Intent intento = new Intent(vista.getContext(), misiones.class);
+
+                startActivity(intento);
             }
         });
 
