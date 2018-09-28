@@ -74,7 +74,7 @@
                     android:layout_margin="4dp"
                     android:adjustViewBounds="true"
                     android:background="@android:color/background_light"
-
+                    android:onClick="encuestas"
                     app:srcCompat="@drawable/encuestas"
                     android:scaleType="fitXY"
 

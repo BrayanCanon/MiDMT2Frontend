@@ -401,7 +401,7 @@ public class Evolucion extends AppCompatActivity {
                     if((datosPaciente.get(i+3)).equals("1")){estado.setText("Activo");}else {estado.setText("Inactivo");} //Cambio de valor numero a texto activo o inactivo en el estado
                     telefono.setText((CharSequence)datosPaciente.get(i+4));
                     try {
-                        if (((String) datosPaciente.get(i + 11)).contains("Femenino")) {
+                        if (((String) datosPaciente.get(i + 12)).contains("Femenino")) {
                             emoticon.setImageResource(R.drawable.woman);
                         }
                         String f = ((String) datosPaciente.get(i + 8)).substring(0, 4);// Fecha de nacimiento
