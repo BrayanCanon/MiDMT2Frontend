@@ -33,6 +33,7 @@ import juan.example.com.diabetest2.comunes.HabitosSaludables;
 import juan.example.com.diabetest2.comunes.Informacion;
 import juan.example.com.diabetest2.comunes.Mensajes;
 import juan.example.com.diabetest2.comunes.Recursos;
+import juan.example.com.diabetest2.paciente.encuestas.Encuesta;
 import juan.example.com.diabetest2.paciente.misiones;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
 
@@ -286,6 +287,9 @@ public void ingresarCorreoFamiliar(View v){
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
     public void abrirMetas(View v) {Intent intento = new Intent(this, Metas.class);
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+    }
+    public void encuestas(View v) {Intent intento = new Intent(this, Encuesta.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
 

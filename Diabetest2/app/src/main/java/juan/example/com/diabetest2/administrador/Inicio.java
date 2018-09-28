@@ -238,6 +238,7 @@ public class Inicio extends AppCompatActivity {
                 if (rol.contains("paciente") && completado == 6 && preguntarAnimo.contains("0") && preguntarHba1c.contains("0")) {
                     intento = new Intent(this, MenuPaciente.class);
                 }
+
             }
             //Toast.makeText(getApplicationContext(), "actividad:"+intento.toString(), Toast.LENGTH_LONG).show();
             startActivity(intento);
