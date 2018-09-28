@@ -90,7 +90,7 @@ public class RecursosMision extends Fragment {
             public void onClick(View view) {
                 Intent intento;
                 intento = new Intent(getContext(),VerRecursosMisionPaciente.class);
-                startActivity(intento);
+
                 Bundle envio = new Bundle();
                 RecursoVo recurso = listaRecursos.get(recyclerRecursos.getChildAdapterPosition(view));
                 envio.putSerializable("recurso",recurso);

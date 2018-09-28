@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.util.Conexion;
+import juan.example.com.diabetest2.util.Mision;
 import juan.example.com.diabetest2.util.RecursoVo;
 
 public class Recursos_crud extends AppCompatActivity {
@@ -38,7 +39,9 @@ public class Recursos_crud extends AppCompatActivity {
         recyclerRecursos=findViewById(R.id.recyclerRecursos);
         recyclerRecursos.setItemAnimator(new DefaultItemAnimator());
         recyclerRecursos.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AdaptadorRecursos(listaRecursos,vista);
+        Bundle envio =   getIntent().getExtras();
+        Mision mis = envio.getParcelable("mision");
+        adapter = new AdaptadorRecursos(listaRecursos,vista,true, mis);
         recyclerRecursos.setAdapter(adapter);
         this.llenarRecursos();
 
@@ -61,7 +64,7 @@ public class Recursos_crud extends AppCompatActivity {
                 for(int i = 0; i<arreglo.size();i++){
                     salida=arreglo.get(i).getAsJsonObject();
                     usuario=salida.get("nomUsuario").getAsJsonObject();
-                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),usuario.get("nomUsuario").getAsString(),salida.get("contenidoApoyo").getAsString(),salida.get("imagen").getAsString(),salida.get("fecha").getAsString(),salida.get("video").getAsString());
+                    RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),usuario.get("nomUsuario").getAsString(),salida.get("contenidoApoyo").getAsString(),salida.get("imagen").getAsString(),salida.get("fecha").getAsString(),salida.get("video").getAsString(),salida.get("idRecapoyo").getAsString());
                     listaRecursos.add(rec);
 
                 }

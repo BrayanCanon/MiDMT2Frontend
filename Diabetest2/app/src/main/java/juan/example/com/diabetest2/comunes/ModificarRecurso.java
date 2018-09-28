@@ -145,7 +145,11 @@ public class ModificarRecurso extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             try {
                 SoapObject solicitud = new SoapObject(Inicio.namespace, "modificarRecurso");
-                solicitud.addProperty("imgenvieja", VerRecurso.urlImagen.substring(VerRecurso.urlImagen.length() -13)); //Este id es el nombre de la imagen como identificador en la bd
+                String[] img = VerRecurso.urlImagen.split("/");
+
+
+
+                solicitud.addProperty("imgenvieja",  img[5]); //Este id es el nombre de la imagen como identificador en la bd
                 solicitud.addProperty("autor", ServicioDT2.idLocal);
                 solicitud.addProperty("titulo", a1);
                 solicitud.addProperty("mensaje", b1);

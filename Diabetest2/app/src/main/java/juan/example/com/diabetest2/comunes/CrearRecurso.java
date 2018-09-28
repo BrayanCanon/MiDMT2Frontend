@@ -192,6 +192,8 @@ public class CrearRecurso extends AppCompatActivity {
 
             }
         }).execute(valores);
+        abrir(null);
+
 
 
 

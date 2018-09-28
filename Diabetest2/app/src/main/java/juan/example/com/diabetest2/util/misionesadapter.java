@@ -2,6 +2,7 @@ package juan.example.com.diabetest2.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.RecursosAsignadosMis;
 import juan.example.com.diabetest2.profesional.misioncruds.Recursos_crud;
 import juan.example.com.diabetest2.profesional.modmision.Modmisp;
 
@@ -102,8 +104,10 @@ public class misionesadapter extends RecyclerView.Adapter<misionesadapter.MyView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent seleccion=new Intent(este,Recursos_crud.class);
-                    seleccion.putExtra("mision",pos);
+                    Intent seleccion=new Intent(este,RecursosAsignadosMis.class);
+                    Bundle envio = new Bundle();
+                    envio.putParcelable("mision",pos);
+                    seleccion.putExtras(envio);
                     este.startActivity(seleccion);
 
                 }

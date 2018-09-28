@@ -87,7 +87,9 @@ public class VerRecurso extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             try {
                 SoapObject solicitud = new SoapObject(Inicio.namespace, "recursos");
-                solicitud.addProperty("recurso", urlImagen.substring(urlImagen.length() - 13));
+                String[] img = urlImagen.split("/");
+
+                solicitud.addProperty("recurso", img[5]);
                 solicitud.addProperty("op", "e");
                 SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 sobre.setOutputSoapObject(solicitud);

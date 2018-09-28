@@ -1,5 +1,6 @@
 package juan.example.com.diabetest2.profesional.misioncruds;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +57,7 @@ public class MisionRecursosLista extends AppCompatActivity {
         final Mision elemento2=new Mision();
         prueba=new ArrayList<>();
         n=new misionesadapter(prueba,this,true);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         vista.setLayoutManager(mLayoutManager);
         vista.setAdapter(n);
