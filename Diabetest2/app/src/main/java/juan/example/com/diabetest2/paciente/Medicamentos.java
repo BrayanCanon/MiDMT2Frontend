@@ -77,6 +77,7 @@ public class Medicamentos extends AppCompatActivity {
                 HttpTransportSE transporte = new HttpTransportSE(Inicio.url);
                 transporte.call("http://Servicios/consultarMedicamentos", sobre);
                 listadoX = (Vector) sobre.getResponse();
+
             } catch (Exception e) {
             }
             return true;
