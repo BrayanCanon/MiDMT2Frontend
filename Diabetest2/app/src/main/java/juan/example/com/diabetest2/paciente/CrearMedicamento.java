@@ -108,11 +108,11 @@ public class CrearMedicamento extends AppCompatActivity {
         e1 = e.isChecked();
         f1 = f.getText().toString();
 
-        if(Build.VERSION.SDK_INT < 23){
+    //    if(Build.VERSION.SDK_INT < 23){
             int hora = tp.getCurrentHour();
             int minuto = tp.getCurrentMinute();
             g1 = hora+":"+minuto;
-        }
+    //    }
         if(a.getText().length()>1) {
             Consultar co = new Consultar();
             co.execute();
