@@ -160,7 +160,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageButton
+                ImageButton
                     android:id="@+id/imageButton19"
                     android:layout_width="104dp"
                     android:layout_height="186dp"
@@ -172,18 +172,6 @@
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/bt_pro_informacion" />
 
-                <ImageButton
-                    android:id="@+id/imageButton20"
-                    android:layout_width="113dp"
-                    android:layout_height="191dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@android:color/background_light"
-                    android:onClick="habitos"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/bt_pro_habitos" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -193,8 +181,8 @@
 
                 <ImageButton
                     android:id="@+id/misiones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="121dp"
+                    android:layout_height="157dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
@@ -205,13 +193,13 @@
 
                 <ImageButton
                     android:id="@+id/imageButton25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="115dp"
+                    android:layout_height="136dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:background="@color/blanco"
-                    app:srcCompat="@drawable/encuestas" />
+                    app:srcCompat="@color/blanco" />
 
             </LinearLayout>
 
