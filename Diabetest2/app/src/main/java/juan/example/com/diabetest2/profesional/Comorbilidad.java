@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import juan.example.com.diabetest2.administrador.ServicioDT2;
 public class Comorbilidad extends AppCompatActivity {
 
     Switch a, b, c, d, e, f, g, h,i, j;
+    Button guardar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +44,14 @@ public class Comorbilidad extends AppCompatActivity {
         h = (Switch) findViewById(R.id.switch8);
         i = (Switch) findViewById(R.id.switch9);
         j = (Switch) findViewById(R.id.switch10);
+        guardar=(Button)findViewById(R.id.button5);
     }
 
     String respuesta;
     boolean a1, b1, c1, d1, e1, f1, g1, h1, i1, j1;
     public void procesar (View v) {
+        guardar.setEnabled(false);
+        Toast.makeText(this, "procesando información por favor espere", Toast.LENGTH_LONG).show();
         a1 = a.isChecked();
         b1 = b.isChecked();
         c1 = c.isChecked();
