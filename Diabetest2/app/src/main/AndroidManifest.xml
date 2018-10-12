@@ -155,7 +155,9 @@
         <activity android:name=".profesional.modmision.Modpaso" />
         <activity android:name=".profesional.misioncruds.MisionRecursosLista" />
         <activity android:name=".profesional.misioncruds.RecursosAsignadosMis" />
-        <activity android:name=".paciente.encuestas.Encuesta"></activity>
+        <activity android:name=".paciente.encuestas.Encuesta" />
+        <activity android:name=".profesional.misioncruds.AsignacionRecursos" />
+        <activity android:name=".profesional.PerfilDeTratamiento"></activity>
     </application>
 
 </manifest>
