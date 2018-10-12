@@ -149,17 +149,14 @@
             android:name=".paciente.VerMisionPaciente"
             android:label="@string/title_activity_ver_mision_paciente"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".paciente.MisionPaciente"
-            android:label="@string/title_activity_mision_paciente"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".profesional.modmision.Modpasos" />
-        <activity android:name=".paciente.VerRecursosMision" />
         <activity android:name=".paciente.VerRecursosMisionPaciente" />
         <activity android:name=".profesional.modmision.Modpaso" />
         <activity android:name=".profesional.misioncruds.MisionRecursosLista" />
         <activity android:name=".profesional.misioncruds.RecursosAsignadosMis" />
-        <activity android:name=".paciente.encuestas.Encuesta"></activity>
+        <activity android:name=".paciente.encuestas.Encuesta" />
+        <activity android:name=".profesional.misioncruds.AsignacionRecursos" />
+        <activity android:name=".profesional.PerfilDeTratamiento"></activity>
     </application>
 
 </manifest>
