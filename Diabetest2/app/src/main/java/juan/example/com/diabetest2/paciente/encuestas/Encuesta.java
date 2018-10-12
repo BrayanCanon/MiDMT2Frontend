@@ -2,6 +2,7 @@ package juan.example.com.diabetest2.paciente.encuestas;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import juan.example.com.diabetest2.R;
 
 public class Encuesta extends AppCompatActivity {
@@ -20,6 +24,7 @@ public class Encuesta extends AppCompatActivity {
     WebView wbb;
     ProgressDialog mProgressDialog;
     Context este=this;
+    String url2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class Encuesta extends AppCompatActivity {
         WebSettings wbset=wbb.getSettings();
         wbset.setJavaScriptEnabled(true);
         wbb.setWebViewClient(new oWebViewClient());
-        String url="https://docs.google.com/forms/d/e/1FAIpQLSccdhIrGrUD8c4yM-esrLXR22_t9ftPHbAps7xyepbN2HsSIw/viewform?usp=sf_link";
+        final String url2=getIntent().getStringExtra("link");
         mProgressDialog.setMessage("Cargando… " );
         wbb.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
@@ -64,6 +69,7 @@ public class Encuesta extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 //after loading page, remove loading page
                 mProgressDialog.dismiss();
+
             }
 
             @Override
@@ -72,13 +78,22 @@ public class Encuesta extends AppCompatActivity {
                 super.onPageStarted(view, url, favicon);
 
                 //on page started, show loading page
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.setMessage("Cargando…");
-                mProgressDialog.show();
+                Pattern pattern = Pattern.compile("https://docs.google.com/forms");
+                String vid=url;
+                Matcher matcher = pattern.matcher(vid);
+                //--------------------------------------
+                if(!matcher.find()){
+                    wbb.loadUrl(url2);
+                }
+                else {
+                    mProgressDialog.setCancelable(false);
+                    mProgressDialog.setMessage("Cargando…");
+                    mProgressDialog.show();
+                }
 
             }
 
         });
-        wbb.loadUrl(url);
+        wbb.loadUrl(url2);
     }
 }

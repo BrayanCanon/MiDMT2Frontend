@@ -18,6 +18,9 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
@@ -43,16 +46,36 @@ public class CrearPaciente extends AppCompatActivity {
     }
 
 
+    //asdajsbdasbdbdaubd
     String respuesta;
     String a, b;
     public void procesar (View v) {
-        a = correo.getText().toString();
-        b  = identificacion.getText().toString();
-        paciente = identificacion.getText().toString();
-        CrearPaciente.consultar co = new CrearPaciente.consultar();
-        if(probarInternet() == false){
-            Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
-        } else{ co.execute(); }
+        if(!correo.getText().toString().matches("") && !identificacion.getText().toString().matches("")) {
+            a = correo.getText().toString();
+            if (isEmailValid(a)) {
+                b = identificacion.getText().toString();
+                paciente = identificacion.getText().toString();
+                CrearPaciente.consultar co = new CrearPaciente.consultar();
+                if (probarInternet() == false) {
+                    Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
+                } else {
+                    co.execute();
+                }
+            }
+            else {
+                Toast toast1 =
+                        Toast.makeText(this,
+                                "correo invalido", Toast.LENGTH_SHORT);
+                toast1.show();
+            }
+        }
+
+        else {
+            Toast toast1 =
+                    Toast.makeText(this,
+                            "Por favor llene los datos antes de continuar", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
 
     }
 
@@ -125,7 +148,31 @@ public class CrearPaciente extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+    public boolean isEmailValid(String email)
+    {
+        String regExpn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if(matcher.matches())
+            return true;
+        else
+            return false;
+    }
+
 }
+
+
 
 
 /*

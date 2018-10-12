@@ -11,8 +11,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
+import juan.example.com.diabetest2.paciente.encuestas.Encuesta;
 import juan.example.com.diabetest2.util.RecursoVo;
 
 public class VerRecursosMisionPaciente extends AppCompatActivity {
@@ -23,6 +27,7 @@ public class VerRecursosMisionPaciente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_recursos_mision_paciente);
+
         imagen=findViewById(R.id.id_imagen_recurso);
         titulo=findViewById(R.id.id_titulo_recurso_detalle);
         video= findViewById(R.id.id_link_YouTube);
@@ -35,6 +40,16 @@ public class VerRecursosMisionPaciente extends AppCompatActivity {
         autor.setText(recurso.getAutor());
         fecha.setText(recurso.getFecha());
         descripcion.setText(recurso.getDecripcion());
+        //--------------------------------------
+        Pattern pattern = Pattern.compile("https://docs.google.com/forms");
+        String vid=recurso.getVideo();
+        Matcher matcher = pattern.matcher(vid);
+        //--------------------------------------
+        if(matcher.find()){
+            Intent formulario=new Intent(this,Encuesta.class);
+            formulario.putExtra("link",vid);
+            startActivity(formulario);
+        }
         video.setText(recurso.getVideo());
         video.setOnClickListener(new View.OnClickListener() {
             @Override

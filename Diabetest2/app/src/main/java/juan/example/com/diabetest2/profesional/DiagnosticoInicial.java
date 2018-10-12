@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import juan.example.com.diabetest2.administrador.Inicio;
 public class DiagnosticoInicial extends AppCompatActivity {
 
     private EditText tension1,tension2, trigli, hba1c, peso, talla;
+    private Button guardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class DiagnosticoInicial extends AppCompatActivity {
         hba1c = (EditText) findViewById(R.id.id_hba1c);
         peso = (EditText) findViewById(R.id.id_peso);
         talla = (EditText) findViewById(R.id.id_talla);
+        guardar=(Button)findViewById(R.id.button2);
     }
 
     String respuesta;
@@ -59,6 +62,8 @@ public class DiagnosticoInicial extends AppCompatActivity {
         g = talla.getText().toString();
 
         if(e.length() == 3){
+            guardar.setEnabled(false);
+            Toast.makeText(this, "procesando información por favor espere", Toast.LENGTH_LONG).show();
             DiagnosticoInicial.consultar co = new DiagnosticoInicial.consultar();
             co.execute();
         }else{
