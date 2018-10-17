@@ -1,6 +1,8 @@
 package juan.example.com.diabetest2.paciente;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,13 @@ import java.util.ArrayList;
 public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHolderPasos> {
     ArrayList<PasoVo> listaPasos;
     ArrayList<VerificacionVo> listaverif;
+    Context con;
 
 
-    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif) {
+    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con) {
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
+        this.con=con;
 
     }
 
@@ -52,31 +56,43 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
         holder.verif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder alerta = new AlertDialog.Builder(con);
+                alerta.setTitle(" Verificación");
+                alerta.setMessage("Esta seguro que quiere verificar que ha completado el paso?");
 
-
-              if(finalVerificacion.getVerif()==false && holder.verif.isChecked()){
-                  ArrayList<String> nombres= new ArrayList<>();
-                  ArrayList<String> valores= new ArrayList<>();
-                  nombres.add("idMisionPaciente");
-                  nombres.add("numeroDia");
-                  nombres.add("verifPaciente");
-                  valores.add(listaPasos.get(position).getIdMisionPaciente());
-                  valores.add(Integer.toString(listaPasos.get(position).getOrden()));
-                  valores.add(Boolean.toString(true));
-
-
-                  new Conexion("crearVerificacion", nombres, new Conexion.Comunicado() {
-                      @Override
-
-                      public void salidas(String output) {
-
-
-                      }
-                  }).execute(valores);
+                alerta.setPositiveButton("verificar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(finalVerificacion.getVerif()==false && holder.verif.isChecked()){
+                            ArrayList<String> nombres= new ArrayList<>();
+                            ArrayList<String> valores= new ArrayList<>();
+                            nombres.add("idMisionPaciente");
+                            nombres.add("numeroDia");
+                            nombres.add("verifPaciente");
+                            valores.add(listaPasos.get(position).getIdMisionPaciente());
+                            valores.add(Integer.toString(listaPasos.get(position).getOrden()));
+                            valores.add(Boolean.toString(true));
 
 
 
-                }
+                            new Conexion("crearVerificacion", nombres, new Conexion.Comunicado() {
+                                @Override
+
+                                public void salidas(String output) {
+
+
+                                }
+                            }).execute(valores);
+
+
+
+                        }
+
+                    }
+                });alerta.create();
+                alerta.show();
+
+
             }
         });}
 

@@ -35,6 +35,45 @@
         </android.support.v7.widget.RecyclerView>
 
         <TextView
+            android:id="@+id/textView158"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Mi Progreso"
+            android:textColor="@color/blanco"
+            android:textSize="30sp"/>
+        <TextView
+            android:id="@+id/textView156"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ejercicio:"
+            android:textColor="@color/blanco"
+            android:textSize="20sp"/>
+
+        <ProgressBar
+            android:id="@+id/barra_ej"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="273dp"
+            android:layout_height="match_parent"
+           />
+
+        <TextView
+            android:id="@+id/textView159"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alimentación:"
+            android:textColor="@color/blanco"
+            android:textSize="20sp"/>
+
+        <ProgressBar
+            android:id="@+id/barra_alim"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="273dp"
+            android:layout_height="match_parent"
+
+            android:progress="100" />
+
+        <TextView
             android:id="@+id/textView151"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +82,7 @@
 
             android:textColor="@color/blanco"
             android:textSize="30sp" />
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recNuevasMis"

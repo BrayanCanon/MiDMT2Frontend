@@ -90,7 +90,7 @@ public class pasosLogrosMision extends Fragment {
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
         listaverif = new ArrayList<>();
-        adapter = new AdaptadorPasos(listaPasos,listaverif);
+        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext());
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);
