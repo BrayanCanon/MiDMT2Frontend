@@ -158,6 +158,9 @@
         <activity android:name=".paciente.encuestas.Encuesta" />
         <activity android:name=".profesional.Encuesta1" />
         <activity android:name=".profesional.Encuesta2"></activity>
+        <activity android:name=".paciente.encuestas.Encuesta" />
+        <activity android:name=".profesional.misioncruds.AsignacionRecursos" />
+        <activity android:name=".profesional.PerfilDeTratamiento"></activity>
     </application>
 
 </manifest>
