@@ -239,6 +239,7 @@ public class Inicio extends AppCompatActivity {
                     intento = new Intent(this, MenuPaciente.class);
                 }
 
+
             }
             //Toast.makeText(getApplicationContext(), "actividad:"+intento.toString(), Toast.LENGTH_LONG).show();
             startActivity(intento);
