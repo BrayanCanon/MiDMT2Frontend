@@ -169,11 +169,15 @@ public class misiones extends AppCompatActivity {
                     JsonObject mision;
                     JsonObject categoria;
                     JsonObject nivel;
+                    int img =0;
                     for(int i =0; i<arreglo.size();i++ ){
                       mision=arreglo.get(i).getAsJsonObject();
                       categoria = mision.get("idCategoria").getAsJsonObject();
                       nivel = mision.get("idNivel").getAsJsonObject();
-                      MisionVo mis = new MisionVo(mision.get("nombre").getAsString(), categoria.get("nombreCategoria").getAsString(), nivel.get("nombre").getAsString(), mision.get("idMision").getAsString(), mision.get("descripcion").getAsString());
+                      if(categoria.get("idCategoria").getAsInt()==2){
+                          img=1;
+                      }else{img =2;}
+                      MisionVo mis = new MisionVo(mision.get("nombre").getAsString(), categoria.get("nombreCategoria").getAsString(), nivel.get("nombre").getAsString(), mision.get("idMision").getAsString(), mision.get("descripcion").getAsString(),img);
                       listaNuevasMisiones.add(mis);
 
                     }

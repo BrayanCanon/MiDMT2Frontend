@@ -8,6 +8,8 @@ public class MisionVo implements Serializable {
     private String dificultad;
     private String idMision,idMisionPaciente;
     private String descripcion;
+    private int condicionImagen;
+
 
 
 
@@ -21,7 +23,17 @@ public class MisionVo implements Serializable {
 
     }
 
-    public MisionVo(String titulo, String categoria, String dificultad, String idMision,  String descripcion,String idMisionPaciente) {
+    public MisionVo(String titulo, String categoria, String dificultad, String idMision, String idMisionPaciente, String descripcion, int condicionImagen) {
+        this.titulo = titulo;
+        this.categoria = categoria;
+        this.dificultad = dificultad;
+        this.idMision = idMision;
+        this.idMisionPaciente = idMisionPaciente;
+        this.descripcion = descripcion;
+        this.condicionImagen = condicionImagen;
+    }
+
+    public MisionVo(String titulo, String categoria, String dificultad, String idMision, String descripcion, String idMisionPaciente) {
         this.titulo = titulo;
         this.categoria = categoria;
         this.dificultad = dificultad;
@@ -29,6 +41,16 @@ public class MisionVo implements Serializable {
         this.idMisionPaciente = idMisionPaciente;
         this.descripcion = descripcion;
     }
+    public MisionVo(String titulo, String categoria, String dificultad, String idMision, String descripcion,int condicionImagen) {
+        this.titulo = titulo;
+        this.categoria = categoria;
+        this.dificultad = dificultad;
+        this.idMision = idMision;
+        this.idMisionPaciente = idMisionPaciente;
+        this.descripcion = descripcion;
+        this.condicionImagen = condicionImagen;
+    }
+
 
     public String getIdMisionPaciente() {
         return idMisionPaciente;
@@ -74,5 +96,13 @@ public class MisionVo implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getCondicionImagen() {
+        return condicionImagen;
+    }
+
+    public void setCondicionImagen(int condicionImagen) {
+        this.condicionImagen = condicionImagen;
     }
 }
