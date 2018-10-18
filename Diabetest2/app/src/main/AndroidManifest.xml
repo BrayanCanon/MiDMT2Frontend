@@ -133,7 +133,7 @@
         <activity android:name=".profesional.crearmisgmedi" />
         <activity android:name=".profesional.misioncruds.Medicamentosm" />
         <activity android:name=".profesional.misioncruds.Forosm" />
-        <activity android:name=".profesional.misioncruds.AsignacionRecursos"/>
+        <activity android:name=".profesional.misioncruds.AsignacionRecursos" />
         <activity android:name=".profesional.misioncruds.habitosm" />
         <activity android:name=".profesional.misioncruds.Encuestas" />
         <activity android:name=".profesional.misioncruds.mededit" />
@@ -155,8 +155,10 @@
         <activity android:name=".profesional.modmision.Modpaso" />
         <activity android:name=".profesional.misioncruds.MisionRecursosLista" />
         <activity android:name=".profesional.misioncruds.RecursosAsignadosMis" />
+        <activity android:name=".profesional.Encuesta1" />
+        <activity android:name=".profesional.Encuesta2"></activity>
         <activity android:name=".paciente.encuestas.Encuesta" />
-        
+        <activity android:name=".profesional.misioncruds.AsignacionRecursos" />
         <activity android:name=".profesional.PerfilDeTratamiento"></activity>
     </application>
 

@@ -107,7 +107,7 @@ public class Comorbilidad extends AppCompatActivity {
 
     //Conector entre actividades
     public void abrir(View v) {
-        Intent intento = new Intent(this, MenuProfesional.class);
+        Intent intento = new Intent(this, Encuesta1.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); this.finish(); }
     }
 

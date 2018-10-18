@@ -30,11 +30,18 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </RadioGroup>
+
         <RadioButton
             android:id="@+id/general"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Perfil General" />
+            android:text="Perfil General"
+            android:onClick="deselect"/>
 
         <RadioButton
             android:id="@+id/cardiacas"
@@ -64,10 +71,12 @@
             android:id="@+id/movilidadReducida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Movilidad Reducida" />
+            android:text="Movilidad Reducida"
+            android:onClick="movred"/>
 
         <TextView
             android:id="@+id/textView157"
+            tools:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Por Favor indique si la movilidad reducida es a causa de una extremidad faltante en caso de ser asi indique cual:"
@@ -75,6 +84,7 @@
 
         <EditText
             android:id="@+id/editText7"
+            tools:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="138dp"
             android:ems="10"
@@ -85,7 +95,8 @@
             android:id="@+id/Siguiente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Siguiente" />
+            android:text="Siguiente"
+            android:onClick="iniciovolv"/>
 
     </LinearLayout>
 

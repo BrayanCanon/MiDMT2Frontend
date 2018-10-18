@@ -53,6 +53,7 @@ public class DiagnosticoInicial extends AppCompatActivity {
     String f;
     String g;
     public void procesar (View v) {
+
         a = CrearPaciente.paciente;
         b = tension1.getText().toString();
         c = tension2.getText().toString();
@@ -61,15 +62,19 @@ public class DiagnosticoInicial extends AppCompatActivity {
         f = peso.getText().toString();
         g = talla.getText().toString();
 
-        if(e.length() == 3){
-            guardar.setEnabled(false);
-            Toast.makeText(this, "procesando información por favor espere", Toast.LENGTH_LONG).show();
-            DiagnosticoInicial.consultar co = new DiagnosticoInicial.consultar();
-            co.execute();
-        }else{
-            Toast.makeText(getApplicationContext(), "El formato para HbA1c es: #.#", Toast.LENGTH_LONG).show();
+        if(!a.matches("") && !b.matches("") && !c.matches("") && !d.matches("") && !e.matches("") && !f.matches("") && !g.matches("")) {
+            if (e.length() == 3) {
+                guardar.setEnabled(false);
+                Toast.makeText(this, "procesando información por favor espere", Toast.LENGTH_LONG).show();
+                DiagnosticoInicial.consultar co = new DiagnosticoInicial.consultar();
+                co.execute();
+            } else {
+                Toast.makeText(getApplicationContext(), "El formato para HbA1c es: #.#", Toast.LENGTH_LONG).show();
+            }
         }
-
+        else {
+            Toast.makeText(getApplicationContext(), "por favor llene todos los datos", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
