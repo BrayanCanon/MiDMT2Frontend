@@ -26,6 +26,7 @@
 
         <Button
             android:id="@+id/button40"
+            android:onClick="procesar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Continuar" />
