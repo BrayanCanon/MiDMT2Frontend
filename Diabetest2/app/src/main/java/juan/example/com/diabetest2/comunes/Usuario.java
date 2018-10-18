@@ -110,6 +110,8 @@ public class Usuario extends AppCompatActivity {
     String a1, b1, c1, d1, e1, f1, g1;
     int ci1;
     public void procesar (View v) {
+
+
         a1 = a.getText().toString(); // La clave
         b1 = b.getText().toString(); // Nombres
         c1 = c.getText().toString(); // Apellidos
@@ -133,6 +135,7 @@ public class Usuario extends AppCompatActivity {
             co.execute();
 
         }
+
     }
 
 
