@@ -3,6 +3,8 @@ package juan.example.com.diabetest2.paciente;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,12 @@ import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.profesional.misioncruds.RecursosAsignadosMis;
 import juan.example.com.diabetest2.util.Conexion;
 
 import java.util.ArrayList;
@@ -83,6 +90,41 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
                                 }
                             }).execute(valores);
+                           new Conexion("consultarLogroGanado", nombres, new Conexion.Comunicado() {
+                                @Override
+                                public void salidas(String output) {
+                                    if(output!= null ) {
+                                        Gson gson = new Gson();
+                                        JsonObject logro = gson.fromJson(output,JsonObject.class);
+                                        AlertDialog.Builder logrodial = new AlertDialog.Builder(con);
+                                        if(logro.get("idLogro").getAsInt()!=38){
+                                       logrodial.setTitle(" Felicidades Ganaste "+ logro.get("nomLogro").getAsString());
+                                        logrodial.setMessage(logro.get("descripcion").getAsString());
+                                        logrodial.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intento = new Intent(con, misiones.class);
+
+                                                intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                                                con.startActivity(intento);
+                                            }
+                                        });
+                                       logrodial.create();
+                                        logrodial.show();
+
+
+
+                                    }else{Intent intento = new Intent(con, misiones.class);
+
+                                        intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                                        con.startActivity(intento);}}
+
+                                }
+                            }).execute(valores);
+
+
 
 
 
