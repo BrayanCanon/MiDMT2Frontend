@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import juan.example.com.diabetest2.util.Conexion;
 
 public class PerfilDeTratamiento extends AppCompatActivity {
 
-    RadioButton general,cardiaco,renales,cardiovasculares,arterial,movilidad;
+    CheckBox general,cardiaco,renales,cardiovasculares,arterial,movilidad;
     TextView advertencia;
     EditText indicaciones;
     Context este=this;
@@ -25,24 +26,40 @@ public class PerfilDeTratamiento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_de_tratamiento);
-        general=(RadioButton)findViewById(R.id.general);
-        cardiaco=(RadioButton)findViewById(R.id.cardiacas);
-        renales=(RadioButton)findViewById(R.id.renales);
-        cardiovasculares=(RadioButton)findViewById(R.id.cardiovasculares);
-        arterial=(RadioButton)findViewById(R.id.hipertensionArterial);
-        movilidad=(RadioButton)findViewById(R.id.movilidadReducida);
+        general=(CheckBox)findViewById(R.id.general);
+        cardiaco=(CheckBox)findViewById(R.id.cardiacas);
+        renales=(CheckBox)findViewById(R.id.renales);
+        cardiovasculares=(CheckBox)findViewById(R.id.cardiovasculares);
+        arterial=(CheckBox)findViewById(R.id.hipertensionArterial);
+        movilidad=(CheckBox)findViewById(R.id.movilidadReducida);
         advertencia=(TextView)findViewById(R.id.textView157);
         indicaciones=(EditText)findViewById(R.id.editText7);
+
+        advertencia.setVisibility(View.INVISIBLE);
+        indicaciones.setVisibility(View.INVISIBLE);
+        //------------------------------------------------------
+        //------------------------------------------------------
+
     }
 
     public void deselect(View view) {
-        cardiaco.setActivated(false);
-        renales.setActivated(false);
-        cardiovasculares.setActivated(false);
-        arterial.setActivated(false);
-        movilidad.setActivated(false);
-        advertencia.setVisibility(View.INVISIBLE);
-        indicaciones.setVisibility(View.INVISIBLE);
+        if(general.isChecked()) {
+            cardiaco.setChecked(false);cardiaco.setEnabled(false);
+            renales.setChecked(false);renales.setEnabled(false);
+            cardiovasculares.setChecked(false);cardiovasculares.setEnabled(false);
+            arterial.setChecked(false);arterial.setEnabled(false);
+            movilidad.setChecked(false);movilidad.setEnabled(false);
+            advertencia.setVisibility(View.INVISIBLE);
+            indicaciones.setVisibility(View.INVISIBLE);
+        }
+        else {
+            cardiaco.setEnabled(true);
+            renales.setEnabled(true);
+            cardiovasculares.setEnabled(true);
+            arterial.setEnabled(true);
+            movilidad.setEnabled(true);
+        }
+
     }
 
     public void movred(View view) {
@@ -72,7 +89,7 @@ public class PerfilDeTratamiento extends AppCompatActivity {
         new Conexion("perfiltrat", nombres, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
-                Intent volver=new Intent(este,MenuProfesional.class);
+                Intent volver=new Intent(este,Encuesta1.class);
                 startActivity(volver);
             }
         }).execute(valores);

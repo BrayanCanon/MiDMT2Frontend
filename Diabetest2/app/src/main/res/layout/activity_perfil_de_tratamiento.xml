@@ -36,38 +36,38 @@
 
         </RadioGroup>
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/general"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Perfil General"
             android:onClick="deselect"/>
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/cardiacas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enfermedades Cardiacas" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/renales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enfermedades Renales" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/cardiovasculares"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enfermedades Cardiovasculares" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/hipertensionArterial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hipertension Arterial" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/movilidadReducida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

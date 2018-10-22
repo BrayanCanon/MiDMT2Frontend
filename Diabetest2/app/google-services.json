@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "450260717612",
+    "firebase_url": "https://michat-94f8a.firebaseio.com",
+    "project_id": "michat-94f8a",
+    "storage_bucket": "michat-94f8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450260717612:android:7510b777400481a3",
+        "android_client_info": {
+          "package_name": "juan.example.com.diabetest2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450260717612-lvn88m8tlrcohtsoj8ilb1tedk152il3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsv3i3BOe4G38yB2dMupLi644ZqpI7dFM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
