@@ -55,6 +55,8 @@ public class misiones extends AppCompatActivity {
         alimentacion = findViewById(R.id.barra_alim);
         nivEjercicio=findViewById(R.id.NivelActEjer);
         nivAlim=findViewById(R.id.NivelAcrAlim);
+        llenarBarraEjercicio();
+        llenarBarraAlimentacion();
         FileInputStream in2 = null;
         try {
             in2 = openFileInput("id.dt2");
@@ -213,13 +215,11 @@ private void llenarBarraEjercicio(){
             public void salidas(String output) {
                 Gson gson = new Gson();
                 JsonObject nivel = gson.fromJson(output, JsonObject.class);
-                nivel.get("Porcentaje").getAsInt();
-                nivel.get("nombreNivel");
 
 
-
-
-            }
+                ejercicio.setProgress(nivel.get("Porcentaje").getAsInt());
+                nivEjercicio.setText( nivel.get("nombreNivel").getAsString());
+                }
         }).execute(valores);
 
 } catch (FileNotFoundException e) {
@@ -231,4 +231,36 @@ private void llenarBarraEjercicio(){
     }
 
 
-}}
+}
+    private void llenarBarraAlimentacion(){
+        FileInputStream in2 = null;
+        try {
+            in2 = openFileInput("id.dt2");
+            ObjectInputStream ois2 = new ObjectInputStream(in2);
+            String idGuardado =  ois2.readObject().toString();
+            ArrayList<String> nombres= new ArrayList<>();
+            ArrayList valores= new ArrayList();
+            nombres.add("codPaciente");
+            valores.add(idGuardado);
+            new Conexion("consultarNivelAlimentacion", nombres, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+                    Gson gson = new Gson();
+                    JsonObject nivel = gson.fromJson(output, JsonObject.class);
+
+
+                    alimentacion.setProgress(nivel.get("Porcentaje").getAsInt());
+                    nivAlim.setText( nivel.get("nombreNivel").getAsString());
+                }
+            }).execute(valores);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }}
