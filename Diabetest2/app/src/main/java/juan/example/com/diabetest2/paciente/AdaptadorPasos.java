@@ -50,9 +50,14 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
         if(listaPasos.get(position).getHabCheckbox()==true){
             holder.verif.setVisibility(View.INVISIBLE);
         }else{
+            int diasverif=0;
         for(int i=0;i<listaverif.size();i++){
             if(listaPasos.get(position).getOrden()==listaverif.get(i).getNumDia()){
                 verificacion=listaverif.get(i);
+                if(listaverif.get(i).getVerif()==true){
+                    diasverif++;
+                      int a =1;
+                }
             }
 
         }

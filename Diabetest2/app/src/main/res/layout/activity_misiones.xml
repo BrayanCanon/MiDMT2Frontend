@@ -6,89 +6,165 @@
     android:layout_height="match_parent"
     tools:context="juan.example.com.diabetest2.paciente.misiones"
     android:background="@drawable/fondo">
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-        <TextView
-            android:id="@+id/textView129"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Mis Misiones"
-            android:textColor="@color/blanco"
-
-            android:textSize="30sp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerMisiones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbarStyle="outsideInset"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal">
-
-        </android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/textView158"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Mi Progreso"
-            android:textColor="@color/blanco"
-            android:textSize="30sp"/>
-        <TextView
-            android:id="@+id/textView156"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ejercicio:"
-            android:textColor="@color/blanco"
-            android:textSize="20sp"/>
-
-        <ProgressBar
-            android:id="@+id/barra_ej"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="273dp"
             android:layout_height="match_parent"
-           />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView159"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Alimentación:"
-            android:textColor="@color/blanco"
-            android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/textView158"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Mi Progreso"
+                android:textColor="@color/blanco"
+                android:textSize="30sp" />
 
-        <ProgressBar
-            android:id="@+id/barra_alim"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="273dp"
-            android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/textView156"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ejercicio:"
+                android:textColor="@color/blanco"
+                android:textSize="20sp" />
 
-            android:progress="100" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
 
-        <TextView
-            android:id="@+id/textView151"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Nuevas Misiones Disponibles"
+                <TextView
+                    android:id="@+id/textView162"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tu nivel actual de ejercicio es :"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp" />
 
-            android:textColor="@color/blanco"
-            android:textSize="30sp" />
+                <TextView
+                    android:id="@+id/NivelActEjer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView164"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Siguiente nivel :"
+                android:textColor="@color/blanco"
+                android:textSize="15sp"/>
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recNuevasMis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <ProgressBar
 
-    </LinearLayout>
-</ScrollView>
+                    android:id="@+id/barra_ej"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="273dp"
+                    android:layout_height="match_parent" />
+
+
+
+            <TextView
+                android:id="@+id/textView159"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alimentación:"
+                android:textColor="@color/blanco"
+                android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:id="@+id/textView166"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tu nivel actual de alimentacion es :"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/NivelAcrAlim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textView165"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Siguiente nivel :"
+                android:textColor="@color/blanco"
+                android:textSize="15sp"/>
+
+
+
+                <ProgressBar
+                android:id="@+id/barra_alim"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="273dp"
+                android:layout_height="match_parent"
+
+                android:progress="100" />
+
+            <TextView
+                android:id="@+id/textView129"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Mis Misiones"
+                android:textColor="@color/blanco"
+
+                android:textSize="30sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerMisiones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbars="horizontal">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/textView151"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Nuevas Misiones Disponibles"
+
+                android:textColor="@color/blanco"
+                android:textSize="30sp" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recNuevasMis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
