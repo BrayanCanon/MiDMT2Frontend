@@ -15,7 +15,7 @@
             android:id="@+id/textView140"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="nombre logro" />
+            android:text="Nombre del Logro" />
 
         <EditText
             android:id="@+id/nombre"
@@ -28,7 +28,7 @@
             android:id="@+id/textView141"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="puntos"
+            android:text="Puntos"
             android:inputType="number"/>
 
         <EditText
@@ -42,7 +42,7 @@
             android:id="@+id/te1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="descripcion" />
+            android:text="Descripción" />
         <EditText
             android:id="@+id/descripcion"
             android:layout_width="match_parent"
