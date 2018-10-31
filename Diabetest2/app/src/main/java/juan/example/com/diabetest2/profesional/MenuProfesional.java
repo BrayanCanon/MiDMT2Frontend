@@ -163,7 +163,7 @@ public class MenuProfesional extends AppCompatActivity {
 
     public void mmisiones(View v) {
 
-        Intent intento = new Intent(this, MisionSelProf.class);
+        Intent intento = new Intent(this, Mision_Gen_Prof.class);
         if(probarInternet() == false)
         {
             Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();

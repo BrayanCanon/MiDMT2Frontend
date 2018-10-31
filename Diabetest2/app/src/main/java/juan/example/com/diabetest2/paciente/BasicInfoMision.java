@@ -120,7 +120,7 @@ public class BasicInfoMision extends Fragment {
           int duration = Toast.LENGTH_SHORT;
                 String text;
                 Context context = getContext();
-                if (output==null){
+                if (output=="null"){
                     text  = "No se ha iniciado la mision intenta mas tarde";
                 }else{
                    text=output;

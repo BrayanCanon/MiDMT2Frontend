@@ -34,7 +34,7 @@
                     android:id="@+id/textView135"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pasos de la misión" />
+                    android:text="Pasos de la Misión" />
 
                 <ListView
                     android:id="@+id/pasos"

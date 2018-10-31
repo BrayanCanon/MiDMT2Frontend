@@ -8,7 +8,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +21,7 @@
                 android:id="@+id/textView149"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="nombre" />
+                android:text="Nombre" />
 
             <EditText
                 android:id="@+id/editTextnom"
@@ -32,12 +34,12 @@
                 android:id="@+id/textView155"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="descripcion" />
+                android:text="Descripción" />
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
-                android:layout_height="124dp"
+                android:layout_height="200dp"
                 android:ems="10"
                 android:inputType="textMultiLine" />
 
@@ -45,32 +47,32 @@
                 android:id="@+id/textView138"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="categoría" />
+                android:text="Categoría" />
 
             <Spinner
                 android:id="@+id/spinner1"
-                android:entries="@array/categorias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:entries="@array/categorias"
                 android:spinnerMode="dropdown" />
 
             <TextView
                 android:id="@+id/textView133"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="tipo de mision" />
+                android:text="Tipo de Misión" />
 
             <Spinner
                 android:id="@+id/spinner3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/tipo_mis"/>
+                android:entries="@array/tipo_mis" />
 
             <TextView
                 android:id="@+id/textView136"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="nivel" />
+                android:text="Nivel" />
 
             <Spinner
                 android:id="@+id/spinner4"

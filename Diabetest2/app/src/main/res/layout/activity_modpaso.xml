@@ -28,14 +28,14 @@
             android:id="@+id/textView1463"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="descripcion" />
+            android:text="Descripción" />
 
         <EditText
             android:id="@+id/desc3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="270dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine" />
 
             <RadioGroup
                 android:id="@+id/grupores"
