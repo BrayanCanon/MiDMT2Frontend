@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="juan.example.com.diabetest2">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,6 +14,11 @@
 
     <protected-broadcast android:name="android.intent.action.MEDIA.MOUNTED" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icono_normal"
@@ -21,7 +27,8 @@
         android:roundIcon="@drawable/icono_normal"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
         <activity android:name=".administrador.Inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -159,8 +166,14 @@
         <activity android:name=".profesional.Encuesta2" />
         <activity android:name=".paciente.encuestas.Encuesta" />
         <activity android:name=".profesional.PerfilDeTratamiento" />
-        <activity android:name=".comunes.chattest.Mainchat" />
-        <activity android:name=".comunes.chattest.SignInActivity"></activity>
+        <activity
+            android:name=".comunes.smackchat.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name=".comunes.smackchat.ContactListActivity" />
+
+        <service android:name=".comunes.smackchat.RoosterConnectionService"></service>
+
+        <activity android:name=".comunes.smackchat.ChatActivity"></activity>
     </application>
 
 </manifest>

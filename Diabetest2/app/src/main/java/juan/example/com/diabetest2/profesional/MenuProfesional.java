@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-import juan.example.com.diabetest2.profesional.MisionSelProf;
 import juan.example.com.diabetest2.comunes.Mensajes;
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
@@ -35,6 +34,7 @@ import juan.example.com.diabetest2.comunes.HabitosSaludables;
 import juan.example.com.diabetest2.comunes.Informacion;
 import juan.example.com.diabetest2.comunes.Recursos;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
+import juan.example.com.diabetest2.comunes.smackchat.LoginActivity;
 
 // Autor: Juan David Velásquez Bedoya
 
@@ -80,7 +80,13 @@ public class MenuProfesional extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//-----------------------------------------------------------------------------
+    public void chatest(View view) {
+        Intent anum=new Intent(this,LoginActivity.class);
+        startActivity(anum);
+
+    }
+
+    //-----------------------------------------------------------------------------
 //Cerrar sesiones en el servidor
     private class CerrarSesion extends AsyncTask<Void, Void, Boolean> {
         @Override
