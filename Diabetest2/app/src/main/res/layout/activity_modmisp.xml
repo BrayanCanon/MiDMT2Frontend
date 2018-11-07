@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="basico"
-            android:text="informacion basica" />
+            android:text="informacion básica" />
 
         <Button
             android:id="@+id/button39"

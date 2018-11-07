@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -160,6 +161,16 @@ public class misiones extends AppCompatActivity {
 
 
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == android.view.KeyEvent.KEYCODE_BACK ) {
+            Intent a = new Intent(this,MenuPaciente.class);
+            a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(a);
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
     private void llenarNuevasMis() throws IOException, ClassNotFoundException {
         FileInputStream in2 = null;
         try {
@@ -231,7 +242,10 @@ private void llenarBarraEjercicio(){
     }
 
 
+
+
 }
+
     private void llenarBarraAlimentacion(){
         FileInputStream in2 = null;
         try {
