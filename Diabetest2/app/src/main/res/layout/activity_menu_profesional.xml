@@ -197,6 +197,7 @@
                     android:layout_height="136dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:onClick="chatest"
                     android:adjustViewBounds="true"
                     android:background="@color/blanco"
                     app:srcCompat="@color/blanco" />
