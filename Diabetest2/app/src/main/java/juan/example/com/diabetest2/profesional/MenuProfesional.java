@@ -81,8 +81,8 @@ public class MenuProfesional extends AppCompatActivity {
     }
 
     public void chatest(View view) {
-        Intent anum=new Intent(this,LoginActivity.class);
-        startActivity(anum);
+        //Intent anum=new Intent(this,LoginActivity.class);
+        //startActivity(anum);
 
     }
 
