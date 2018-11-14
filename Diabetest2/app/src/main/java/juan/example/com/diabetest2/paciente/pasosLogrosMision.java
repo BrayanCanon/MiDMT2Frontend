@@ -159,12 +159,15 @@ public class pasosLogrosMision extends Fragment {
                                 JsonObject verif;
                                 for (int i = 0; i < arreglo.size(); i++) {
                                     verif = arreglo.get(i).getAsJsonObject();
-                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean());
+                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean(),verif.get("fecha").getAsString()
+                                    );
                                     listaverif.add(obj);
                                 }
                                 adapter.notifyDataSetChanged();
                             }
                         }).execute(va);
+                        
+
 
                     }
                     for(int i=1;i<=arreglo.size();i++) {

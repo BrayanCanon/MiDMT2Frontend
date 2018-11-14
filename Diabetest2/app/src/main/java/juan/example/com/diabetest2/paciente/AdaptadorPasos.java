@@ -45,6 +45,8 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolderPasos holder, final int position) {
 
+
+
         VerificacionVo verificacion= new VerificacionVo(position,false);
         holder.dia.setText(Integer.toString(listaPasos.get(position).getOrden()));
         if(listaPasos.get(position).getHabCheckbox()==true){
@@ -57,7 +59,9 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                 if(listaverif.get(i).getVerif()==true){
                     diasverif++;
                       int a =1;
+
                 }
+
             }
 
         }
