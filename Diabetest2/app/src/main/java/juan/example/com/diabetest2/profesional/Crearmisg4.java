@@ -35,6 +35,7 @@ public class Crearmisg4 extends AppCompatActivity {
     Spinner diasmarc;
     String cadnom,codmision;
     String nomcat;
+    String tipomis;
     ArrayAdapter<String> adap;
     ArrayList<String> adp=new ArrayList<>();
 
@@ -47,7 +48,7 @@ public class Crearmisg4 extends AppCompatActivity {
             codcategoria=params.getInt("catcod");
             cadnom=params.getString("cadnom");
             codmision=params.getString("codmision");
-
+            tipomis=params.getString("tipomis");
 
         }
         catch (Exception e){
@@ -122,6 +123,7 @@ public class Crearmisg4 extends AppCompatActivity {
                     creado.putExtra("diasnum",diasnum);
                     creado.putExtra("cadcod",catcod);
                     creado.putExtra("output",output);
+                    creado.putExtra("tipomis",tipomis);
                     creado.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(creado);
                 }
@@ -145,6 +147,7 @@ public class Crearmisg4 extends AppCompatActivity {
             nomcat=slida.getString("cadnom");
             a.putExtra("categoria",nomcat);
             a.putExtra("codigo",codmision);
+            a.putExtra("tipomis",tipomis);
             a.putExtra("noexiste",1);
             a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(a);

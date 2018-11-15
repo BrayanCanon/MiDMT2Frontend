@@ -171,9 +171,10 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".comunes.smackchat.ContactListActivity" />
 
-        <service android:name=".comunes.smackchat.RoosterConnectionService"></service>
+        <service android:name=".comunes.smackchat.RoosterConnectionService" />
 
-        <activity android:name=".comunes.smackchat.ChatActivity"></activity>
+        <activity android:name=".comunes.smackchat.ChatActivity" />
+        <activity android:name=".profesional.crearmisespec"></activity>
     </application>
 
 </manifest>
