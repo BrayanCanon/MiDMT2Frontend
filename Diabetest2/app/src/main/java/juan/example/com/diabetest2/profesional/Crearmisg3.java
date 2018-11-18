@@ -47,6 +47,7 @@ public class Crearmisg3 extends AppCompatActivity {
     private String nomcategoria;
     private String codmision;
     private Button finalizar;
+    private String tipomis;
     private Context contexto=this;
     private ArrayList<Movie> salida;
     private TextView titulo;
@@ -72,6 +73,7 @@ public class Crearmisg3 extends AppCompatActivity {
         seguir.setEnabled(true);
         nomcategoria=getIntent().getStringExtra("categoria");
         codmision=getIntent().getStringExtra("codigo");
+        tipomis=getIntent().getStringExtra("tipomis");
 
         Log.d("estele",codmision);
         Log.d("nommision",nomcategoria);
@@ -194,6 +196,7 @@ public class Crearmisg3 extends AppCompatActivity {
         Log.d("codcategoria",String.valueOf(codcategoria));
         datos.putString("cadnom",nomcategoria);
         datos.putString("codmision",codmision);
+        datos.putString("tipomis",tipomis);
         Log.d("codmision",codmision);
         ag.putExtras(datos);
         startActivity(ag);
@@ -231,10 +234,21 @@ public class Crearmisg3 extends AppCompatActivity {
                    }
                }).execute(valores);
                //--------------------------------
-               Intent envio = new Intent(this, Mision_Gen_Prof.class);
-               envio.putExtra("seleccion", respuestas);
-               envio.putExtra("codigo",String.valueOf(codmision));
-               startActivity(envio);
+                if(getIntent().getExtras().getString("categoria").equals("Genérico")) {
+                    Intent envio = new Intent(this, Mision_Gen_Prof.class);
+                    envio.putExtra("seleccion", respuestas);
+                    envio.putExtra("codigo", String.valueOf(codmision));
+                    startActivity(envio);
+
+                }
+                else{
+                    Intent envio = new Intent(this, crearmisespec.class);
+                    envio.putExtra("seleccion", respuestas);
+                    envio.putExtra("codigo", String.valueOf(codmision));
+                    startActivity(envio);
+
+                }
+
 
     }
     @Override

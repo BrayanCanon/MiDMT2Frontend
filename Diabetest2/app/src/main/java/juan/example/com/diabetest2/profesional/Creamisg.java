@@ -109,6 +109,7 @@ public class Creamisg extends AppCompatActivity {
                             intento.putExtra("categoria", categmenu.getSelectedItem().toString());
                             intento.putExtra("codigo", String.valueOf(codmision));
                             intento.putExtra("codcategoria", categmenu.getSelectedItemPosition() + 1);
+                            intento.putExtra("tipomis",tipomis.getSelectedItem().toString());
                             intento.putParcelableArrayListExtra("pasoslista", new ArrayList<Movie>());
                             Log.d("categoria", "" + categmenu.getSelectedItem());
                             Log.d("codcategoria", "" + (categmenu.getSelectedItemPosition() + 1));

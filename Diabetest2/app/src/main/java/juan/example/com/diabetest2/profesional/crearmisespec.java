@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,27 +24,25 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import juan.example.com.diabetest2.paciente.Evolucion;
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
+import juan.example.com.diabetest2.paciente.Evolucion;
 import juan.example.com.diabetest2.util.Conexion;
 
-// Autor: Juan David Velásquez Bedoya
-
-public class Pacientes extends AppCompatActivity {
+public class crearmisespec extends AppCompatActivity {
 
     ListView listaP;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pacientes);
+        setContentView(R.layout.activity_crearmisespec);
 
-        Pacientes.Consultar co = new Pacientes.Consultar();
+        crearmisespec.Consultar co = new crearmisespec.Consultar();
         co.execute();
     }
-
 
     Vector listadoX = new Vector();
     Vector pacientes = new Vector();
@@ -80,10 +79,10 @@ public class Pacientes extends AppCompatActivity {
                     } //Vector indice coincidente con ListView, id_destinatario del Paciente
                     //Llenado del listView
                     ArrayAdapter aa = new ArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, pacientes);
-                    listaP = (ListView) findViewById(R.id.id_listaPacientes2);
+                    listaP = (ListView) findViewById(R.id.id_listaPacientes22);
                     listaP.setAdapter(aa);
 
-                    final TextView mititulo = (TextView) findViewById(R.id.id_titulopacientes);
+                    final TextView mititulo = (TextView) findViewById(R.id.id_titulopacientes2);
                     listaP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int elegido, long id) {
@@ -98,26 +97,20 @@ public class Pacientes extends AppCompatActivity {
 
     public void abrir(View v) {
         //Intent intento = new Intent(this, Evolucion.class);
-        //if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }new Conexion("generarExcel",)
-        /*ArrayList nombres=new ArrayList();
-        ArrayList valores=new ArrayList();
-        nombres.add("codPaciente");valores.add(Evolucion.id);
+        //if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+        ArrayList<String> nombres=new ArrayList<>();
+        ArrayList valores=new ArrayList<>();
 
-        new Conexion("generarExcel", nombres, new Conexion.Comunicado() {
+        nombres.add("codPaciente");valores.add(Evolucion.id);
+        nombres.add("idMision");valores.add(getIntent().getStringExtra("codigo"));
+        new Conexion("AsignarMisionPaciente", nombres, new Conexion.Comunicado() {
             @Override
-            public void salidas(String output)
-            {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(Inicio.domain+"/reportes/"+Evolucion.id+".xlsx"));
-                startActivity(browserIntent);
+            public void salidas(String output) {
+
             }
         }).execute(valores);
-        */
-        Intent intento = new Intent(this, Evolucion.class);
-        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
-
-
-
+        Intent salir=new Intent(this,Mision_Gen_Prof.class);
+        startActivity(salir);
     }
     //Chequear conexion a internet  ----------------------------------
     public boolean probarInternet() {
@@ -127,62 +120,15 @@ public class Pacientes extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-}
-
-/*
-Spinner listaPacientes;
-ListView listaMensajes;
-int seleccion;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pacientes);
-
-        //listaPacientes = (Spinner) findViewById(R.id_destinatario.id_listapacientes);
-        ArrayList listado = new ArrayList();
-        listado.add("paciente 1");
-        listado.add("paciente 2");
-        listado.add("paciente 3");
-        listado.add("paciente 4");
-        listado.add("paciente 5");
-        listado.add("paciente 6");
-        listado.add("paciente 7");
-        listado.add("paciente 8");
-        listado.add("paciente 9");
-        listado.add("paciente 10");
-        listado.add("paciente 11");
-        listado.add("paciente 12");
-        listado.add("paciente 13");
-        listado.add("paciente 14");
-        listado.add("paciente 15");
-        //ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1, listado);
-        //listaPacientes.setAdapter(aa);
-
-        ArrayAdapter aa2 = new ArrayAdapter(this,android.R.layout.simple_list_item_1, listado);
-        listaMensajes = (ListView) findViewById(R.id_destinatario.id_listaPacientes2);
-        listaMensajes.setAdapter(aa2);
-
-    }
-
-
-
-    public void cuandoClick(View v){
-        final TextView mititulo = (TextView) findViewById(R.id_destinatario.id_titulopacientes);
-
-        switch (v.getId()){
-            case R.id_destinatario.id_bt_ver: // Id del boton que va a ejecutar la acción
-                //mititulo.setText(listaPacientes.getSelectedItem().toString());
-                //(Item) arg0.getAdapter().getItem(arg2);
-                listaMensajes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id_destinatario) {
-                        seleccion = position;
-                    }
-                });
-                mititulo.setText(String.valueOf(seleccion)); //Con el ArrayView
-
-
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Toast toast1 =
+                    Toast.makeText(this,
+                            "Por favor termine el proceso antes de continuar", Toast.LENGTH_SHORT);
+            toast1.show();
+            return true;
         }
+        return super.onKeyDown(keyCode, event);
     }
- */
+}

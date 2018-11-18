@@ -50,6 +50,7 @@ public class Inicio extends AppCompatActivity {
     //public static final String urlImagenes = "http://18.218.252.83:8080/DT2/Imagenes/";
     public static final String url = "http://vps209893.vps.ovh.ca" +
             ":8080/DT7/Procesos?wsdl";
+    public static final String domain="http://vps209893.vps.ovh.ca:8080/DT7";
     public static final String urlImagenes = "http://vps209893.vps.ovh.ca:8080/DT7/Imagenes/";
 
     public static long id,idPaciente;
