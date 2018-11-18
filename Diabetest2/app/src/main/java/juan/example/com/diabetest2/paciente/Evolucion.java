@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import juan.example.com.diabetest2.comunes.CrearMensaje;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
 import juan.example.com.diabetest2.profesional.MenuProfesional;
 import juan.example.com.diabetest2.profesional.Observaciones;
+import juan.example.com.diabetest2.util.Conexion;
 
 // Autor: Juan David Velásquez Bedoya
 
@@ -401,9 +403,9 @@ public class Evolucion extends AppCompatActivity {
                     if((datosPaciente.get(i+3)).equals("1")){estado.setText("Activo");}else {estado.setText("Inactivo");} //Cambio de valor numero a texto activo o inactivo en el estado
                     telefono.setText((CharSequence)datosPaciente.get(i+4));
                     try {
-                        if (((String) datosPaciente.get(i + 12)).contains("Femenino")) {
+                        /*if (((String) datosPaciente.get(i + 10)).contains("Femenino")) {
                             emoticon.setImageResource(R.drawable.woman);
-                        }
+                        }*/
                         String f = ((String) datosPaciente.get(i + 8)).substring(0, 4);// Fecha de nacimiento
                         Date dt = new Date();
                         f = String.valueOf((1900 + dt.getYear()) - Integer.parseInt(f));
@@ -477,8 +479,23 @@ public class Evolucion extends AppCompatActivity {
     }
     // Ver plantilla_detalle del paciente
     public void abrirDetalle(View v) {
-        Intent intento = new Intent(this, DetallePaciente.class);
-        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+        //Intent intento = new Intent(this, DetallePaciente.class);
+        //if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+
+        ArrayList nombres=new ArrayList();
+        ArrayList valores=new ArrayList();
+        nombres.add("codPaciente");valores.add(Evolucion.id);
+
+        new Conexion("generarExcel", nombres, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output)
+            {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(Inicio.domain+"/reportes/"+Evolucion.id+".xlsx"));
+                startActivity(browserIntent);
+            }
+        }).execute(valores);
+
     }
     // Ver metas del paciente
     public void abrirMetas(View v) {

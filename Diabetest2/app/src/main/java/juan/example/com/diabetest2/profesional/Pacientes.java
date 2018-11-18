@@ -99,7 +99,7 @@ public class Pacientes extends AppCompatActivity {
     public void abrir(View v) {
         //Intent intento = new Intent(this, Evolucion.class);
         //if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }new Conexion("generarExcel",)
-        ArrayList nombres=new ArrayList();
+        /*ArrayList nombres=new ArrayList();
         ArrayList valores=new ArrayList();
         nombres.add("codPaciente");valores.add(Evolucion.id);
 
@@ -112,6 +112,11 @@ public class Pacientes extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         }).execute(valores);
+        */
+        Intent intento = new Intent(this, Evolucion.class);
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+
+
 
     }
     //Chequear conexion a internet  ----------------------------------
