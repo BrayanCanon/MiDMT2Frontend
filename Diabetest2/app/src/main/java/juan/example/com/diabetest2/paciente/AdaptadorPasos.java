@@ -21,15 +21,20 @@ import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.profesional.misioncruds.RecursosAsignadosMis;
 import juan.example.com.diabetest2.util.Conexion;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHolderPasos> {
     ArrayList<PasoVo> listaPasos;
     ArrayList<VerificacionVo> listaverif;
     Context con;
     private Integer diascomp;
+    public static boolean diaverificado=false;
+
+
 
     public Integer getDiascomp() {
         return diascomp;
@@ -75,8 +80,28 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                 String fecha = verificacion.getFecha();
                 Date current = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                String b =format.format(current);
-                int a=1;
+                SimpleDateFormat formatoserv = new SimpleDateFormat("MMM d, yyyy hh:mm:ss a",Locale.ENGLISH);
+                Date c = null;
+                try {
+                     c=formatoserv.parse(fecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+
+                }
+                String fechaverif=format.format(c);
+                String fechaactual =format.format(current);
+                if(position>(diascomp)+1 ){
+                    holder.verif.setVisibility(View.INVISIBLE);
+                }
+                if(fechaverif.equals(fechaactual)){
+                    diaverificado=true;
+                }
+                if(diaverificado==true){
+                    holder.verif.setVisibility(View.INVISIBLE);
+
+                }
+
+
 
 
 
