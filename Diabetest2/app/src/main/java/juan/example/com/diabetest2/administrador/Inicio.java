@@ -1,18 +1,27 @@
 
 package juan.example.com.diabetest2.administrador;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -20,9 +29,16 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import juan.example.com.diabetest2.comunes.CrearRecurso;
 import juan.example.com.diabetest2.paciente.Consentimiento;
 import juan.example.com.diabetest2.profesional.ConsentimientoPro;
 import juan.example.com.diabetest2.profesional.EncuestaProfesionales;
@@ -39,6 +55,7 @@ import juan.example.com.diabetest2.paciente.ActividadFisica;
 import juan.example.com.diabetest2.paciente.Aep;
 import juan.example.com.diabetest2.paciente.Animo;
 import juan.example.com.diabetest2.paciente.ApoyoSocial;
+import juan.example.com.diabetest2.util.Conexion;
 
 // Autor: Juan David Velásquez Bedoya
 
@@ -56,6 +73,9 @@ public class Inicio extends AppCompatActivity {
     public static long id,idPaciente;
     public static String rol, preguntarAnimo,preguntarPeso,preguntarHba1c;
     public static int completado, consentimiento;
+    public String mensaje="";
+    public Context este=this;
+    public static Long idLocal;
 
     static EditText correo;
     EditText clave;
@@ -86,6 +106,13 @@ public class Inicio extends AppCompatActivity {
         if(probarInternet() == false){
             Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
         } else{ chequearSesion(); }
+        //-----------------------------------------------------
+
+
+
+
+
+        //-----------------------------------------------------
 
     }
 
@@ -142,6 +169,7 @@ public class Inicio extends AppCompatActivity {
                     String[] r = respuesta.split(";");
                     ServicioDT2.idLocal = Long.valueOf(r[0].trim());
                     id = Long.valueOf(r[0].trim());
+                    idLocal=id;
                     rol = r[1];
                     Log.d("rol",r[1]);
                     consentimiento = Integer.valueOf(r[2]);
@@ -164,9 +192,43 @@ public class Inicio extends AppCompatActivity {
     }
 
 
-        public void abrir(View v) {
-            startService(new Intent(this, ServicioDT2.class)); //Inicio del servicio notificaciones
+    public void persistirID() {
+        if (idLocal != null) {
+            try {
+    /*
+            OutputStream salida = new FileOutputStream("/sdcard/id.dt2");
+            byte[] arreglo = String.valueOf(Inicio.id).getBytes();
+            salida.write(arreglo);
+    */
+                //FileOutputStream salida = openFileOutput("id.dt2", Context.MODE_PRIVATE);
 
+                FileOutputStream salida = new FileOutputStream(new File(getFilesDir(), "id.dt2"));
+                ObjectOutputStream oos = new ObjectOutputStream(salida);
+                oos.writeObject(idLocal);
+                oos.close();
+
+                FileOutputStream salida2 = new FileOutputStream(new File(getFilesDir(), "correo.dt2"));
+                ObjectOutputStream oos2 = new ObjectOutputStream(salida2);
+                oos2.writeObject(a);
+                oos2.close();
+
+                FileOutputStream salida3 = new FileOutputStream(new File(getFilesDir(), "clave.dt2"));
+                ObjectOutputStream oos3 = new ObjectOutputStream(salida3);
+                oos3.writeObject(b);
+                oos3.close();
+
+
+            } catch (java.io.IOException ex) {
+                Logger.getLogger(CrearRecurso.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+
+
+        public void abrir(View v) {
+            //startService(new Intent(this, ServicioDT2.class)); //Inicio del servicio notificaciones
+            persistirID();
             Intent intento = null;
             if (rol.contains("administrador")) {
                 intento = new Intent(this, Administracion.class);

@@ -6,11 +6,16 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -23,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -31,6 +37,7 @@ import java.util.logging.Logger;
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
 import juan.example.com.diabetest2.comunes.CrearRecurso;
+import juan.example.com.diabetest2.util.Conexion;
 
 // Autor: Juan David Velásquez Bedoya
 
@@ -38,6 +45,8 @@ public class ServicioDT2 extends Service {
 
     private static final String TAG = "Atención";
     public static Context ctx;
+    public  String mensaje;
+    public Context este=this;
 
     @Nullable
     @Override
@@ -50,14 +59,19 @@ public class ServicioDT2 extends Service {
     }
     public void onStart(Intent intent, int startId){
         Log.i(TAG,"*********El servicio MiDT2 a comenzado**********");
-        persistirID();
+        Intent consulta=new Intent(this,Inicio.class);
+        startActivity(consulta);
+        //persistirID();
+        leerID();
         chequeador();
         //this.stopSelf();  //En caso de querer acabarlo al terminar algo
     }
+
     public void onDestroy(){
         super.onDestroy();
         Log.i(TAG,"Servicio MiDT2 Terminado");
     }
+
 
 //----------------------------------------------------------------------------
     public void chequeador(){
@@ -69,8 +83,52 @@ public class ServicioDT2 extends Service {
     class tarea extends TimerTask{
         @Override
         public void run(){
+//-----------
+            File uno=new File(getFilesDir(), "id.dt2");
+            File dos=new File(getFilesDir(), "correo.dt2");
+            File tres=new File(getFilesDir(), "clave.dt2");
+            //-----------
 
-            if(probarInternet() == true){
+            if(probarInternet() == true && uno.exists() && dos.exists() && tres.exists()){
+                //------------------------------------
+                ArrayList nombres=new ArrayList();
+                ArrayList valores=new ArrayList();
+                final int notificationID = 1;
+
+
+                nombres.add("idPaciente");valores.add("10190644521");
+                new Conexion("notificacionRefuerzo", nombres, new Conexion.Comunicado() {
+                    @Override
+                    public void salidas(String output) {
+                        Gson gson=new Gson();
+                        JsonObject salida=gson.fromJson(output,JsonObject.class);
+                        mensaje=salida.get("mensajeNotificacion").getAsString();
+                        //-------------
+                        Intent i = new Intent(este, Inicio.class);
+                        i.putExtra("notificationID", notificationID);
+
+                        PendingIntent pendingIntent = PendingIntent.getActivity(este, 0, i, 0);
+                        NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        CharSequence ticker ="Mensaje nuevo de MiDT2";
+                        CharSequence contentTitle = "Hola!";
+                        Notification noti = new Notification.Builder(este)
+                                .setContentIntent(pendingIntent)
+                                .setTicker(ticker)
+                                .setContentTitle(contentTitle)
+                                .setSmallIcon(R.drawable.user_comment)
+                                .setVibrate(new long[] {100, 250, 100, 500})
+                                .setSound(alarmSound)
+                                //---------------
+                                .setStyle(new Notification.BigTextStyle().bigText(mensaje))
+                                .setContentText(mensaje)
+                                .build();
+                        nm.notify(notificationID, noti);
+//----------------------------------------
+                    }
+                }).execute(valores);
+
+                //-------------------------------------
                 consultar co = new consultar();
                 co.execute();
             }
@@ -90,40 +148,6 @@ public class ServicioDT2 extends Service {
         return false;
     }
 //-----------------------------------------------------------------------------
-
-    public void persistirID() {
-        Log.i(TAG, "Id que llega de la bd: " + idLocal);
-        if (idLocal != null) {
-            try {
-    /*
-            OutputStream salida = new FileOutputStream("/sdcard/id.dt2");
-            byte[] arreglo = String.valueOf(Inicio.id).getBytes();
-            salida.write(arreglo);
-    */
-                //FileOutputStream salida = openFileOutput("id.dt2", Context.MODE_PRIVATE);
-
-                FileOutputStream salida = new FileOutputStream(new File(getFilesDir(), "id.dt2"));
-                ObjectOutputStream oos = new ObjectOutputStream(salida);
-                oos.writeObject(idLocal);
-                oos.close();
-
-                FileOutputStream salida2 = new FileOutputStream(new File(getFilesDir(), "correo.dt2"));
-                ObjectOutputStream oos2 = new ObjectOutputStream(salida2);
-                oos2.writeObject(Inicio.a);
-                oos2.close();
-
-                FileOutputStream salida3 = new FileOutputStream(new File(getFilesDir(), "clave.dt2"));
-                ObjectOutputStream oos3 = new ObjectOutputStream(salida3);
-                oos3.writeObject(Inicio.b);
-                oos3.close();
-
-
-            } catch (java.io.IOException ex) {
-                Logger.getLogger(CrearRecurso.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-    }
     public void leerID()  {
         try {
     /*
@@ -160,7 +184,6 @@ static String respuesta = "";
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                leerID();
                 //--------------- verificacion de variables
                 Log.i(TAG, String.valueOf(idLocal));
                 Log.i(TAG,nombreEspacio);
