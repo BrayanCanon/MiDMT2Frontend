@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <protected-broadcast android:name="android.intent.action.MEDIA.MOUNTED" />
 
@@ -175,6 +176,14 @@
 
         <activity android:name=".comunes.smackchat.ChatActivity" />
         <activity android:name=".profesional.crearmisespec"></activity>
+
+        <receiver android:name=".administrador.autostart">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.REBOOT"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
