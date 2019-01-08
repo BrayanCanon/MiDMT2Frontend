@@ -65,10 +65,10 @@ public class Inicio extends AppCompatActivity {
     public static final String accionSoap = "http://Servicios/acceso";
     //public static final String url = "http://192.168.1.5:8080/DT2/Procesos?wsdl";
     //public static final String urlImagenes = "http://18.218.252.83:8080/DT2/Imagenes/";
-    public static final String url = "http://vps209893.vps.ovh.ca" +
+    public static final String url = "http://18.218.252.83" +
             ":8080/DT7/Procesos?wsdl";
-    public static final String domain="http://vps209893.vps.ovh.ca:8080/DT7";
-    public static final String urlImagenes = "http://vps209893.vps.ovh.ca:8080/DT7/Imagenes/";
+    public static final String domain="http://18.218.252.83:8080/DT7";
+    public static final String urlImagenes = "http:/18.218.252.83:8080/DT7/Imagenes/";
 
     public static long id,idPaciente;
     public static String rol, preguntarAnimo,preguntarPeso,preguntarHba1c;
@@ -227,7 +227,7 @@ public class Inicio extends AppCompatActivity {
 
 
         public void abrir(View v) {
-            //startService(new Intent(this, ServicioDT2.class)); //Inicio del servicio notificaciones
+            startService(new Intent(this, ServicioDT2.class)); //Inicio del servicio notificaciones
             persistirID();
             Intent intento = null;
             if (rol.contains("administrador")) {
