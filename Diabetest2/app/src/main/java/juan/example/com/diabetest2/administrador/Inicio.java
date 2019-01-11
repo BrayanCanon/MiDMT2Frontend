@@ -227,7 +227,7 @@ public class Inicio extends AppCompatActivity {
 
 
         public void abrir(View v) {
-            //startService(new Intent(this, ServicioDT2.class)); //Inicio del servicio notificaciones
+            startService(new Intent(this, ServicioDT2.class)); //Inicio del servicio notificaciones
             persistirID();
             Intent intento = null;
             if (rol.contains("administrador")) {

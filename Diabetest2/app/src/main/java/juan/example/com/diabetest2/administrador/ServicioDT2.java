@@ -25,10 +25,13 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -60,7 +63,7 @@ public class ServicioDT2 extends Service {
     public void onStart(Intent intent, int startId){
         Log.i(TAG,"*********El servicio MiDT2 a comenzado**********");
         Intent consulta=new Intent(this,Inicio.class);
-        startActivity(consulta);
+        //startActivity(consulta);
         //persistirID();
         leerID();
         chequeador();
@@ -89,48 +92,70 @@ public class ServicioDT2 extends Service {
             File tres=new File(getFilesDir(), "clave.dt2");
             //-----------
 
-            if(probarInternet() == true && uno.exists() && dos.exists() && tres.exists()){
+            if(/*probarInternet() == true &&*/ uno.exists() && dos.exists() && tres.exists()){
                 //------------------------------------
-                ArrayList nombres=new ArrayList();
-                ArrayList valores=new ArrayList();
-                final int notificationID = 1;
+                Long idPersistido;
+                try {
+                    FileInputStream in = openFileInput("id.dt2");
+                    ObjectInputStream ois = new ObjectInputStream(in);
+                    Object idGuardado = ois.readObject();
+                    ois.close();
+                     idPersistido = Long.valueOf(idGuardado.toString().trim());
+                }catch (Exception e){
+                    idPersistido= new Long(0) ;
+                }
+
+                //------------------------------------
+                if(idPersistido!=0) {
+                    ArrayList nombres = new ArrayList();
+                    ArrayList valores = new ArrayList();
+                    final int notificationID = 1;
 
 
-                nombres.add("idPaciente");valores.add("10190644521");
-                new Conexion("notificacionRefuerzo", nombres, new Conexion.Comunicado() {
-                    @Override
-                    public void salidas(String output) {
-                        Gson gson=new Gson();
-                        JsonObject salida=gson.fromJson(output,JsonObject.class);
-                        mensaje=salida.get("mensajeNotificacion").getAsString();
-                        //-------------
-                        Intent i = new Intent(este, Inicio.class);
-                        i.putExtra("notificationID", notificationID);
+                    nombres.add("idPaciente");
+                    valores.add(idPersistido);
+                    new Conexion("notificacionRefuerzo", nombres, new Conexion.Comunicado() {
+                        @Override
+                        public void salidas(String output) {
+                            try {
+                                File fechade = new File(getFilesDir(), "notifecha.dt2");
+                                Gson gson = new Gson();
+                                JsonObject salida = gson.fromJson(output, JsonObject.class);
+                                mensaje = salida.get("mensajeNotificacion").getAsString();
+                                if (fechade.exists() && !fechade.isDirectory()) {
+                                    //------------------------------------------------------------
+                                    FileInputStream in = openFileInput("notifecha.dt2");
+                                    ObjectInputStream ois = new ObjectInputStream(in);
+                                    Date fechaar = (Date) ois.readObject();
+                                    Date hoy = new Date();
+                                    int diferencia = (int) ((hoy.getTime() - fechaar.getTime()) / (1000 * 60 * 60 * 24));
+                                    if (diferencia > 0) {
+                                        notifice(mensaje, fechade);
+                                    }
+                                } else {
+                                    //------------------------------
+                                    notifice(mensaje, fechade);
+                                    //-------------------------------
 
-                        PendingIntent pendingIntent = PendingIntent.getActivity(este, 0, i, 0);
-                        NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-                        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                        CharSequence ticker ="Mensaje nuevo de MiDT2";
-                        CharSequence contentTitle = "Hola!";
-                        Notification noti = new Notification.Builder(este)
-                                .setContentIntent(pendingIntent)
-                                .setTicker(ticker)
-                                .setContentTitle(contentTitle)
-                                .setSmallIcon(R.drawable.user_comment)
-                                .setVibrate(new long[] {100, 250, 100, 500})
-                                .setSound(alarmSound)
-                                //---------------
-                                .setStyle(new Notification.BigTextStyle().bigText(mensaje))
-                                .setContentText(mensaje)
-                                .build();
-                        nm.notify(notificationID, noti);
+                                }
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+
 //----------------------------------------
-                    }
-                }).execute(valores);
-
+                        }
+                    }).execute(valores);
+                }
                 //-------------------------------------
                 consultar co = new consultar();
                 co.execute();
+            }
+            else{
+                Log.d("jeje","asd");
             }
         }
     }
@@ -288,7 +313,38 @@ static String respuesta = "";
     }
 //-----------------------------------------------------------------------------
 
+public void notifice(String mensaje2,File fechade) throws IOException {
+    Date hoy = new Date();
+    FileOutputStream salida2 = new FileOutputStream(fechade);
+    ObjectOutputStream oos2 = new ObjectOutputStream(salida2);
+    oos2.writeObject(hoy);
+    oos2.close();
+    salida2=null;
 
+    //-------------
+    Intent i = new Intent(este, Inicio.class);
+    i.putExtra("notificationID", notificationID);
+
+    PendingIntent pendingIntent = PendingIntent.getActivity(este, 0, i, 0);
+    NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    CharSequence ticker ="Mensaje nuevo de MiDT2";
+    CharSequence contentTitle = "mi dmt2 con psicoeducacion";
+    Notification noti = new Notification.Builder(este)
+            .setContentIntent(pendingIntent)
+            .setTicker(ticker)
+            .setContentTitle(contentTitle)
+            .setSmallIcon(R.drawable.user_comment)
+            .setVibrate(new long[] {100, 250, 100, 500})
+            .setSound(alarmSound)
+            //---------------
+            .setStyle(new Notification.BigTextStyle().bigText(mensaje2))
+            .setContentText(mensaje2)
+            .build();
+    nm.notify(notificationID, noti);
+    nm.notify(notificationID, noti);
+
+}
 
 
 }
