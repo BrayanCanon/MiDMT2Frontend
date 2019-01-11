@@ -90,7 +90,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                 }
                 String fechaverif=format.format(c);
                 String fechaactual =format.format(current);
-                if(position>(diascomp)+1 ){
+                if(position>((diascomp)+1 )){
                     holder.verif.setVisibility(View.INVISIBLE);
                 }
                 if(fechaverif.equals(fechaactual)){
