@@ -15,8 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -24,6 +30,7 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -31,6 +38,7 @@ import java.util.Vector;
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
+import juan.example.com.diabetest2.util.Conexion;
 
 
 // Autor: Juan David Velásquez Bedoya
@@ -39,11 +47,18 @@ public class Mensajes extends AppCompatActivity {
 
     Context ctx;
     static Timer ti;
+    public EditText mensajesd;
+    public int numeros;
+    public static long idDestino;
+    public static String destinatario;
+    public ListView lv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mensajes);
+        mensajesd=(EditText)findViewById(R.id.mensajet);
         ctx = this;
         ti = new Timer();
         Tarea tt = new Tarea();
@@ -77,10 +92,56 @@ public class Mensajes extends AppCompatActivity {
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
     class Tarea extends TimerTask {
+
         @Override
         public void run() {
-            Consultar co = new Consultar();
-            co.execute();
+            //Consultar co = new Consultar();
+            //co.execute();
+            fechas.clear();
+            remitentes.clear();
+            mensajes.clear();
+            repetidos.clear();
+            ArrayList nombres=new ArrayList();
+            ArrayList valores=new ArrayList();
+            nombres.add("id_usuario");valores.add(ServicioDT2.idLocal);
+            nombres.add("id_emi_usuario");valores.add(idDestino);
+            final ArrayList<String> fechas=new ArrayList();
+            final ArrayList<String> contenido=new ArrayList();
+            final ArrayList<String> remitentes=new ArrayList();
+
+            new Conexion("consultachat", nombres, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+                    Gson gson=new Gson();
+                    JsonArray mensajes=gson.fromJson(output,JsonArray.class);
+                    JsonObject mensaje;
+                    for(int a=0;a<mensajes.size();a++){
+                       mensaje= mensajes.get(a).getAsJsonObject();
+                       fechas.add(mensaje.get("fecha").getAsString());
+                       contenido.add(mensaje.get("mensaje").getAsString());
+                       remitentes.add(mensaje.get("destinatario").getAsString());
+
+                    }
+
+
+                    String fechitas[]=new String[fechas.size()];
+                    String conteniditos[]=new String[contenido.size()];
+                    String remitensitos[]=new String[remitentes.size()];
+
+
+
+                    ArrayList al=new ArrayList();
+                    lv = (ListView) findViewById(R.id.id_mensajes_recibidos);
+                    lv.setAdapter(new AaMensajes((Activity) ctx,fechas.toArray(fechitas),
+                            remitentes.toArray(remitensitos)
+                            ,contenido.toArray(conteniditos)
+
+                    ));
+                }
+
+            }).execute(valores);
+
+
         }
     }
 
@@ -92,7 +153,7 @@ public class Mensajes extends AppCompatActivity {
     Vector mensajes = new Vector();
     Vector id_remitentes = new Vector();
     Vector <Integer> repetidos = new Vector<Integer>();
-    ListView lv;
+
 
     private class Consultar extends AsyncTask<Void, Void, Boolean> {
     @Override
@@ -208,6 +269,20 @@ public class Mensajes extends AppCompatActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void sendchat(View v){
+        ArrayList valores=new ArrayList();
+        ArrayList nombres=new ArrayList();
+        nombres.add("id");valores.add(ServicioDT2.idLocal);
+        nombres.add("mensaje");valores.add(mensajesd.getText().toString());
+        nombres.add("destinatario");valores.add(idDestino);
+        new Conexion("crearMensaje", nombres, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+
+            }
+        }).execute(valores);
     }
 
 

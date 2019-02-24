@@ -142,16 +142,16 @@
                     app:srcCompat="@drawable/bt_pro_comunidad" />
 
                 <ImageButton
-                    android:id="@+id/imageButton18"
+                    android:id="@+id/misiones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:background="@android:color/background_light"
-                    android:onClick="mensajes"
+                    android:background="@color/blanco"
+                    android:onClick="mmisiones"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/bt_pro_mensajes" />
+                    app:srcCompat="@drawable/misiones" />
 
             </LinearLayout>
 
@@ -174,35 +174,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/misiones"
-                    android:layout_width="121dp"
-                    android:layout_height="157dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/blanco"
-                    android:onClick="mmisiones"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/misiones" />
-
-                <ImageButton
-                    android:id="@+id/imageButton25"
-                    android:layout_width="115dp"
-                    android:layout_height="136dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:onClick="chatest"
-                    android:adjustViewBounds="true"
-                    android:background="@color/blanco"
-                    app:srcCompat="@color/blanco" />
-
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
