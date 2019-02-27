@@ -289,9 +289,8 @@ public void ingresarCorreoFamiliar(View v){
             new Conexion("idProfecional", nombres, new Conexion.Comunicado() {
                 @Override
                 public void salidas(String output) {
-                    Gson gson=new Gson();
-                    JsonObject profperf=gson.fromJson(output,JsonObject.class);
-                    Mensajes.idDestino=profperf.get("codProfesional").getAsInt();
+
+                    Mensajes.idDestino= Long.parseLong(output);
                     Intent intento = new Intent(este, Mensajes.class);
                     startActivity(intento);
                 }
