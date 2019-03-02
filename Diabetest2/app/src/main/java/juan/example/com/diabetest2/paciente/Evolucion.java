@@ -38,6 +38,7 @@ import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
 import juan.example.com.diabetest2.comunes.CrearMensaje;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
+import juan.example.com.diabetest2.comunes.Mensajes;
 import juan.example.com.diabetest2.profesional.MenuProfesional;
 import juan.example.com.diabetest2.profesional.Observaciones;
 import juan.example.com.diabetest2.util.Conexion;
@@ -472,9 +473,12 @@ public class Evolucion extends AppCompatActivity {
 
     // Enviar mensaje
     public void enviarMensaje(View v) {
-        CrearMensaje.idDestino = id;
-        CrearMensaje.destinatario = datosPaciente.get(1) +" "+ datosPaciente.get(2);
-        Intent intento = new Intent(this, CrearMensaje.class);
+        //CrearMensaje.idDestino = id;
+        //CrearMensaje.destinatario = datosPaciente.get(1) +" "+ datosPaciente.get(2);
+        Mensajes.idDestino=id;
+        Mensajes.destinatario=datosPaciente.get(1) +" "+ datosPaciente.get(2);
+        //Intent intento = new Intent(this, CrearMensaje.class);
+        Intent intento = new Intent(this, Mensajes.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
     // Ver plantilla_detalle del paciente

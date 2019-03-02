@@ -16,6 +16,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -25,6 +28,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
@@ -36,11 +40,14 @@ import juan.example.com.diabetest2.comunes.Recursos;
 import juan.example.com.diabetest2.paciente.encuestas.Encuesta;
 import juan.example.com.diabetest2.paciente.misiones;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
+import juan.example.com.diabetest2.util.Conexion;
 
 
 // Autor: Juan David Velásquez Bedoya
 
 public class MenuPaciente extends AppCompatActivity {
+
+    public Context este=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -274,8 +281,21 @@ public void ingresarCorreoFamiliar(View v){
     public void foro(View v) { Intent intento = new Intent(this, Comunidad.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
-    public void mensajes(View v) { Intent intento = new Intent(this, Mensajes.class);
-        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+    public void mensajes(View v) {
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{
+            ArrayList nombres=new ArrayList();
+            ArrayList valores=new ArrayList();
+            nombres.add("id_usuario");valores.add(ServicioDT2.idLocal);
+            new Conexion("idProfecional", nombres, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+
+                    Mensajes.idDestino= Long.parseLong(output);
+                    Intent intento = new Intent(este, Mensajes.class);
+                    startActivity(intento);
+                }
+            }).execute(valores);
+        }
     }
     public void informacion(View v) { Intent intento = new Intent(this, Informacion.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
