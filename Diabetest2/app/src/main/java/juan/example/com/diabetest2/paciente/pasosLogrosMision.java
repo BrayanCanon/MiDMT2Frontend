@@ -47,6 +47,7 @@ public class pasosLogrosMision extends Fragment {
     ArrayList<VerificacionVo> listaverif ;
     AdaptadorPasos adapter;
     TextView nombre,descripcion,dias;
+    Integer diasComp;
 
 
     public pasosLogrosMision() {
@@ -90,7 +91,10 @@ public class pasosLogrosMision extends Fragment {
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
         listaverif = new ArrayList<>();
-        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext());
+        if(habCheckBox == false ) {
+            llenarListaVerif();
+        }
+        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),diasComp);
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);
@@ -102,6 +106,32 @@ public class pasosLogrosMision extends Fragment {
             llenarLista(habCheckBox);
 
         return vista;
+    }
+    private void llenarListaVerif(){
+        ArrayList<String> no = new ArrayList<>();
+        ArrayList va = new ArrayList();
+
+        no.add("idMisionPaciente");
+        va.add(mision.getIdMisionPaciente());
+
+        new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+                Gson gson = new Gson();
+                JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                JsonObject verif;
+                for (int i = 0; i < arreglo.size(); i++) {
+                    verif = arreglo.get(i).getAsJsonObject();
+                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean(),verif.get("fecha").getAsString()
+                    );
+                    listaverif.add(obj);
+
+                }
+
+            }
+        }).execute(va);
+
+
     }
 
     private void mostrarDias() {
@@ -125,6 +155,25 @@ public class pasosLogrosMision extends Fragment {
         final ArrayList valores= new ArrayList();
         nombres.add("idMision");
         valores.add(mision.getIdMision());
+        ArrayList<String> no = new ArrayList<>();
+        ArrayList va = new ArrayList();
+        no.add("idMisionPaciente");
+        va.add(mision.getIdMisionPaciente());
+
+        new Conexion("diasCompletados", no, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+                if(output!=null){
+
+                Gson gson = new Gson();
+                JsonObject dias = gson.fromJson(output,JsonObject.class);
+                diasComp=dias.get("num").getAsInt();
+                adapter.setDiascomp(diasComp);
+                adapter.notifyDataSetChanged();}
+
+            }
+        }).execute(va);
+
         new Conexion("consultarTodosPasos", nombres, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
@@ -144,12 +193,12 @@ public class pasosLogrosMision extends Fragment {
                     nombre.setText(nom);
                     descripcion.setText(desc);
                     dias.setText(dia);
+
                     if( habCheckBox==false) {
                         ArrayList<String> no = new ArrayList<>();
                         ArrayList va = new ArrayList();
                         no.add("idMisionPaciente");
                         va.add(mision.getIdMisionPaciente());
-
 
                         new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
                             @Override
@@ -159,10 +208,12 @@ public class pasosLogrosMision extends Fragment {
                                 JsonObject verif;
                                 for (int i = 0; i < arreglo.size(); i++) {
                                     verif = arreglo.get(i).getAsJsonObject();
-                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean());
+                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean(),verif.get("fecha").getAsString()
+                                    );
                                     listaverif.add(obj);
+                                    adapter.notifyDataSetChanged();
                                 }
-                                adapter.notifyDataSetChanged();
+
                             }
                         }).execute(va);
 
