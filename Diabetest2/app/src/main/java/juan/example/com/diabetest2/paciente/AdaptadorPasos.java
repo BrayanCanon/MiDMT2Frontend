@@ -32,7 +32,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     ArrayList<VerificacionVo> listaverif;
     Context con;
     private Integer diascomp;
-    public static boolean diaverificado=false;
+    public static boolean diaverificado;
 
 
 
@@ -68,15 +68,15 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     public void onBindViewHolder(final ViewHolderPasos holder, final int position) {
 
         VerificacionVo verificacion= new VerificacionVo(position,false);
-
         holder.dia.setText(Integer.toString(listaPasos.get(position).getOrden()));
         if(listaPasos.get(position).getHabCheckbox()==true){
             holder.verif.setVisibility(View.INVISIBLE);
         }else{
-
-        for(int i=0;i<listaverif.size();i++){
-            if(listaPasos.get(position).getOrden()==listaverif.get(i).getNumDia()){
-                verificacion=listaverif.get(i);
+            if(diaverificado == true ){
+                holder.verif.setEnabled(false);
+            }
+            else if(listaverif.size()> position){
+                verificacion=listaverif.get(position);
                 String fecha = verificacion.getFecha();
                 Date current = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,24 +90,14 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                 }
                 String fechaverif=format.format(c);
                 String fechaactual =format.format(current);
-                if(position>((diascomp)+1 )){
-                    holder.verif.setVisibility(View.INVISIBLE);
-                }
+
                 if(fechaverif.equals(fechaactual)){
                     diaverificado=true;
-                }
-                if(diaverificado==true){
-                    holder.verif.setVisibility(View.INVISIBLE);
 
                 }
-
-
-
-
-
             }
 
-        }
+
 
         holder.verif.setChecked(verificacion.getVerif());
         holder.verif.setEnabled(!verificacion.getVerif());

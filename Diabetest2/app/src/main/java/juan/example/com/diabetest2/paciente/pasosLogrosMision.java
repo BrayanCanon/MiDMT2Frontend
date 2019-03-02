@@ -91,6 +91,9 @@ public class pasosLogrosMision extends Fragment {
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
         listaverif = new ArrayList<>();
+        if(habCheckBox == false ) {
+            llenarListaVerif();
+        }
         adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),diasComp);
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -103,6 +106,32 @@ public class pasosLogrosMision extends Fragment {
             llenarLista(habCheckBox);
 
         return vista;
+    }
+    private void llenarListaVerif(){
+        ArrayList<String> no = new ArrayList<>();
+        ArrayList va = new ArrayList();
+
+        no.add("idMisionPaciente");
+        va.add(mision.getIdMisionPaciente());
+
+        new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
+            @Override
+            public void salidas(String output) {
+                Gson gson = new Gson();
+                JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                JsonObject verif;
+                for (int i = 0; i < arreglo.size(); i++) {
+                    verif = arreglo.get(i).getAsJsonObject();
+                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean(),verif.get("fecha").getAsString()
+                    );
+                    listaverif.add(obj);
+
+                }
+
+            }
+        }).execute(va);
+
+
     }
 
     private void mostrarDias() {
@@ -166,10 +195,6 @@ public class pasosLogrosMision extends Fragment {
                     dias.setText(dia);
 
                     if( habCheckBox==false) {
-
-
-
-
                         ArrayList<String> no = new ArrayList<>();
                         ArrayList va = new ArrayList();
                         no.add("idMisionPaciente");
