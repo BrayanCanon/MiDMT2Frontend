@@ -39,11 +39,26 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     int diferencia;
     String un;
 
+    public Integer getDiascomp() {
+        return diascomp;
+    }
+
+    public void setDiascomp(Integer diascomp) {
+        this.diascomp = diascomp;
+    }
+
     public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un) {
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
         this.con=con;
         this.un=un;
+
+    }
+    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,Integer diascomp ) {
+        this.listaPasos = listaPasos;
+        this.listaverif=listaverif;
+        this.con=con;
+        this.diascomp=diascomp;
 
     }
 
@@ -61,17 +76,32 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
         if(listaPasos.get(position).getHabCheckbox()==true){
             holder.verif.setVisibility(View.INVISIBLE);
         }else{
-            int diasverif=0;
-        for(int i=0;i<listaverif.size();i++){
-            if(listaPasos.get(position).getOrden()==listaverif.get(i).getNumDia()){
-                verificacion=listaverif.get(i);
-                if(listaverif.get(i).getVerif()==true){
-                    diasverif++;
-                      int a =1;
+            if(diaverificado == true ){
+                holder.verif.setEnabled(false);
+            }
+            else if(listaverif.size()> position){
+                verificacion=listaverif.get(position);
+                String fecha = verificacion.getFecha();
+                Date current = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat formatoserv = new SimpleDateFormat("MMM d, yyyy hh:mm:ss a",Locale.ENGLISH);
+                Date c = null;
+                try {
+                     c=formatoserv.parse(fecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+
+                }
+                String fechaverif=format.format(c);
+                String fechaactual =format.format(current);
+
+                if(fechaverif.equals(fechaactual)){
+                    diaverificado=true;
+
                 }
             }
 
-        }
+
 
         holder.verif.setChecked(verificacion.getVerif());
         holder.verif.setEnabled(!verificacion.getVerif());
