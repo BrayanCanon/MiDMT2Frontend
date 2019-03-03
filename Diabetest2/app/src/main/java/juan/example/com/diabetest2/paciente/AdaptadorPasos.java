@@ -29,8 +29,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHolderPasos> {
     ArrayList<PasoVo> listaPasos;
@@ -38,6 +41,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     Context con;
     int diferencia;
     String un;
+    int diascomp;
 
     public Integer getDiascomp() {
         return diascomp;
@@ -84,7 +88,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                 String fecha = verificacion.getFecha();
                 Date current = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat formatoserv = new SimpleDateFormat("MMM d, yyyy hh:mm:ss a",Locale.ENGLISH);
+                SimpleDateFormat formatoserv = new SimpleDateFormat("MMM d, yyyy hh:mm:ss a", Locale.ENGLISH);
                 Date c = null;
                 try {
                      c=formatoserv.parse(fecha);
