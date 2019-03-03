@@ -93,10 +93,14 @@ public class pasosLogrosMision extends Fragment {
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
         listaverif = new ArrayList<>();
+<<<<<<< HEAD
         if(habCheckBox == false ) {
             llenarListaVerif();
         }
         adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),mision.getIdMision());
+=======
+        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext());
+>>>>>>> parent of bef391e... revisar paso por mision
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);
