@@ -37,12 +37,13 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     ArrayList<VerificacionVo> listaverif;
     Context con;
     int diferencia;
+    String un;
 
-
-    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con) {
+    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un) {
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
         this.con=con;
+        this.un=un;
 
     }
 
@@ -78,7 +79,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
         holder.verif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                File archivo_fecha = new File(con.getFilesDir(), "pulsacion.dt2");
+                File archivo_fecha = new File(con.getFilesDir(), un+".dt2");
                 Boolean primer_ingreso=false;
                 if(!archivo_fecha.exists()){
                     Date hoy = new Date();
@@ -101,7 +102,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                     Date hoy = new Date();
                     Date ultima_pulsacion;
                     try {
-                        FileInputStream in = con.openFileInput("pulsacion.dt2");
+                        FileInputStream in = con.openFileInput(un+".dt2");
                         ObjectInputStream ois = new ObjectInputStream(in);
                         ultima_pulsacion=(Date) ois.readObject();
                         diferencia = (int) ( (hoy.getTime() - ultima_pulsacion.getTime()) / (1000 * 60 * 60 * 24) );
