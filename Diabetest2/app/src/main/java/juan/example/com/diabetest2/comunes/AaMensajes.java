@@ -42,11 +42,4 @@ public class AaMensajes extends ArrayAdapter {
 
         return nuevaVista;
     }
-    public void refresh() {
-        notifyDataSetChanged();
-
-
-    }
-
-
 }
