@@ -14,9 +14,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,8 +52,6 @@ public class Mensajes extends AppCompatActivity {
     public static long idDestino;
     public static String destinatario;
     public ListView lv;
-    public AaMensajes gen;
-    public Tarea tt;
 
 
     @Override
@@ -65,7 +61,7 @@ public class Mensajes extends AppCompatActivity {
         mensajesd=(EditText)findViewById(R.id.mensajet);
         ctx = this;
         ti = new Timer();
-        tt = new Tarea();
+        Tarea tt = new Tarea();
 
         if(probarInternet() == false){
             Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
@@ -136,12 +132,11 @@ public class Mensajes extends AppCompatActivity {
 
                     ArrayList al=new ArrayList();
                     lv = (ListView) findViewById(R.id.id_mensajes_recibidos);
-                    gen=new AaMensajes((Activity) ctx,fechas.toArray(fechitas),
+                    lv.setAdapter(new AaMensajes((Activity) ctx,fechas.toArray(fechitas),
                             remitentes.toArray(remitensitos)
                             ,contenido.toArray(conteniditos)
 
-                    );
-                    lv.setAdapter(gen);
+                    ));
                 }
 
             }).execute(valores);
@@ -198,7 +193,6 @@ public class Mensajes extends AppCompatActivity {
                 }
                 //Llenado del ListView principal --------------------------------------------------------------------
                 lv = (ListView) findViewById(R.id.id_mensajes_recibidos);
-
                 lv.setAdapter(new AaMensajes((Activity) ctx,
                         (String[]) fechas.toArray(new String[fechas.size()]),
                         (String[]) remitentes.toArray(new String[remitentes.size()]),
@@ -286,7 +280,6 @@ public class Mensajes extends AppCompatActivity {
         new Conexion("crearMensaje", nombres, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
-                tt.run();
 
             }
         }).execute(valores);
