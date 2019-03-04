@@ -29,36 +29,35 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHolderPasos> {
     ArrayList<PasoVo> listaPasos;
     ArrayList<VerificacionVo> listaverif;
     Context con;
+    String un;
     int diferencia;
+    int varifdias;
 
 
-
-    public Integer getDiascomp() {
-        return diascomp;
-    }
-
-    public void setDiascomp(Integer diascomp) {
-        this.diascomp = diascomp;
-    }
-
-    public AdaptadorPasos(ArrayList<PasoVo> listaPasos, ArrayList<VerificacionVo> listaverif, Context con ) {
+    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un) {
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
         this.con=con;
 
     }
-    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,Integer diascomp ) {
-        this.listaPasos = listaPasos;
-        this.listaverif=listaverif;
-        this.con=con;
-        this.diascomp=diascomp;
+
+    public void contarverifs(){
+        varifdias=0;
+        for(int a=0;a<listaPasos.size();a++){
+            if(varifdias<listaPasos.get(a).getOrden() && listaPasos.get(a).getHabCheckbox() ){
+                varifdias=a;
+            }
+        }
 
     }
 
@@ -75,41 +74,17 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
         holder.dia.setText(Integer.toString(listaPasos.get(position).getOrden()));
         if(listaPasos.get(position).getHabCheckbox()==true){
             holder.verif.setVisibility(View.INVISIBLE);
-        }else{
-            if(diaverificado == true ){
-                holder.verif.setEnabled(false);
-            }
-            else if(listaverif.size()> position){
-                verificacion=listaverif.get(position);
-                String fecha = verificacion.getFecha();
-                Date current = new Date();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat formatoserv = new SimpleDateFormat("MMM d, yyyy hh:mm:ss a",Locale.ENGLISH);
-                Date c = null;
-                try {
-                     c=formatoserv.parse(fecha);
-                } catch (ParseException e) {
-                    e.printStackTrace();
 
-                }
-                String fechaverif=format.format(c);
-                String fechaactual =format.format(current);
-
-                if(fechaverif.equals(fechaactual)){
-                    diaverificado=true;
-
-                }
-            }
-
-
-
+        }
+        else{
         holder.verif.setChecked(verificacion.getVerif());
         holder.verif.setEnabled(!verificacion.getVerif());
         final VerificacionVo finalVerificacion = verificacion;
         holder.verif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                File archivo_fecha = new File(con.getFilesDir(), "pulsacion.dt2");
+                if((varifdias+1)>=listaPasos.get(position).getOrden()){
+                File archivo_fecha = new File(con.getFilesDir(), un+".dt2");
                 Boolean primer_ingreso=false;
                 if(!archivo_fecha.exists()){
                     Date hoy = new Date();
@@ -132,7 +107,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                     Date hoy = new Date();
                     Date ultima_pulsacion;
                     try {
-                        FileInputStream in = con.openFileInput("pulsacion.dt2");
+                        FileInputStream in = con.openFileInput(un+".dt2");
                         ObjectInputStream ois = new ObjectInputStream(in);
                         ultima_pulsacion=(Date) ois.readObject();
                         diferencia = (int) ( (hoy.getTime() - ultima_pulsacion.getTime()) / (1000 * 60 * 60 * 24) );
@@ -228,16 +203,42 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                             }
 
                         }
-                    });alerta.create();
+                    });
+                    alerta.create();
                     alerta.show();
                 }
 
 
 
             }
+                else{
+                    AlertDialog.Builder logrodial = new AlertDialog.Builder(con);
+                    logrodial.setTitle("Por favor espere");
+                    logrodial.setMessage("Marque en orden los pasos");
+                    logrodial.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intento = new Intent(con, misiones.class);
+
+                            intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                            con.startActivity(intento);
+
+                        }
+                    });
+                    logrodial.create();
+                    logrodial.show();
+
+                }
+
+
+
+            }
+
+            ///--------
         });}
 
-                                                }
+}
 
 
 
