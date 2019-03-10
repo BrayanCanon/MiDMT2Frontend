@@ -114,6 +114,7 @@ public class Mensajes extends AppCompatActivity {
             final ArrayList<String> fechas=new ArrayList();
             final ArrayList<String> contenido=new ArrayList();
             final ArrayList<String> remitentes=new ArrayList();
+            final ArrayList<String> remitentereal=new ArrayList<>();
 
             new Conexion("consultachat", nombres, new Conexion.Comunicado() {
                 @Override
@@ -126,20 +127,21 @@ public class Mensajes extends AppCompatActivity {
                        fechas.add(mensaje.get("fecha").getAsString());
                        contenido.add(mensaje.get("mensaje").getAsString());
                        remitentes.add(mensaje.get("destinatario").getAsString());
+                       remitentereal.add(mensaje.get("remitente").getAsString());
 
                     }
 
 
                     String fechitas[]=new String[fechas.size()];
                     String conteniditos[]=new String[contenido.size()];
-                    String remitensitos[]=new String[remitentes.size()];
+                    String remitensitos[]=new String[remitentereal.size()];
 
 
 
                     ArrayList al=new ArrayList();
                     lv = (ListView) findViewById(R.id.id_mensajes_recibidos);
                     lv.setAdapter(new AaMensajes((Activity) ctx,fechas.toArray(fechitas),
-                            remitentes.toArray(remitensitos)
+                            remitentereal.toArray(remitensitos)
                             ,contenido.toArray(conteniditos)
 
                     ));
