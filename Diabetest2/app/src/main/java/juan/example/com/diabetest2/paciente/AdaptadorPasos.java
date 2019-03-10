@@ -53,11 +53,13 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
     public void contarverifs(){
         varifdias=0;
-        for(int a=0;a<listaPasos.size();a++){
-            if(varifdias<listaPasos.get(a).getOrden() && listaPasos.get(a).getHabCheckbox() ){
-                varifdias=a;
+        for(int i=0;i<listaverif.size();i++) {
+            if (varifdias < listaverif.get(i).getNumDia()) {
+                varifdias = listaverif.get(i).getNumDia();
             }
         }
+        String stop;
+
 
     }
 
@@ -70,6 +72,10 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolderPasos holder, final int position) {
 
+
+
+
+
         VerificacionVo verificacion= new VerificacionVo(position,false);
         holder.dia.setText(Integer.toString(listaPasos.get(position).getOrden()));
         if(listaPasos.get(position).getHabCheckbox()==true){
@@ -77,6 +83,14 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
         }
         else{
+            for(int i=0;i<listaverif.size();i++){
+                if(listaPasos.get(position).getOrden()==listaverif.get(i).getNumDia()){
+                    verificacion=listaverif.get(i);
+
+
+                }
+
+            }
         holder.verif.setChecked(verificacion.getVerif());
         holder.verif.setEnabled(!verificacion.getVerif());
         final VerificacionVo finalVerificacion = verificacion;
@@ -84,23 +98,12 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
             @Override
             public void onClick(View view) {
                 if((varifdias+1)>=listaPasos.get(position).getOrden()){
-                File archivo_fecha = new File(con.getFilesDir(), un+".dt2");
+                final File archivo_fecha = new File(con.getFilesDir(), un+".dt2");
                 Boolean primer_ingreso=false;
                 if(!archivo_fecha.exists()){
                     Date hoy = new Date();
+                    primer_ingreso=true;
 
-                    try {
-                        FileOutputStream salida = new FileOutputStream(archivo_fecha);
-                        ObjectOutputStream oos2 = new ObjectOutputStream(salida);
-                        oos2.writeObject(hoy);
-                        oos2.close();
-                        salida.close();
-                        primer_ingreso=true;
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
 
                 }
                 else{
@@ -179,10 +182,24 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                                                 logrodial.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                                        try {
+                                                            Date hoy = new Date();
+
+                                                            FileOutputStream salida = new FileOutputStream(archivo_fecha);
+                                                            ObjectOutputStream oos2 = new ObjectOutputStream(salida);
+                                                            oos2.writeObject(hoy);
+                                                            oos2.close();
+                                                            salida.close();
+                                                        } catch (FileNotFoundException e) {
+                                                            e.printStackTrace();
+                                                        } catch (IOException e) {
+                                                            e.printStackTrace();
+                                                        }
+
                                                         Intent intento = new Intent(con, misiones.class);
-
                                                         intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
                                                         con.startActivity(intento);
                                                     }
                                                 });
@@ -235,14 +252,9 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
             }
 
-            ///--------
         });}
 
 }
-
-
-
-
 
 
 
