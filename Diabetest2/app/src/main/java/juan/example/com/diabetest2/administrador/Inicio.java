@@ -81,6 +81,7 @@ public class Inicio extends AppCompatActivity {
     EditText clave;
     public String respuesta;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

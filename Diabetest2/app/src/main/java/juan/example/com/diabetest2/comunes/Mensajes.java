@@ -113,8 +113,8 @@ public class Mensajes extends AppCompatActivity {
             nombres.add("id_emi_usuario");valores.add(idDestino);
             final ArrayList<String> fechas=new ArrayList();
             final ArrayList<String> contenido=new ArrayList();
-            final ArrayList<String> remitentes=new ArrayList();
-            final ArrayList<String> remitentereal=new ArrayList<>();
+            //final ArrayList<String> remitentes=new ArrayList();
+            final ArrayList<String> remitentes=new ArrayList<>();
 
             new Conexion("consultachat", nombres, new Conexion.Comunicado() {
                 @Override
@@ -126,22 +126,22 @@ public class Mensajes extends AppCompatActivity {
                        mensaje= mensajes.get(a).getAsJsonObject();
                        fechas.add(mensaje.get("fecha").getAsString());
                        contenido.add(mensaje.get("mensaje").getAsString());
-                       remitentes.add(mensaje.get("destinatario").getAsString());
-                       remitentereal.add(mensaje.get("remitente").getAsString());
+                       //remitentes.add(mensaje.get("destinatario").getAsString());
+                        remitentes.add(mensaje.get("remitente").getAsString());
 
                     }
 
 
                     String fechitas[]=new String[fechas.size()];
                     String conteniditos[]=new String[contenido.size()];
-                    String remitensitos[]=new String[remitentereal.size()];
+                    String remitensitos[]=new String[remitentes.size()];
 
 
 
                     ArrayList al=new ArrayList();
                     lv = (ListView) findViewById(R.id.id_mensajes_recibidos);
                     lv.setAdapter(new AaMensajes((Activity) ctx,fechas.toArray(fechitas),
-                            remitentereal.toArray(remitensitos)
+                            remitentes.toArray(remitensitos)
                             ,contenido.toArray(conteniditos)
 
                     ));
