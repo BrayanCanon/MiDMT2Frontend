@@ -59,6 +59,12 @@ public class Mensajes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mensajes);
         mensajesd=(EditText)findViewById(R.id.mensajet);
+        mensajesd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mensajesd.setText("");
+            }
+        });
         ctx = this;
         ti = new Timer();
         Tarea tt = new Tarea();
@@ -280,6 +286,7 @@ public class Mensajes extends AppCompatActivity {
         new Conexion("crearMensaje", nombres, new Conexion.Comunicado() {
             @Override
             public void salidas(String output) {
+                mensajesd.setText("");
 
             }
         }).execute(valores);
