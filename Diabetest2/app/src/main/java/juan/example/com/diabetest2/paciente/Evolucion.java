@@ -52,13 +52,29 @@ public class Evolucion extends AppCompatActivity {
     TextView nombre, correo, estado, telefono, edad;
     ImageView emoticon;
     Button borrar, chatear, detalle, observaciones, medicamentos, metas;
+
+    //-----
+    Button chatboton,id_borrar_paciente,id_bt_medicinas,id_bt_observaciones_pro;
+    Button deldetalle;
+    //-----
     public static long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evolucion);
-
+        //---------------
+        chatboton=(Button)findViewById(R.id.id_msj_privado);
+        deldetalle=(Button)findViewById(R.id.id_detalle_paciente);
+        id_borrar_paciente=(Button)findViewById(R.id.id_borrar_paciente);
+        id_bt_medicinas=(Button)findViewById(R.id.id_bt_medicinas);
+        id_bt_observaciones_pro=(Button)findViewById(R.id.id_bt_observaciones_pro);
+        chatboton.setEnabled(false);
+        deldetalle.setEnabled(false);
+        id_borrar_paciente.setEnabled(false);
+        id_bt_medicinas.setEnabled(false);
+        id_bt_observaciones_pro.setEnabled(false);
+        //---------------
         pesoImc = (XYPlot) findViewById(R.id.id_PlotPesoIMC);
         animo = (XYPlot) findViewById(R.id.id_Ev_animo);
         hba1c = (XYPlot) findViewById(R.id.id_hba1c);
@@ -398,6 +414,8 @@ public class Evolucion extends AppCompatActivity {
             if (success == true) {
                 int i = 0;
                 Calendar fa = new GregorianCalendar();
+
+
                 while(i< datosPaciente.size()){
                     correo.setText((CharSequence) datosPaciente.get(i));
                     nombre.setText((CharSequence)datosPaciente.get(i+1) +" "+ (CharSequence)datosPaciente.get(i+2));
@@ -416,6 +434,13 @@ public class Evolucion extends AppCompatActivity {
                     i = 20;
 
                 }
+                //------------------------desbloquear en caso de cargar datos
+                chatboton.setEnabled(true);
+                deldetalle.setEnabled(true);
+                id_borrar_paciente.setEnabled(true);
+                id_bt_medicinas.setEnabled(true);
+                id_bt_observaciones_pro.setEnabled(true);
+                //------------------------
             }
         }
     }
