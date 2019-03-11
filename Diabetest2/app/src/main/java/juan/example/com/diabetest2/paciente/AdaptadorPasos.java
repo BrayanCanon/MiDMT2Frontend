@@ -48,6 +48,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
         this.con=con;
+        this.un=un;
 
     }
 

@@ -88,6 +88,7 @@ public class pasosLogrosMision extends Fragment {
         // Inflate the layout for this fragment
         Bundle envio = getArguments();
          mision  = (MisionVo) envio.getSerializable("mision");
+         Boolean familiar=envio.containsKey("codApoyo");
         boolean habCheckBox=envio.getBoolean("habEmpezarMision");
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
