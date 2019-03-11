@@ -77,25 +77,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/imageButton2"
+                    android:layout_width="0dp"
+                    android:layout_height="167dp"
                     android:layout_weight="1"
-                    android:background="@android:color/background_light"
-                    android:onClick="informacion"
-                    app:srcCompat="@mipmap/bt_informacion" />
+                    android:scaleType="fitXY"
+                    android:onClick="misiones"
+                    app:srcCompat="@drawable/misiones"
+                    android:background="@color/blanco"/>
 
-                <ImageButton
-                    android:id="@+id/imageButton3"
+                <ImageView
+                    android:id="@+id/imageView51"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@android:color/background_light"
-                    android:onClick="abrirHabitos"
-                    app:srcCompat="@mipmap/bt_habitos" />
+                    android:scaleType="fitXY"
+                    app:srcCompat="@android:color/white" />
             </LinearLayout>
 
         </LinearLayout>

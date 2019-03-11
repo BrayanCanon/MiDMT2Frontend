@@ -48,6 +48,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
         this.con=con;
+        this.un=un;
 
     }
 
@@ -186,8 +187,9 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
                                                         try {
                                                             Date hoy = new Date();
-
-                                                            FileOutputStream salida = new FileOutputStream(archivo_fecha);
+                                                            //fdgdgf
+                                                            File uno=new File(con.getFilesDir(), un+".dt2");
+                                                            FileOutputStream salida = new FileOutputStream(uno);
                                                             ObjectOutputStream oos2 = new ObjectOutputStream(salida);
                                                             oos2.writeObject(hoy);
                                                             oos2.close();
@@ -210,6 +212,21 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
                                             }else{Intent intento = new Intent(con, misiones.class);
 
+
+                                                try {
+                                                Date hoy = new Date();
+                                                //fdgdgf
+                                                File uno=new File(con.getFilesDir(), un+".dt2");
+                                                FileOutputStream salida = new FileOutputStream(uno);
+                                                ObjectOutputStream oos2 = new ObjectOutputStream(salida);
+                                                oos2.writeObject(hoy);
+                                                oos2.close();
+                                                salida.close();
+                                                } catch (FileNotFoundException e) {
+                                                    e.printStackTrace();
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
                                                 intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                                                 con.startActivity(intento);}}
