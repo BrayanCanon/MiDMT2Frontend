@@ -42,13 +42,15 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     String un;
     int diferencia;
     int varifdias;
+    Boolean apoyo;
 
 
-    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un) {
+    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un,Boolean apoyo) {
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
         this.con=con;
         this.un=un;
+        this.apoyo=apoyo;
 
     }
 
@@ -170,6 +172,8 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
                                     }
                                 }).execute(valores);
+
+
                                 new Conexion("consultarLogroGanado", nombres, new Conexion.Comunicado() {
                                     @Override
                                     public void salidas(String output) {

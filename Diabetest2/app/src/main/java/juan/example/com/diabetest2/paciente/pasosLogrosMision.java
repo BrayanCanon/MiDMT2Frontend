@@ -95,7 +95,7 @@ public class pasosLogrosMision extends Fragment {
         listaverif = new ArrayList<>();
         llenarListaVerificación(habCheckBox);
 
-        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),mision.getIdMision());
+        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),mision.getIdMision(),familiar);
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);
