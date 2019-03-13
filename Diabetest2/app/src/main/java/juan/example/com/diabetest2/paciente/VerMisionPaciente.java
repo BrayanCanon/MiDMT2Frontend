@@ -45,7 +45,7 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_mision_paciente);
+        setContentView(R.layout.activity_ver_mis9ion_paciente);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

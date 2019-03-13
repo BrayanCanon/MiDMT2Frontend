@@ -43,6 +43,7 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     int diferencia;
     int varifdias;
     Boolean apoyo;
+    String verificacionrol="crearVerificacion";
 
 
     public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un,Boolean apoyo) {
@@ -74,8 +75,6 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolderPasos holder, final int position) {
-
-
 
 
 
@@ -153,18 +152,30 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if(finalVerificacion.getVerif()==false && holder.verif.isChecked()){
+                                String verifipo="verifPaciente";
+                                //---------------------
+                                //---------
+                                if(apoyo){
+                                    verificacionrol="crearVerificacionApoyo";
+                                    verifipo="verifApoyoSocial";
+                                }
+
+
+                                //----------
+                                //---------------------
+
                                 ArrayList<String> nombres= new ArrayList<>();
                                 ArrayList<String> valores= new ArrayList<>();
                                 nombres.add("idMisionPaciente");
                                 nombres.add("numeroDia");
-                                nombres.add("verifPaciente");
+                                nombres.add(verifipo);
                                 valores.add(listaPasos.get(position).getIdMisionPaciente());
                                 valores.add(Integer.toString(listaPasos.get(position).getOrden()));
                                 valores.add(Boolean.toString(true));
 
 
 
-                                new Conexion("crearVerificacion", nombres, new Conexion.Comunicado() {
+                                new Conexion(verificacionrol, nombres, new Conexion.Comunicado() {
                                     @Override
 
                                     public void salidas(String output) {
