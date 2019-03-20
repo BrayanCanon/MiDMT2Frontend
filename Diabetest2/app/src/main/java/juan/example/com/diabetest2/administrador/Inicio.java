@@ -65,9 +65,9 @@ public class Inicio extends AppCompatActivity {
     public static final String accionSoap = "http://Servicios/acceso";
     //public static final String url = "http://192.168.1.5:8080/DT2/Procesos?wsdl";
     //public static final String urlImagenes = "http://18.218.252.83:8080/DT2/Imagenes/";
-    public static final String url = "http://91.121.72.151" +
-            ":9090/DT3/Procesos?wsdl";
-    public static final String domain="http://91.121.72.151:9090/DT3";
+    public static final String url = "http://192.168.1.7" +
+            ":8080/DT3/Procesos?wsdl";
+    public static final String domain="http://192.168.1.8:8080/DT3";
     public static final String urlImagenes = "http://172.16.186.88::8080/DT7/Imagenes/";
 
     public static long id,idPaciente;
