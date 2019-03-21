@@ -250,7 +250,7 @@ public class Inicio extends AppCompatActivity {
             if (rol.contains("familiar") && completado == 0) {
                 intento = new Intent(this, Usuario.class);
             }
-            if (rol.contains("familiar") && consentimiento == 1) {
+            if (rol.contains("familiar") && completado == 1) {
                 Toast.makeText(this, ""+ idPaciente, Toast.LENGTH_SHORT).show();
                 intento = new Intent(this, MenuFamiliar.class);
             }

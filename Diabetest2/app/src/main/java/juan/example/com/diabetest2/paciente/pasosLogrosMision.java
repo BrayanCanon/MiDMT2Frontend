@@ -35,6 +35,7 @@ public class pasosLogrosMision extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private  Boolean familiar;
 
 
     // TODO: Rename and change types of parameters
@@ -88,7 +89,7 @@ public class pasosLogrosMision extends Fragment {
         // Inflate the layout for this fragment
         Bundle envio = getArguments();
          mision  = (MisionVo) envio.getSerializable("mision");
-         Boolean familiar=envio.containsKey("codApoyo");
+         familiar=envio.containsKey("codApoyo");
         boolean habCheckBox=envio.getBoolean("habEmpezarMision");
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
@@ -159,12 +160,19 @@ public class pasosLogrosMision extends Fragment {
                         new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
                             @Override
                             public void salidas(String output) {
+                                String veriftipo;
+                                if(familiar){
+                                    veriftipo="verifApoyoSocial";
+                                }
+                                else {
+                                    veriftipo="verifPaciente";
+                                }
                                 Gson gson = new Gson();
                                 JsonArray arreglo = gson.fromJson(output, JsonArray.class);
                                 JsonObject verif;
                                 for (int i = 0; i < arreglo.size(); i++) {
                                     verif = arreglo.get(i).getAsJsonObject();
-                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean());
+                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get(veriftipo).getAsBoolean());
                                     listaverif.add(obj);
                                 }
                                 adapter.notifyDataSetChanged();
