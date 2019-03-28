@@ -280,6 +280,7 @@ public class Mensajes extends AppCompatActivity {
     }
 
     public void sendchat(View v){
+        Tarea de=new Tarea();
         ArrayList valores=new ArrayList();
         ArrayList nombres=new ArrayList();
         nombres.add("id");valores.add(ServicioDT2.idLocal);
@@ -292,6 +293,8 @@ public class Mensajes extends AppCompatActivity {
 
             }
         }).execute(valores);
+        de.run();
+
     }
 
 
