@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -237,6 +238,7 @@ public void ingresarCorreoFamiliar(View v){
         protected void onPostExecute(final Boolean success) {
             if (success == true) {
                 try {
+                    /*
                     FileOutputStream salida = new FileOutputStream(new File(getFilesDir(), "id.dt2"));
                     ObjectOutputStream oos = new ObjectOutputStream(salida);
                     oos.writeObject(null);
@@ -249,7 +251,22 @@ public void ingresarCorreoFamiliar(View v){
                     ObjectOutputStream oos3 = new ObjectOutputStream(salida3);
                     oos3.writeObject(null);
                     oos3.close();
+                    */
                     //Cierre
+                    File dirFiles = getFilesDir();
+                    int exte=0;
+                    for (String strFile : dirFiles.list())
+                    {
+                        // strFile is the file name
+                        exte= strFile.lastIndexOf('.');
+                        if(exte>0){
+                            if(strFile.substring(exte+1).equals("dt2")){
+                                Log.d("salida borrar",strFile);
+                                new File(getFilesDir(),strFile).delete();
+                            }
+                        }
+
+                    }
                     int pid = android.os.Process.myPid();
                     android.os.Process.killProcess(pid);
                     System.exit(0);
