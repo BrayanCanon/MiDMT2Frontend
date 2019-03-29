@@ -43,15 +43,17 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
     int diferencia;
     int varifdias;
     Boolean apoyo;
+    String codApoyo;
     String verificacionrol="crearVerificacion";
 
 
-    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un,Boolean apoyo) {
+    public AdaptadorPasos(ArrayList<PasoVo> listaPasos,ArrayList<VerificacionVo> listaverif,Context con,String un,Boolean apoyo,String codApoyo) {
         this.listaPasos = listaPasos;
         this.listaverif=listaverif;
         this.con=con;
         this.un=un;
         this.apoyo=apoyo;
+        this.codApoyo=codApoyo;
 
     }
 
@@ -126,6 +128,9 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Intent intento = new Intent(con, misiones.class);
+                                    if(apoyo){
+                                        intento.putExtra("fampuestos",codApoyo);
+                                    }
                                     intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     con.startActivity(intento);
                                 }
@@ -217,6 +222,9 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
 
                                                         Intent intento = new Intent(con, misiones.class);
                                                         intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        if(apoyo){
+                                                            intento.putExtra("fampuestos",codApoyo);
+                                                        }
                                                         con.startActivity(intento);
                                                     }
                                                 });
@@ -242,8 +250,9 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                                                 } catch (IOException e) {
                                                     e.printStackTrace();
                                                 }
-                                                intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+                                                if(apoyo){
+                                                    intento.putExtra("fampuestos",codApoyo);
+                                                }
                                                 con.startActivity(intento);}}
 
                                     }
@@ -268,10 +277,13 @@ public class AdaptadorPasos extends RecyclerView.Adapter<AdaptadorPasos.ViewHold
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent intento = new Intent(con, misiones.class);
-
+                            if(apoyo){
+                                intento.putExtra("fampuestos",codApoyo);
+                            }
                             intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                             con.startActivity(intento);
+
 
                         }
                     });

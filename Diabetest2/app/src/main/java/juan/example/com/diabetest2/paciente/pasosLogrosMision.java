@@ -45,6 +45,7 @@ public class pasosLogrosMision extends Fragment {
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerPasos ;
     MisionVo mision;
+    String codApoyo=null;
     ArrayList<PasoVo> listaPasos;
     ArrayList<VerificacionVo> listaverif ;
     AdaptadorPasos adapter;
@@ -90,13 +91,16 @@ public class pasosLogrosMision extends Fragment {
         Bundle envio = getArguments();
          mision  = (MisionVo) envio.getSerializable("mision");
          familiar=envio.containsKey("codApoyo");
+        if(familiar){
+            codApoyo=envio.getString("codApoyo");
+        }
         boolean habCheckBox=envio.getBoolean("habEmpezarMision");
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
         listaverif = new ArrayList<>();
         llenarListaVerificación(habCheckBox);
 
-        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),mision.getIdMision(),familiar);
+        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),mision.getIdMision(),familiar,codApoyo);
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);

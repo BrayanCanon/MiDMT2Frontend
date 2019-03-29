@@ -80,6 +80,10 @@ public class VerMisionPaciente extends AppCompatActivity implements BasicInfoMis
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == android.view.KeyEvent.KEYCODE_BACK ) {
             Intent a = new Intent(this,misiones.class);
+            if(misiones.idguardtest!=null){
+                a.putExtra("fampuestos",misiones.idguardtest);
+            }
+
             a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(a);
             return true;
