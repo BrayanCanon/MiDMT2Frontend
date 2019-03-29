@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import juan.example.com.diabetest2.PasosMision;
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.familiar.MenuFamiliar;
 import juan.example.com.diabetest2.util.Conexion;
 
 public class misiones extends AppCompatActivity {
@@ -41,6 +42,8 @@ public class misiones extends AppCompatActivity {
     TextView nivEjercicio,nivAlim;
     String idGuardado;
     String idFamguard;
+    public static Boolean famtest=false;
+    public static String idguardtest=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,8 @@ public class misiones extends AppCompatActivity {
         {
             idFamguard=idGuardado;
             idGuardado=getIntent().getExtras().getString("fampuestos");
+            idguardtest=idGuardado;
+            famtest=true;
 
         }
         //-----------------------------
@@ -96,7 +101,7 @@ public class misiones extends AppCompatActivity {
                 envio.putSerializable("mision",mision);
                 envio.putString("codPaciente",idGuardado);
                 envio.putBoolean("habEmpezarMision",false);
-                if(idFamguard != null && !idFamguard.isEmpty()) envio.putString("codApoyo",idFamguard);
+                if(idFamguard != null && !idFamguard.isEmpty()) envio.putString("codApoyo",idGuardado);
                 intento.putExtras(envio);
                 startActivity(intento);
 
@@ -113,6 +118,7 @@ public class misiones extends AppCompatActivity {
                 envio.putSerializable("mision",mision);
                 envio.putString("codPaciente",idGuardado);
                 envio.putBoolean("habEmpezarMision",true);
+                if(idFamguard != null && !idFamguard.isEmpty()) envio.putString("codApoyo",idGuardado);
                 intento.putExtras(envio);
                 startActivity(intento);
 
@@ -182,6 +188,10 @@ public class misiones extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == android.view.KeyEvent.KEYCODE_BACK ) {
             Intent a = new Intent(this,MenuPaciente.class);
+            if(getIntent().hasExtra("fampuestos")){
+                a = new Intent(this, MenuFamiliar.class);
+            }
+
             a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(a);
             return true;
