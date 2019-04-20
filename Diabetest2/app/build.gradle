@@ -18,6 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 ext {
@@ -63,5 +64,10 @@ dependencies {
     implementation "org.igniterealtime.smack:smack-tcp:$smackVersion"
     implementation "org.igniterealtime.smack:smack-experimental:$smackVersion"
     implementation "org.igniterealtime.smack:smack-android:$smackVersion"
-
+    android {
+        lintOptions {
+            checkReleaseBuilds false // Add this
+            abortOnError false
+        }
+    }
 }
