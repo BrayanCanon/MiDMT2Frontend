@@ -35,6 +35,8 @@ public class pasosLogrosMision extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private  Boolean familiar;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -43,6 +45,7 @@ public class pasosLogrosMision extends Fragment {
     private OnFragmentInteractionListener mListener;
     RecyclerView recyclerPasos ;
     MisionVo mision;
+    String codApoyo=null;
     ArrayList<PasoVo> listaPasos;
     ArrayList<VerificacionVo> listaverif ;
     AdaptadorPasos adapter;
@@ -78,6 +81,7 @@ public class pasosLogrosMision extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -86,11 +90,17 @@ public class pasosLogrosMision extends Fragment {
         // Inflate the layout for this fragment
         Bundle envio = getArguments();
          mision  = (MisionVo) envio.getSerializable("mision");
+         familiar=envio.containsKey("codApoyo");
+        if(familiar){
+            codApoyo=envio.getString("codApoyo");
+        }
         boolean habCheckBox=envio.getBoolean("habEmpezarMision");
         View vista =inflater.inflate(R.layout.fragment_pasos_logros_mision, container, false);
         listaPasos=new ArrayList<>();
         listaverif = new ArrayList<>();
-        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext());
+        llenarListaVerificación(habCheckBox);
+
+        adapter = new AdaptadorPasos(listaPasos,listaverif,this.getContext(),mision.getIdMision(),familiar,codApoyo);
         recyclerPasos=vista.findViewById(R.id.recyclerPasos);
         recyclerPasos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerPasos.setAdapter(adapter);
@@ -154,12 +164,19 @@ public class pasosLogrosMision extends Fragment {
                         new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
                             @Override
                             public void salidas(String output) {
+                                String veriftipo;
+                                if(familiar){
+                                    veriftipo="verifApoyoSocial";
+                                }
+                                else {
+                                    veriftipo="verifPaciente";
+                                }
                                 Gson gson = new Gson();
                                 JsonArray arreglo = gson.fromJson(output, JsonArray.class);
                                 JsonObject verif;
                                 for (int i = 0; i < arreglo.size(); i++) {
                                     verif = arreglo.get(i).getAsJsonObject();
-                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean());
+                                    VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get(veriftipo).getAsBoolean());
                                     listaverif.add(obj);
                                 }
                                 adapter.notifyDataSetChanged();
@@ -173,6 +190,8 @@ public class pasosLogrosMision extends Fragment {
                         listaPasos.add(pasoVo);
 
                     }
+                    //----------------------------
+                    adapter.contarverifs();
 
                     adapter.notifyDataSetChanged();
                 }
@@ -180,6 +199,7 @@ public class pasosLogrosMision extends Fragment {
         }).execute(valores);
 
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -219,4 +239,28 @@ public class pasosLogrosMision extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    private void llenarListaVerificación(final boolean habCheckBox){
+        if( habCheckBox==false) {
+            ArrayList<String> no = new ArrayList<>();
+            ArrayList va = new ArrayList();
+            no.add("idMisionPaciente");
+            va.add(mision.getIdMisionPaciente());
+
+
+            new Conexion("consultarVerificacionPorMP", no, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+                    Gson gson = new Gson();
+                    JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                    JsonObject verif;
+                    for (int i = 0; i < arreglo.size(); i++) {
+                        verif = arreglo.get(i).getAsJsonObject();
+                        VerificacionVo obj = new VerificacionVo(verif.get("numeroDia").getAsInt(), verif.get("verifPaciente").getAsBoolean());
+                        listaverif.add(obj);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }).execute(va);
+
+        }}
 }

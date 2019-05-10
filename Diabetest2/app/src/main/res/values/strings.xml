@@ -76,4 +76,6 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="error_invalid_email">This email address is invalid</string>
+    <string name="title_activity_verificacion_rutina">VerificacionRutina</string>
+    <string name="title_activity_verificacion_talla">VerificacionTalla</string>
 </resources>

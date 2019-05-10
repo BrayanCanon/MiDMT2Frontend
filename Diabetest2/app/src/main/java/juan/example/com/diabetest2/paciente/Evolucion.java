@@ -38,6 +38,7 @@ import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
 import juan.example.com.diabetest2.comunes.CrearMensaje;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
+import juan.example.com.diabetest2.comunes.Mensajes;
 import juan.example.com.diabetest2.profesional.MenuProfesional;
 import juan.example.com.diabetest2.profesional.Observaciones;
 import juan.example.com.diabetest2.util.Conexion;
@@ -50,14 +51,30 @@ public class Evolucion extends AppCompatActivity {
 
     TextView nombre, correo, estado, telefono, edad;
     ImageView emoticon;
-    Button borrar, chatear, detalle, observaciones, medicamentos, metas;
+    Button borrar, chatear, detalle, observaciones, medicamentos, metas, glucosaBoton, pesoBoton;
+
+    //-----
+    Button chatboton,id_borrar_paciente,id_bt_medicinas,id_bt_observaciones_pro;
+    Button deldetalle;
+    //-----
     public static long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evolucion);
-
+        //---------------
+        chatboton=(Button)findViewById(R.id.id_msj_privado);
+        deldetalle=(Button)findViewById(R.id.id_detalle_paciente);
+        id_borrar_paciente=(Button)findViewById(R.id.id_borrar_paciente);
+        id_bt_medicinas=(Button)findViewById(R.id.id_bt_medicinas);
+        id_bt_observaciones_pro=(Button)findViewById(R.id.id_bt_observaciones_pro);
+        chatboton.setEnabled(false);
+        deldetalle.setEnabled(false);
+        id_borrar_paciente.setEnabled(false);
+        id_bt_medicinas.setEnabled(false);
+        id_bt_observaciones_pro.setEnabled(false);
+        //---------------
         pesoImc = (XYPlot) findViewById(R.id.id_PlotPesoIMC);
         animo = (XYPlot) findViewById(R.id.id_Ev_animo);
         hba1c = (XYPlot) findViewById(R.id.id_hba1c);
@@ -74,20 +91,22 @@ public class Evolucion extends AppCompatActivity {
         detalle = (Button) findViewById(R.id.id_detalle_paciente);
         observaciones = (Button) findViewById(R.id.id_bt_observaciones_pro);
         medicamentos = (Button) findViewById(R.id.id_bt_medicinas);
-
+        glucosaBoton = (Button) findViewById(R.id.btn_glucosa);
+        pesoBoton = (Button) findViewById(R.id.btn_peso);
         //identificacion del id_destinatario a presentar
         if(Inicio.rol.contains("paciente")){
             id = ServicioDT2.idLocal;
             borrar.setVisibility(View.INVISIBLE);
             observaciones.setVisibility(View.INVISIBLE);
+            chatear.setVisibility(View.INVISIBLE);
             //Cambios del botón iniciarChat
-            chatear.setText("GLUCOSA");
-            chatear.setOnClickListener(new View.OnClickListener() {
+            //chatear.setText("GLUCOSA");
+            /*chatear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ingresarIdFamiliar(null);
                 }
-            });;
+            });*/
         }
         if(Inicio.rol.contains("familiar")){
             chatear.setVisibility(View.INVISIBLE);
@@ -95,6 +114,8 @@ public class Evolucion extends AppCompatActivity {
             observaciones.setVisibility(View.INVISIBLE);
             medicamentos.setVisibility(View.INVISIBLE);
             detalle.setVisibility(View.INVISIBLE);
+            pesoBoton.setVisibility(View.INVISIBLE);
+            glucosaBoton.setVisibility(View.INVISIBLE);
         }
 
         Evolucion.Consultar co = new Evolucion.Consultar();
@@ -156,7 +177,7 @@ public class Evolucion extends AppCompatActivity {
 
     //Graficos ---------------
     Vector <String> tablaPesoImc = new Vector<>();
-    Vector <String> tablaAnimo = new Vector<>();
+    Vector <String> tablaAnimo = new Vector<>();//No se esta trabajando
     Vector <String> tablaHba1c = new Vector<>();
     Vector <String> tablaGlucosa = new Vector<>();
 
@@ -185,6 +206,7 @@ public class Evolucion extends AppCompatActivity {
                 transporte.call("http://Servicios/consultarAnimo", sobre);
                 temp=(SoapObject)sobre.bodyIn;
                 for(int a=0;a<temp.getPropertyCount();a++) tablaAnimo.add(temp.getProperty(a).toString());
+                //Consulta del Glucos
 
                 //Consulta del HbA1c
                 solicitud = new SoapObject(Inicio.namespace, "consultarHba1c");
@@ -196,11 +218,13 @@ public class Evolucion extends AppCompatActivity {
                 for(int a=0;a<temp.getPropertyCount();a++) tablaHba1c.add(temp.getProperty(a).toString());
 
                 //Consulta del Glucosa
-                solicitud = new SoapObject(Inicio.namespace, "consultarGlucosa");
-                solicitud.addProperty("id", id);
+                solicitud = new SoapObject(Inicio.namespace, "consultarVerificacionRutinaPacienteValores");
+                solicitud.addProperty("codPaciente", ""+id);
+                solicitud.addProperty("idRutina", 2);
                 sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 sobre.setOutputSoapObject(solicitud);
-                transporte.call("http://Servicios/consultarGlucosa", sobre);
+                HttpTransportSE transporteVerificacion = new HttpTransportSE(Inicio.urlVerificacion);
+                transporteVerificacion.call("http://Servicios/consultarVerificacionRutinaPacienteValores", sobre);
                 temp=(SoapObject)sobre.bodyIn;
                 for(int a=0;a<temp.getPropertyCount();a++) tablaGlucosa.add(temp.getProperty(a).toString());
             } catch (Exception e) {}
@@ -247,13 +271,13 @@ public class Evolucion extends AppCompatActivity {
                 final Vector <String> fechasX4 = new Vector();
                 Vector <Integer> glucosaX = new Vector();
                 i = 0;
-                if(tablaGlucosa.size()>30 ){ i = tablaGlucosa.size()-30;}
-                while(i< tablaGlucosa.size() && tablaGlucosa.size()>1){
+                if(tablaGlucosa.size()>0 ){ i = tablaGlucosa.size()-0;}
+                while(i< tablaGlucosa.size() && tablaGlucosa.size()>0){
                     fechasX4.add(tablaGlucosa.get(i).substring(5,16));
                     glucosaX.add((int)Double.parseDouble(tablaGlucosa.get(i+1)));
                     i = i+2;
                 }
-                if(tablaGlucosa.size()>1) {
+                if(tablaGlucosa.size()>0) {
                     //Grafico glucosa ---------------------------------------------------------------------
                     Number[] glucosaValores = glucosaX.toArray(new Number[glucosaX.size()]);
                     XYSeries s0 = new SimpleXYSeries(Arrays.asList(glucosaValores), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Glucosa");
@@ -397,6 +421,8 @@ public class Evolucion extends AppCompatActivity {
             if (success == true) {
                 int i = 0;
                 Calendar fa = new GregorianCalendar();
+
+
                 while(i< datosPaciente.size()){
                     correo.setText((CharSequence) datosPaciente.get(i));
                     nombre.setText((CharSequence)datosPaciente.get(i+1) +" "+ (CharSequence)datosPaciente.get(i+2));
@@ -415,6 +441,13 @@ public class Evolucion extends AppCompatActivity {
                     i = 20;
 
                 }
+                //------------------------desbloquear en caso de cargar datos
+                chatboton.setEnabled(true);
+                deldetalle.setEnabled(true);
+                id_borrar_paciente.setEnabled(true);
+                id_bt_medicinas.setEnabled(true);
+                id_bt_observaciones_pro.setEnabled(true);
+                //------------------------
             }
         }
     }
@@ -472,9 +505,12 @@ public class Evolucion extends AppCompatActivity {
 
     // Enviar mensaje
     public void enviarMensaje(View v) {
-        CrearMensaje.idDestino = id;
-        CrearMensaje.destinatario = datosPaciente.get(1) +" "+ datosPaciente.get(2);
-        Intent intento = new Intent(this, CrearMensaje.class);
+        //CrearMensaje.idDestino = id;
+        //CrearMensaje.destinatario = datosPaciente.get(1) +" "+ datosPaciente.get(2);
+        Mensajes.idDestino=id;
+        Mensajes.destinatario=datosPaciente.get(1) +" "+ datosPaciente.get(2);
+        //Intent intento = new Intent(this, CrearMensaje.class);
+        Intent intento = new Intent(this, Mensajes.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
     // Ver plantilla_detalle del paciente
@@ -510,6 +546,16 @@ public class Evolucion extends AppCompatActivity {
     // Ver plantilla_detalle del paciente
     public void abrirMedicamentos(View v) {
         Intent intento = new Intent(this, Medicamentos.class);
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+    }
+    // Ver plantilla de la inserción de glucosa
+    public void abrirGlucosa(View v) {
+        Intent intento = new Intent(this, VerificacionGlucosa.class);
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+    }
+    // Ver plantilla de la inserción de glucosa
+    public void abrirPeso(View v) {
+        Intent intento = new Intent(this, VerificacionPeso.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
 

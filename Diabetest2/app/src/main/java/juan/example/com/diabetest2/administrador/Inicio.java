@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,10 +66,12 @@ public class Inicio extends AppCompatActivity {
     public static final String accionSoap = "http://Servicios/acceso";
     //public static final String url = "http://192.168.1.5:8080/DT2/Procesos?wsdl";
     //public static final String urlImagenes = "http://18.218.252.83:8080/DT2/Imagenes/";
-    public static final String url = "http://192.168.1.11" +
+    public static final String url = "http://192.168.0.13" +
             ":8080/DT3/Procesos?wsdl";
-    public static final String domain="http://192.168.1.11:8080/DT3";
-    public static final String urlImagenes = "http:/192.168.1.11:8080/DT7/Imagenes/";
+    public static final String urlVerificacion = "http://192.168.0.13" +
+            ":8080/DT3/VerificacionRutinaWS?wsdl";
+    public static final String domain="http://192.168.0.13/DT3";
+    public static final String urlImagenes = "http://172.16.186.88::8080/DT7/Imagenes/";
 
     public static long id,idPaciente;
     public static String rol, preguntarAnimo,preguntarPeso,preguntarHba1c;
@@ -76,10 +79,12 @@ public class Inicio extends AppCompatActivity {
     public String mensaje="";
     public Context este=this;
     public static Long idLocal;
+    public Button logearse;
 
     static EditText correo;
     EditText clave;
     public String respuesta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,7 @@ public class Inicio extends AppCompatActivity {
 
         correo = (EditText) findViewById(R.id.id_correo);
         clave = (EditText) findViewById(R.id.id_clave);
+        logearse=(Button)findViewById(R.id.button13);
 
         //Créditos
         TextView ad = (TextView) findViewById(R.id.abrirCreditos);
@@ -137,6 +143,7 @@ public class Inicio extends AppCompatActivity {
             if (probarInternet() == false) {
                 Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
             } else {
+                logearse.setEnabled(false);
                 co.execute();
             }
         }
@@ -184,7 +191,10 @@ public class Inicio extends AppCompatActivity {
                     }
                     Log.i("INFORMACIÓN MIDT2:", "Rol de la bd: " + rol);
                     Toast.makeText(getApplicationContext(), "¡Hola!", Toast.LENGTH_LONG).show();
-                }else {Toast.makeText(getApplicationContext(), respuesta, Toast.LENGTH_LONG).show();}
+                }else {
+                    logearse.setEnabled(true);
+                    Toast.makeText(getApplicationContext(), respuesta, Toast.LENGTH_LONG).show();
+                }
                 if (rol != null) { abrir(null); }
                 //Toast.makeText(getApplicationContext(), "rol:" + rol + " id: "+id +" completado:"+completado + " animo"+preguntarAnimo, Toast.LENGTH_LONG).show();
             }
@@ -249,7 +259,7 @@ public class Inicio extends AppCompatActivity {
             if (rol.contains("familiar") && completado == 0) {
                 intento = new Intent(this, Usuario.class);
             }
-            if (rol.contains("familiar") && consentimiento == 1) {
+            if (rol.contains("familiar") && completado == 1) {
                 Toast.makeText(this, ""+ idPaciente, Toast.LENGTH_SHORT).show();
                 intento = new Intent(this, MenuFamiliar.class);
             }

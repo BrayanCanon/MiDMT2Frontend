@@ -119,6 +119,18 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@android:color/background_light"
+                    android:onClick="foro"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@mipmap/bt_comunidad" />
+
+                <ImageButton
                     android:id="@+id/imageButton10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,17 +143,6 @@
                     android:scaleType="fitXY"
                     app:srcCompat="@mipmap/bt_mensajes" />
 
-                <ImageButton
-                    android:id="@+id/imageButton9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@android:color/background_light"
-                    android:onClick="foro"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@mipmap/bt_comunidad" />
             </LinearLayout>
 
             <LinearLayout

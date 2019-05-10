@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
@@ -30,10 +32,14 @@ import juan.example.com.diabetest2.comunes.Informacion;
 import juan.example.com.diabetest2.comunes.Recursos;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
 import juan.example.com.diabetest2.paciente.Evolucion;
+import juan.example.com.diabetest2.paciente.misiones;
+import juan.example.com.diabetest2.util.Conexion;
 
 // Autor: Juan David Velásquez Bedoya
 
 public class MenuFamiliar extends AppCompatActivity {
+
+    public Context este=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,32 @@ public class MenuFamiliar extends AppCompatActivity {
     public void abrirHabitos(View v) {
         Intent intento = new Intent(this, HabitosSaludables.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+    }
+
+    public void misiones(View v) {
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{
+
+                ArrayList<String> nombres = new ArrayList<>();
+                ArrayList<String> valores = new ArrayList<>();
+                nombres.add("id_ApoyoSocial");
+                valores.add(""+ServicioDT2.idLocal);
+                new Conexion("idApoyoSocial", nombres, new Conexion.Comunicado() {
+                    @Override
+                    public void salidas(String output) {
+                        Intent intento = new Intent( este, misiones.class);
+                        String idFamGuard=output;
+                        intento.putExtra("fampuestos",idFamGuard);
+                        startActivity(intento);
+
+                    }
+                }).execute(valores);
+            }
+
+    }
+
+    public void misionesm(View v){
+        Intent intento = new Intent(this, HabitosSaludables.class);
+
     }
 
     //Chequear conexion a internet  ----------------------------------
@@ -108,6 +140,7 @@ public class MenuFamiliar extends AppCompatActivity {
         protected void onPostExecute(final Boolean success) {
             if (success == true) {
                 try {
+                    /*
                     FileOutputStream salida = new FileOutputStream(new File(getFilesDir(), "id.dt2"));
                     ObjectOutputStream oos = new ObjectOutputStream(salida);
                     oos.writeObject(null);
@@ -120,6 +153,21 @@ public class MenuFamiliar extends AppCompatActivity {
                     ObjectOutputStream oos3 = new ObjectOutputStream(salida3);
                     oos3.writeObject(null);
                     oos3.close();
+                    */
+                    File dirFiles = getFilesDir();
+                    int exte=0;
+                    for (String strFile : dirFiles.list())
+                    {
+                        // strFile is the file name
+                        exte= strFile.lastIndexOf('.');
+                        if(exte>0){
+                            if(strFile.substring(exte+1).equals("dt2")){
+                                Log.d("salida borrar",strFile);
+                                new File(getFilesDir(),strFile).delete();
+                            }
+                        }
+
+                    }
                     //Cierre
                     int pid = android.os.Process.myPid();
                     android.os.Process.killProcess(pid);

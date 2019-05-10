@@ -59,7 +59,7 @@
         android:layout_y="334dp"
         android:ems="10"
         android:hint="Identificación de paciente"
-        android:inputType="textPersonName"
+        android:inputType="number"
         tools:layout_editor_absoluteX="83dp"
         tools:layout_editor_absoluteY="279dp" />
 

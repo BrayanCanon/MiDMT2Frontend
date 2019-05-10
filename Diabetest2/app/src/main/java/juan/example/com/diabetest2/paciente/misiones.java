@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import juan.example.com.diabetest2.PasosMision;
 import juan.example.com.diabetest2.R;
+import juan.example.com.diabetest2.familiar.MenuFamiliar;
 import juan.example.com.diabetest2.util.Conexion;
 
 public class misiones extends AppCompatActivity {
@@ -40,12 +41,43 @@ public class misiones extends AppCompatActivity {
     ProgressBar ejercicio,alimentacion;
     TextView nivEjercicio,nivAlim;
     String idGuardado;
+    String idFamguard;
+    public static Boolean famtest=false;
+    public static String idguardtest=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_misiones);
 
+        FileInputStream in2 = null;
+
+        //-----------------------------
+        try {
+            in2 = openFileInput("id.dt2");
+            ObjectInputStream ois2 = new ObjectInputStream(in2);
+            idGuardado =  ois2.readObject().toString();
+
+            //-------------------
+
+            //-------------------
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        //-----------------------------
+        if (getIntent().hasExtra("fampuestos"))
+        {
+            idFamguard=idGuardado;
+            idGuardado=getIntent().getExtras().getString("fampuestos");
+            idguardtest=idGuardado;
+            famtest=true;
+
+        }
+        //-----------------------------
         listaMisiones= new ArrayList<>();
         listaNuevasMisiones = new ArrayList<>();
         recylerMisiones=findViewById(R.id.recyclerMisiones);
@@ -58,18 +90,7 @@ public class misiones extends AppCompatActivity {
         nivAlim=findViewById(R.id.NivelAcrAlim);
         llenarBarraEjercicio();
         llenarBarraAlimentacion();
-        FileInputStream in2 = null;
-        try {
-            in2 = openFileInput("id.dt2");
-            ObjectInputStream ois2 = new ObjectInputStream(in2);
-           idGuardado =  ois2.readObject().toString();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +101,7 @@ public class misiones extends AppCompatActivity {
                 envio.putSerializable("mision",mision);
                 envio.putString("codPaciente",idGuardado);
                 envio.putBoolean("habEmpezarMision",false);
+                if(idFamguard != null && !idFamguard.isEmpty()) envio.putString("codApoyo",idGuardado);
                 intento.putExtras(envio);
                 startActivity(intento);
 
@@ -96,6 +118,7 @@ public class misiones extends AppCompatActivity {
                 envio.putSerializable("mision",mision);
                 envio.putString("codPaciente",idGuardado);
                 envio.putBoolean("habEmpezarMision",true);
+                if(idFamguard != null && !idFamguard.isEmpty()) envio.putString("codApoyo",idGuardado);
                 intento.putExtras(envio);
                 startActivity(intento);
 
@@ -165,6 +188,10 @@ public class misiones extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == android.view.KeyEvent.KEYCODE_BACK ) {
             Intent a = new Intent(this,MenuPaciente.class);
+            if(getIntent().hasExtra("fampuestos")){
+                a = new Intent(this, MenuFamiliar.class);
+            }
+
             a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(a);
             return true;
@@ -173,10 +200,6 @@ public class misiones extends AppCompatActivity {
     }
     private void llenarNuevasMis() throws IOException, ClassNotFoundException {
         FileInputStream in2 = null;
-        try {
-            in2 = openFileInput("id.dt2");
-            ObjectInputStream ois2 = new ObjectInputStream(in2);
-        String idGuardado =  ois2.readObject().toString();
         ArrayList<String> nombres= new ArrayList<>();
         ArrayList valores= new ArrayList();
         nombres.add("codPaciente");
@@ -206,17 +229,10 @@ public class misiones extends AppCompatActivity {
                 }
             }
         }).execute(valores);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
     }
 
 private void llenarBarraEjercicio(){
-    FileInputStream in2 = null;
-    try {
-        in2 = openFileInput("id.dt2");
-        ObjectInputStream ois2 = new ObjectInputStream(in2);
-        String idGuardado =  ois2.readObject().toString();
         ArrayList<String> nombres= new ArrayList<>();
         ArrayList valores= new ArrayList();
         nombres.add("codPaciente");
@@ -233,25 +249,10 @@ private void llenarBarraEjercicio(){
                 }
         }).execute(valores);
 
-} catch (FileNotFoundException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
-
-
-
 
 }
 
     private void llenarBarraAlimentacion(){
-        FileInputStream in2 = null;
-        try {
-            in2 = openFileInput("id.dt2");
-            ObjectInputStream ois2 = new ObjectInputStream(in2);
-            String idGuardado =  ois2.readObject().toString();
             ArrayList<String> nombres= new ArrayList<>();
             ArrayList valores= new ArrayList();
             nombres.add("codPaciente");
@@ -267,14 +268,5 @@ private void llenarBarraEjercicio(){
                     nivAlim.setText( nivel.get("nombreNivel").getAsString());
                 }
             }).execute(valores);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
 
     }}

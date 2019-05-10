@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".paciente.VerificacionGlucosa"
+    tools:showIn="@layout/activity_verificacion_glucosa">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textAlignment="center">
+
+        <TextView
+            android:id="@+id/nombreRutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="GLUCOSA"
+            android:textAlignment="center"
+            android:textColor="@color/u_blue_darker"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <ImageView
+            android:id="@+id/imageView43"
+            android:layout_width="230dp"
+            android:layout_height="301dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            app:srcCompat="@drawable/glucosa" />
+
+        <EditText
+            android:id="@+id/valor_verificacion_rutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Ingrésalo aquí"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="18sp"
+
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="375dp" />
+
+        <Button
+            android:id="@+id/boton_ingresar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:onClick="ingresar_verificacion_rutina"
+            android:text="Ingresar"
+            tools:layout_editor_absoluteX="113dp"
+            tools:layout_editor_absoluteY="461dp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -10,11 +10,15 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -25,6 +29,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import juan.example.com.diabetest2.R;
 import juan.example.com.diabetest2.administrador.Inicio;
@@ -36,11 +41,14 @@ import juan.example.com.diabetest2.comunes.Recursos;
 import juan.example.com.diabetest2.paciente.encuestas.Encuesta;
 import juan.example.com.diabetest2.paciente.misiones;
 import juan.example.com.diabetest2.administrador.ServicioDT2;
+import juan.example.com.diabetest2.util.Conexion;
 
 
 // Autor: Juan David Velásquez Bedoya
 
 public class MenuPaciente extends AppCompatActivity {
+
+    public Context este=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +238,7 @@ public void ingresarCorreoFamiliar(View v){
         protected void onPostExecute(final Boolean success) {
             if (success == true) {
                 try {
+                    /*
                     FileOutputStream salida = new FileOutputStream(new File(getFilesDir(), "id.dt2"));
                     ObjectOutputStream oos = new ObjectOutputStream(salida);
                     oos.writeObject(null);
@@ -242,7 +251,22 @@ public void ingresarCorreoFamiliar(View v){
                     ObjectOutputStream oos3 = new ObjectOutputStream(salida3);
                     oos3.writeObject(null);
                     oos3.close();
+                    */
                     //Cierre
+                    File dirFiles = getFilesDir();
+                    int exte=0;
+                    for (String strFile : dirFiles.list())
+                    {
+                        // strFile is the file name
+                        exte= strFile.lastIndexOf('.');
+                        if(exte>0){
+                            if(strFile.substring(exte+1).equals("dt2")){
+                                Log.d("salida borrar",strFile);
+                                new File(getFilesDir(),strFile).delete();
+                            }
+                        }
+
+                    }
                     int pid = android.os.Process.myPid();
                     android.os.Process.killProcess(pid);
                     System.exit(0);
@@ -274,8 +298,21 @@ public void ingresarCorreoFamiliar(View v){
     public void foro(View v) { Intent intento = new Intent(this, Comunidad.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
     }
-    public void mensajes(View v) { Intent intento = new Intent(this, Mensajes.class);
-        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }
+    public void mensajes(View v) {
+        if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{
+            ArrayList nombres=new ArrayList();
+            ArrayList valores=new ArrayList();
+            nombres.add("id_usuario");valores.add(ServicioDT2.idLocal);
+            new Conexion("idProfecional", nombres, new Conexion.Comunicado() {
+                @Override
+                public void salidas(String output) {
+
+                    Mensajes.idDestino= Long.parseLong(output);
+                    Intent intento = new Intent(este, Mensajes.class);
+                    startActivity(intento);
+                }
+            }).execute(valores);
+        }
     }
     public void informacion(View v) { Intent intento = new Intent(this, Informacion.class);
         if(probarInternet() == false){ Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show(); } else{ startActivity(intento); }

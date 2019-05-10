@@ -13,9 +13,7 @@
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <protected-broadcast android:name="android.intent.action.MEDIA.MOUNTED" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <protected-broadcast android:name="android.intent.action.MEDIA.MOUNTED" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -30,6 +28,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
+        <activity
+            android:name=".paciente.VerificacionGlucosa"
+            android:label="@string/title_activity_verificacion_talla"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".paciente.VerificacionPeso"
+            android:label="@string/title_activity_verificacion_rutina"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".administrador.Inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -175,13 +193,13 @@
         <service android:name=".comunes.smackchat.RoosterConnectionService" />
 
         <activity android:name=".comunes.smackchat.ChatActivity" />
-        <activity android:name=".profesional.crearmisespec"></activity>
+        <activity android:name=".profesional.crearmisespec" />
 
         <receiver android:name=".administrador.autostart">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="android.intent.action.REBOOT"/>
+                <action android:name="android.intent.action.REBOOT" />
             </intent-filter>
         </receiver>
     </application>

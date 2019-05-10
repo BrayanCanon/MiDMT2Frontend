@@ -31,14 +31,14 @@
                 android:id="@+id/textView40"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="4dp"
-                android:text="Estado y evolución"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="ESTADO Y EVOLUCIÓN"
                 android:textAlignment="center"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/u_blue_darker"
                 android:textSize="24sp"
                 android:textStyle="bold|italic" />
 
@@ -66,6 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:text="Nombre:"
+                            android:textColor="@color/u_blue_darker"
                             android:textStyle="bold" />
 
                         <TextView
@@ -89,6 +90,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:text="Teléfono:"
+                            android:textColor="@color/u_blue_darker"
                             android:textStyle="bold" />
 
                         <TextView
@@ -112,6 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:text="Edad:"
+                            android:textColor="@color/u_blue_darker"
                             android:textStyle="bold" />
 
                         <TextView
@@ -135,6 +138,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:text="Correo:"
+                            android:textColor="@color/u_blue_darker"
                             android:textStyle="bold" />
 
                         <TextView
@@ -158,6 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:text="Estado:"
+                            android:textColor="@color/u_blue_darker"
                             android:textStyle="bold" />
 
                         <TextView
@@ -213,6 +218,32 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_glucosa"
+                    android:layout_width="201dp"
+                    android:layout_height="match_parent"
+                    android:onClick="abrirGlucosa"
+                    android:text="Glucosa" />
+
+                <Button
+                    android:id="@+id/btn_peso"
+                    android:layout_width="191dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="abrirPeso"
+                    android:text="Peso" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/textView64"
                 android:layout_width="match_parent"
@@ -231,7 +262,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp" />
-
             <com.androidplot.xy.XYPlot
                 android:id="@+id/id_hba1c"
                 androidPlot.title="Hemoglobina Glicosilada (HbA1c)"

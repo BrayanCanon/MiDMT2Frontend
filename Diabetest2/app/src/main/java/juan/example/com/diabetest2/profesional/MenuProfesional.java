@@ -107,7 +107,7 @@ public class MenuProfesional extends AppCompatActivity {
         protected void onPostExecute(final Boolean success) {
             if (success == true) {
                 try {
-                    FileOutputStream salida = new FileOutputStream(new File(getFilesDir(), "id.dt2"));
+                   /* FileOutputStream salida = new FileOutputStream(new File(getFilesDir(), "id.dt2"));
                     ObjectOutputStream oos = new ObjectOutputStream(salida);
                     oos.writeObject(null);
                     oos.close();
@@ -119,7 +119,24 @@ public class MenuProfesional extends AppCompatActivity {
                     ObjectOutputStream oos3 = new ObjectOutputStream(salida3);
                     oos3.writeObject(null);
                     oos3.close();
+                    */
                     //Cierre
+
+                    File dirFiles = getFilesDir();
+                    int exte=0;
+                    for (String strFile : dirFiles.list())
+                    {
+                        // strFile is the file name
+                        exte= strFile.lastIndexOf('.');
+                        if(exte>0){
+                            if(strFile.substring(exte+1).equals("dt2")){
+                                Log.d("salida borrar",strFile);
+                                new File(getFilesDir(),strFile).delete();
+                            }
+                        }
+
+                    }
+
                     int pid = android.os.Process.myPid();
                     android.os.Process.killProcess(pid);
                     System.exit(0);
