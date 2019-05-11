@@ -66,12 +66,13 @@ public class Inicio extends AppCompatActivity {
     public static final String accionSoap = "http://Servicios/acceso";
     //public static final String url = "http://192.168.1.5:8080/DT2/Procesos?wsdl";
     //public static final String urlImagenes = "http://18.218.252.83:8080/DT2/Imagenes/";
-    public static final String url = "http://192.168.0.13" +
+    //23.102.159.225
+    public static final String url = "http://23.102.159.225" +
             ":8080/DT3/Procesos?wsdl";
-    public static final String urlVerificacion = "http://192.168.0.13" +
+    public static final String urlVerificacion = "http://23.102.159.225" +
             ":8080/DT3/VerificacionRutinaWS?wsdl";
-    public static final String domain="http://192.168.0.13/DT3";
-    public static final String urlImagenes = "http://172.16.186.88::8080/DT7/Imagenes/";
+    public static final String domain="http://23.102.159.225/DT3";
+    public static final String urlImagenes = "http://23.102.159.225:8080/DT3/Imagenes/";
 
     public static long id,idPaciente;
     public static String rol, preguntarAnimo,preguntarPeso,preguntarHba1c;
@@ -111,15 +112,11 @@ public class Inicio extends AppCompatActivity {
         //Probar conexión
         if(probarInternet() == false){
             Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
-        } else{ chequearSesion(); }
+        } else{
+              //  chequearSesion();
+        }
         //-----------------------------------------------------
-
-
-
-
-
         //-----------------------------------------------------
-
     }
 
 

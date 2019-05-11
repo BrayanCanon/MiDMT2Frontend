@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fondo"
+    android:background="@drawable/bgapps"
     tools:context=".paciente.BasicInfoMision">
 
     <!-- TODO: Update blank fragment layout -->
@@ -18,48 +18,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            >
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                card_view:cardCornerRadius="19dp"
-                card_view:cardElevation="6dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    >
 
                     <ImageView
                         android:id="@+id/imageView50"
-
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
-                        android:src="@drawable/ejer" />
+                        android:src="@drawable/achievement" />
 
                     <TextView
                         android:id="@+id/titulo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Informacion basica"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/darkblue"
-                        android:textSize="35sp" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="35sp"
+                        android:textAlignment="center"
+                        />
 
                     <TextView
                         android:id="@+id/textView150"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:text="Descripción:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/negro"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="25sp" />
 
                     <TextView
@@ -75,8 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="Categoria:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-
-                        android:textColor="@color/negro"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="25sp" />
 
                     <TextView
@@ -92,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:text="Dificultad:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/negro"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="25sp" />
 
                     <TextView
@@ -110,9 +102,8 @@
                         android:text="Empezar Misión" />
 
                 </LinearLayout>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
 

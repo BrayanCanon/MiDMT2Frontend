@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_recursos"
+    android:background="@color/blanco"
     tools:context=".profesional.misioncruds.Recursos_crud">
 
     <LinearLayout
@@ -13,8 +13,8 @@
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/idTituloRecursos"
@@ -26,7 +26,7 @@
             android:background="@color/blanco50"
             android:text="Recursos de apoyo"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_green_dark"
+            android:textColor="@color/u_blue_darker"
             android:textSize="24sp"
             android:textStyle="bold|italic"
             app:layout_constraintHorizontal_bias="1.0"

@@ -82,8 +82,12 @@ public class VerificacionGlucosa extends AppCompatActivity {
             }
         }
     }
+    public void regresar(View v) {
+        Intent intento = new Intent(this, Evolucion.class);
+        startActivity(intento);
+    }
     public void regresar() {
-        Intent intento = new Intent(this, VerificacionPeso.class);
+        Intent intento = new Intent(this, Evolucion.class);
         startActivity(intento);
     }
     //Chequear conexion a internet  ----------------------------------

@@ -76,7 +76,7 @@ public class Evolucion extends AppCompatActivity {
         id_bt_observaciones_pro.setEnabled(false);
         //---------------
         pesoImc = (XYPlot) findViewById(R.id.id_PlotPesoIMC);
-        animo = (XYPlot) findViewById(R.id.id_Ev_animo);
+        //animo = (XYPlot) findViewById(R.id.id_Ev_animo);
         hba1c = (XYPlot) findViewById(R.id.id_hba1c);
         glucosa = (XYPlot) findViewById(R.id.id_glucosa);
 
@@ -117,10 +117,36 @@ public class Evolucion extends AppCompatActivity {
             pesoBoton.setVisibility(View.INVISIBLE);
             glucosaBoton.setVisibility(View.INVISIBLE);
         }
+        Number[] valorGlucosa= {1,10,5,9,7,4};
+        Number[] fechasGlucosa= {1,2,3,4,5,6};
+        XYSeries seriesGlucosa = new SimpleXYSeries(
+                Arrays.asList(fechasGlucosa),
+                Arrays.asList(valorGlucosa),
+                "seriesGlucosa");
 
-        Evolucion.Consultar co = new Evolucion.Consultar();
+        LineAndPointFormatter seriesFormatGlucosa = new LineAndPointFormatter(
+                Color.rgb(255,51,69),
+                Color.rgb(255,51,69),
+                Color.rgb(255,168,168), null
+        );
+        glucosa.addSeries(seriesGlucosa, seriesFormatGlucosa);
+
+        Number[] valorPeso= {1,10,5,9,7,4};
+        Number[] fechasPeso= {1,2,3,4,5,6};
+        XYSeries seriesPeso = new SimpleXYSeries(
+                Arrays.asList(fechasPeso),
+                Arrays.asList(valorPeso),
+                "seriesPeso");
+
+        LineAndPointFormatter seriesFormatPeso = new LineAndPointFormatter(
+                Color.rgb(54,94,249),
+                Color.rgb(54,94,249),
+                Color.rgb(168,186,255), null
+        );
+        pesoImc.addSeries(seriesPeso, seriesFormatPeso);
+        /*Evolucion.Consultar co = new Evolucion.Consultar();
         co.execute();
-
+*/
         Evolucion.ConsultarPaciente coP = new Evolucion.ConsultarPaciente();
         coP.execute();
     }
@@ -186,17 +212,14 @@ public class Evolucion extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             try {
                 //Consulta peso e imc
-                SoapObject solicitud = new SoapObject(Inicio.namespace, "consultarPesoImc");
-                solicitud.addProperty("id", id);
+                SoapObject solicitud = new SoapObject(Inicio.namespace, "consultarVerificacionRutinaPacienteValores");
+                solicitud.addProperty("codPaciente", ""+id);
+                solicitud.addProperty("idRutina", 2);
                 SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 sobre.setOutputSoapObject(solicitud);
                 HttpTransportSE transporte = new HttpTransportSE(Inicio.url);
-                transporte.call("http://Servicios/consultarPesoImc", sobre);
+                transporte.call("http://Servicios/consultarVerificacionRutinaPacienteValores", sobre);
                 SoapObject temp=(SoapObject) sobre.bodyIn;
-
-                for(int a=0;a<temp.getPropertyCount();a++){
-                    tablaPesoImc.add(temp.getProperty(a).toString());
-                }
 
                 //Consulta del animo
                 solicitud = new SoapObject(Inicio.namespace, "consultarAnimo");
@@ -236,7 +259,7 @@ public class Evolucion extends AppCompatActivity {
                 //Acomodación de la consulta obtenida
                 // Nuevos vectores con tipos para los gráficos
                 //Vectores Peso IMC
-                final Vector <String> fechasX = new Vector();
+               /* final Vector <String> fechasX = new Vector();
                 Vector <Number> pesoX = new Vector();
                 Vector <Number> imcX = new Vector();
                 int i = 0;
@@ -268,7 +291,7 @@ public class Evolucion extends AppCompatActivity {
                     i = i+2;
                 }
                 //Vector glucosa
-                final Vector <String> fechasX4 = new Vector();
+                /*final Vector <String> fechasX4 = new Vector();
                 Vector <Integer> glucosaX = new Vector();
                 i = 0;
                 if(tablaGlucosa.size()>0 ){ i = tablaGlucosa.size()-0;}
@@ -307,6 +330,8 @@ public class Evolucion extends AppCompatActivity {
                         }
                     });
                 }
+
+
                 //Graficos Peso e IMC (2 en 1)-----------------------------------------------------------------
                 Number[] peso = pesoX.toArray(new Number[pesoX.size()]);
                 Number[] imc =  imcX.toArray(new Number[imcX.size()]);
@@ -389,14 +414,12 @@ public class Evolucion extends AppCompatActivity {
                     public StringBuffer format(long value, StringBuffer buffer, FieldPosition field) { return null; }
                     @Override
                     public Number parse(String string, ParsePosition position) { return null; }
-                });
+                });*/
+
             }
         }
 
     }
-
-
-
     // Datos generales del paciente  ---------------------------
     Vector datosPaciente = new Vector();
 

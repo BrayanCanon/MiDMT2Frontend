@@ -262,21 +262,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp" />
-            <com.androidplot.xy.XYPlot
-                android:id="@+id/id_hba1c"
-                androidPlot.title="Hemoglobina Glicosilada (HbA1c)"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="8dp" />
-
-            <TextView
-                android:id="@+id/textView66"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Valor promedio ideal: 7% "
-                android:textAlignment="center"
-                android:textSize="12sp" />
 
             <com.androidplot.xy.XYPlot
                 android:id="@+id/id_PlotPesoIMC"
@@ -295,11 +280,26 @@
                 android:textSize="12sp" />
 
             <com.androidplot.xy.XYPlot
+                android:id="@+id/id_hba1c"
+                androidPlot.title="Hemoglobina Glicosilada (HbA1c)"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/textView66"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Valor promedio ideal: 7% "
+                android:textAlignment="center"
+                android:textSize="12sp" />
+            <!--com.androidplot.xy.XYPlot
                 android:id="@+id/id_Ev_animo"
                 androidPlot.title="Estado de ánimo"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_margin="8dp" />
+                android:layout_margin="8dp" /-->
 
             <Button
                 android:id="@+id/id_borrar_paciente"

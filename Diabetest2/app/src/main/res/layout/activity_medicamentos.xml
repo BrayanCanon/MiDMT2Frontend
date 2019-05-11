@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_medicamentos"
+    android:background="@color/blanco"
     tools:context="juan.example.com.diabetest2.paciente.Medicamentos">
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/blanco75"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
                 android:layout_margin="4dp"
                 android:text="Mis medicamentos"
                 android:textAlignment="center"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/u_blue_darker"
                 android:textSize="24sp"
                 android:textStyle="bold|italic" />
 

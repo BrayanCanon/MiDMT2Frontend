@@ -58,5 +58,14 @@
             android:text="Ingresar"
             tools:layout_editor_absoluteX="113dp"
             tools:layout_editor_absoluteY="461dp" />
+
+        <Button
+            android:id="@+id/btn_regresar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:onClick="regresar"
+            android:text="Regresar"
+            tools:layout_editor_absoluteX="113dp"
+            tools:layout_editor_absoluteY="461dp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

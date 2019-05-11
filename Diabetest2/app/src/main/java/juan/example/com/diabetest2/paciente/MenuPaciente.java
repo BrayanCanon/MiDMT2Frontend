@@ -102,7 +102,7 @@ public void misones(View v){
     // Cuadro advertencia familiar
 public void invitarFamiliar(View v) {
     AlertDialog.Builder alerta = new AlertDialog.Builder(this);
-    alerta.setMessage("Invitar a un familiar, permite que alguien de su confianza pueda observar las recomendaciones que usted recibe de su psicólogo/a y participar en el proceso del apoyo a su enfermedad, para esto solo debe ingresar la identificación y correo de esa persona a continuación.");
+    alerta.setMessage("Invitar a un fa.miliar, permite que alguien de su confianza pueda observar las recomendaciones que usted recibe de su psicólogo/a y participar en el proceso del apoyo a su enfermedad, para esto solo debe ingresar la identificación y correo de esa persona a continuación.");
     alerta.setPositiveButton("Continuar",
             new DialogInterface.OnClickListener() {
 

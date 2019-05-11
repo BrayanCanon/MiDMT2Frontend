@@ -105,7 +105,7 @@ public class CrearPaciente extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), ""+respuesta, Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(getApplicationContext(), respuesta, Toast.LENGTH_LONG).show();
-                    abrir(null);
+                   abrir(null);
 
                     //Envio del correo de notificación
                     Intent i = new Intent(Intent.ACTION_SEND);

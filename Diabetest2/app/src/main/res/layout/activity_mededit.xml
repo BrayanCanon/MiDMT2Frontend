@@ -32,7 +32,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="Información de mi medicamento"
                 android:textAlignment="center"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/u_blue_darker"
                 android:textSize="24sp"
                 android:textStyle="bold|italic" />
 
@@ -41,8 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="codigo" />
+                android:hint="codigo"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/id_nombre_medicamento"
@@ -97,7 +97,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_weight="1"
                 android:text="Recordarme tomar este medicamento"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/u_blue_darker"
                 android:textSize="15sp" />
 
             <TextView
@@ -111,7 +111,9 @@
             <TimePicker
                 android:id="@+id/timePicker"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hapticFeedbackEnabled="true"
+                android:headerBackground="@color/u_blue_darker" />
 
             <Button
                 android:id="@+id/id_bt_guardar_medicamentom"

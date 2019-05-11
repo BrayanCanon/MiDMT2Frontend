@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_informacion"
+    android:background="@color/blanco"
     tools:context="juan.example.com.diabetest2.comunes.Informacion">
 
     <ScrollView
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="Conceptos e Información"
                 android:textAlignment="center"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/u_blue_darker"
                 android:textSize="24sp"
                 android:textStyle="bold|italic" />
 

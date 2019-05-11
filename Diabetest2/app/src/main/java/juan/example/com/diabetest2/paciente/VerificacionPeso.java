@@ -44,8 +44,6 @@ public class VerificacionPeso extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-
     }
     public void ingresar_verificacion_rutina(View v){
         valor = valorVerificacionRutina.getText().toString();
@@ -85,6 +83,11 @@ public class VerificacionPeso extends AppCompatActivity {
         }
     }
     public void regresar() {
+        Intent intento = new Intent(this, Evolucion.class);
+        startActivity(intento);
+    }
+
+    public void regresar(View v) {
         Intent intento = new Intent(this, Evolucion.class);
         startActivity(intento);
     }
