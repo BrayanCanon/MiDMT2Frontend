@@ -30,23 +30,13 @@
         tools:replace="android:label">
         <activity
             android:name=".paciente.VerificacionGlucosa"
-            android:label="@string/title_activity_verificacion_talla"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".paciente.VerificacionPeso"
-            android:label="@string/title_activity_verificacion_rutina"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".administrador.Inicio">
             <intent-filter>

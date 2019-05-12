@@ -113,7 +113,7 @@ public class Inicio extends AppCompatActivity {
         if(probarInternet() == false){
             Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
         } else{
-              //  chequearSesion();
+                chequearSesion();
         }
         //-----------------------------------------------------
         //-----------------------------------------------------
