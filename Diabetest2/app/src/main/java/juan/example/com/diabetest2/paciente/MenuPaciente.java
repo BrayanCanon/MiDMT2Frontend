@@ -63,7 +63,7 @@ public class MenuPaciente extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-//Menú escondido
+    //Menú escondido
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_paciente, menu);

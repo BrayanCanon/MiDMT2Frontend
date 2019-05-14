@@ -6,8 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="juan.example.com.diabetest2.paciente.MenuPaciente"
-    android:background="@drawable/bgapps">
+    android:background="@drawable/bgapps"
+    >
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="0dp"
@@ -17,7 +35,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginTop="35dp"
+        >
 
         <LinearLayout
             android:orientation="vertical"
@@ -50,7 +70,12 @@
                     android:layout_alignParentRight="true"
                     android:src="@drawable/icono_normal"
                     android:layout_height="62dp"
-                    android:layout_width="62dp" />
+                    android:layout_width="62dp"
+                    android:layout_marginRight="62dp"
+                    />
+
+
+
             </RelativeLayout>
 
             <GridLayout
