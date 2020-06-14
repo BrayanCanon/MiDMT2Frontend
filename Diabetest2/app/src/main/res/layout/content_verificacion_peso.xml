@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".paciente.VerificacionPeso"
+    tools:showIn="@layout/activity_verificacion_peso">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/nombreRutina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PESO"
+                android:textAlignment="center"
+                android:textColor="@color/u_blue_darker"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+            <ImageView
+                android:id="@+id/imageView43"
+                android:layout_width="234dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                app:srcCompat="@drawable/peso" />
+
+            <EditText
+                android:id="@+id/valor_verificacion_rutina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ingrésalo aquí"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="18sp"
+
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="375dp" />
+
+            <Button
+                android:id="@+id/boton_ingresar"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:onClick="ingresar_verificacion_rutina"
+                android:text="Ingresar"
+                tools:layout_editor_absoluteX="113dp"
+                tools:layout_editor_absoluteY="461dp" />
+            <Button
+                android:id="@+id/btn_regresar"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:onClick="regresar"
+                android:text="Regresar"
+                tools:layout_editor_absoluteX="113dp"
+                tools:layout_editor_absoluteY="461dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

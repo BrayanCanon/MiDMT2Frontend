@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profesional.modmision.Modpaso">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView143"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre" />
+
+        <EditText
+            android:id="@+id/nom3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView1463"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción" />
+
+        <EditText
+            android:id="@+id/desc3"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+            <RadioGroup
+                android:id="@+id/grupores"
+                android:checkedButton="@+id/radiono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <RadioButton
+                    android:id="@+id/radiosi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="si" />
+
+                <RadioButton
+                    android:id="@+id/radiono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="no" />
+
+            </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView1473"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dias" />
+
+        <EditText
+            android:id="@+id/dias3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberSigned" />
+
+        <Button
+            android:id="@+id/creacionb13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear"
+            android:onClick="modificacion"
+            />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

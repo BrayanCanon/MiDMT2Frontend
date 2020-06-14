@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bgapps"
+    tools:context=".paciente.BasicInfoMision">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            >
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imageView50"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:src="@drawable/achievement" />
+
+                    <TextView
+                        android:id="@+id/titulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Informacion basica"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="35sp"
+                        android:textAlignment="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView150"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Descripción:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/descripcionMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                       />
+
+                    <TextView
+                        android:id="@+id/textView145"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Categoria:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/catMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                         />
+
+                    <TextView
+                        android:id="@+id/textView152"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dificultad:"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/difMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="TextView"
+                        />
+
+                    <Button
+                        android:id="@+id/empMision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Empezar Misión" />
+
+                </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</FrameLayout>

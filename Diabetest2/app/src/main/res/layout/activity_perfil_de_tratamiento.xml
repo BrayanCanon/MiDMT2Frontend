@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profesional.PerfilDeTratamiento">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_x="87dp"
+            android:layout_y="21dp"
+            android:text="Perfil De Tratamiento"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/general"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Perfil General"
+            android:onClick="deselect"/>
+
+        <CheckBox
+            android:id="@+id/cardiacas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enfermedades Cardiacas" />
+
+        <CheckBox
+            android:id="@+id/renales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enfermedades Renales" />
+
+        <CheckBox
+            android:id="@+id/cardiovasculares"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enfermedades Cardiovasculares" />
+
+        <CheckBox
+            android:id="@+id/hipertensionArterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hipertension Arterial" />
+
+        <CheckBox
+            android:id="@+id/movilidadReducida"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movilidad Reducida"
+            android:onClick="movred"/>
+
+        <TextView
+            android:id="@+id/textView157"
+            tools:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Por Favor indique si la movilidad reducida es a causa de una extremidad faltante en caso de ser asi indique cual:"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/editText7"
+            tools:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="138dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Ingrese su Respuesta." />
+
+        <Button
+            android:id="@+id/Siguiente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"
+            android:onClick="iniciovolv"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
