@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -93,6 +94,7 @@ public class CrearPaciente extends AppCompatActivity {
                 transporte.call("http://Servicios/crearPaciente", sobre);
                 SoapPrimitive resultado = (SoapPrimitive) sobre.getResponse();
                 respuesta = resultado.toString();
+                Log.e("SOBREEEEEEEE", sobre.getResponse()+"");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -101,6 +103,7 @@ public class CrearPaciente extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             if (success == true) {
+                Log.e("ERROOOOOOOOOOOOOOOOOOOR", respuesta+" <- RESPUESTA");
                 if(respuesta.contains("existe")){
                     Toast.makeText(getApplicationContext(), ""+respuesta, Toast.LENGTH_LONG).show();
                 }else {

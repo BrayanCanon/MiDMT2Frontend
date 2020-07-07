@@ -1,0 +1,4 @@
+#Sat Jul 04 12:58:21 COT 2020
+base.0=C\:\\Users\\Acer\\Documents\\Auxiliar\\myDMT2Front\\dmt2FrontEnd\\dmt2FrontAndroid\\Diabetest2\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex

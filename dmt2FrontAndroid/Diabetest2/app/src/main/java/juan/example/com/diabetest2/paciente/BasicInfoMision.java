@@ -77,7 +77,7 @@ public class BasicInfoMision extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Bundle envio = getArguments();
+        Bundle envio =  getArguments();
         final MisionVo mision  = (MisionVo) envio.getSerializable("mision");
         final String idPaciente = envio.getString("codPaciente");
         boolean habEmpezarMision=envio.getBoolean("habEmpezarMision");

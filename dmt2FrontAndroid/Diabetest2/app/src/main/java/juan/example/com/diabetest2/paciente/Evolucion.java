@@ -117,6 +117,7 @@ public class Evolucion extends AppCompatActivity {
             pesoBoton.setVisibility(View.INVISIBLE);
             glucosaBoton.setVisibility(View.INVISIBLE);
         }
+
         Number[] valorGlucosa= {1,10,5,9,7,4};
         Number[] fechasGlucosa= {1,2,3,4,5,6};
         XYSeries seriesGlucosa = new SimpleXYSeries(

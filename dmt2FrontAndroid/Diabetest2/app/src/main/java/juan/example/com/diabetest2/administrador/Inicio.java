@@ -67,12 +67,13 @@ public class Inicio extends AppCompatActivity {
     //public static final String url = "http://192.168.1.5:8080/DT2/Procesos?wsdl";
     //public static final String urlImagenes = "http://18.218.252.83:8080/DT2/Imagenes/";
     //23.102.159.225
-    public static final String url = "http://23.102.159.225" +
-            ":8080/DT3/Procesos?wsdl";
-    public static final String urlVerificacion = "http://23.102.159.225" +
+    //public static final String url = "http://192.168.56.1" +
+      //      ":8080/DT3/Procesos?wsdl";
+    public static final String url = "http://192.168.0.10:8080/DT3/Procesos?wsdl";
+    public static final String urlVerificacion = "http://192.168.0.10" +
             ":8080/DT3/VerificacionRutinaWS?wsdl";
-    public static final String domain="http://23.102.159.225/DT3";
-    public static final String urlImagenes = "http://23.102.159.225:8080/DT3/Imagenes/";
+    public static final String domain="http://192.168.0.10:8080/DT3";
+    public static final String urlImagenes = "http://192.168.0.10:8080/DT3/Imagenes/";
 
     public static long id,idPaciente;
     public static String rol, preguntarAnimo,preguntarPeso,preguntarHba1c;
@@ -154,12 +155,19 @@ public class Inicio extends AppCompatActivity {
                 SoapObject solicitud = new SoapObject(namespace, metodo);
                 solicitud.addProperty("correo", a);
                 solicitud.addProperty("clave", b);
+                Log.e("Resultados", ""+ a + " - " + b );
                 SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                Log.e("Cero", "Pasa");
                 sobre.setOutputSoapObject(solicitud);
-                HttpTransportSE transporte = new HttpTransportSE(url);
+                Log.e("Primero", "Pasa");
+                HttpTransportSE transporte = new HttpTransportSE(url, 720000000);
+                Log.e("Segundo", transporte.toString()+"");
                 transporte.call(accionSoap, sobre);
+                Log.e("Tercero", "Pasa");
                 SoapPrimitive resultado = (SoapPrimitive) sobre.getResponse();
+                Log.e("Cuarto", "Pasa");
                 respuesta = resultado.toString();
+                Log.e("Resultado2", ""+ respuesta);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -28,7 +28,7 @@ import juan.example.com.diabetest2.administrador.ServicioDT2;
 public class FyC extends AppCompatActivity {
 
     EditText cc, or,ca;
-    RadioButton a,b,c,d,e,f,g,h,i,j,k,l,m,n;
+    RadioButton a,b,c,d,e,f,g,h,i,j,k,l,m,n, AlcoholNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class FyC extends AppCompatActivity {
         d = (RadioButton) findViewById(R.id.Si2);
 //Alcohol
         e = (RadioButton) findViewById(R.id.Si3); //Si bebe
+        AlcoholNo = (RadioButton)  findViewById(R.id.No3);
         ca = (EditText) findViewById(R.id.id_cantidad_alcohol);
         f = (RadioButton) findViewById(R.id.Si4);
  //enf toda la vida
@@ -85,8 +86,15 @@ public class FyC extends AppCompatActivity {
         else if(a.isChecked() && cc.getText().toString().length()<1){ Toast.makeText(getApplicationContext(), "Incoherencia: No se indicó la cantidad de cigarrillos", Toast.LENGTH_LONG).show();}
         else if(a.isChecked()==false && cc.getText().toString().length()>0){ Toast.makeText(getApplicationContext(), "Incoherencia: Se ingresaron cigarrillos pero no se fuma", Toast.LENGTH_LONG).show();}
         else {
-            FyC.consultar co = new FyC.consultar();
-            co.execute();
+            if(AlcoholNo.isChecked() && ca.getText().toString().length()>0)
+            {
+                Toast.makeText(getApplicationContext(), "Incoherencia: No bebe alcohol, pero se ingresaron datos.", Toast.LENGTH_LONG).show();
+            }
+            else{
+                FyC.consultar co = new FyC.consultar();
+                co.execute();
+            }
+
             //Toast.makeText(getApplicationContext(), "Consultara a bd", Toast.LENGTH_LONG).show();
         }
     }

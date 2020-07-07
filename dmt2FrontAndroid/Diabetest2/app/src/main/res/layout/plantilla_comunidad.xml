@@ -33,15 +33,6 @@
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/id_remitente_mensaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="@android:color/holo_green_dark"
-            android:textStyle="bold|italic" />
-
-        <TextView
             android:id="@+id/id_fecha_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +40,15 @@
             android:text="TextView"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/id_remitente_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
     <LinearLayout

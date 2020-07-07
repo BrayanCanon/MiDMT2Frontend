@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Fri Jun 19 16:30:59 COT 2020
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\Acer\\Documents\\Auxiliar\\myDMT2Front\\dmt2FrontEnd\\dmt2FrontAndroid\\Diabetest2\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+0.path=classes.dex
+0.set=DEX
+count=1

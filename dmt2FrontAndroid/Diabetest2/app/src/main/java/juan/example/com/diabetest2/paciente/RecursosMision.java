@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,8 +125,9 @@ public class RecursosMision extends Fragment {
             public void salidas(String output) {
                 Gson gson = new Gson();
                 JsonArray arreglo = gson.fromJson(output, JsonArray.class);
+                Log.e("EEEE", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+ arreglo.get(1));
                 JsonObject salida,usuario;
-                for(int i = 0; i<arreglo.size();i++){
+                for(int i = 1; i<arreglo.size();i++){
                     salida=arreglo.get(i).getAsJsonObject();
                     usuario=salida.get("nomUsuario").getAsJsonObject();
                     RecursoVo rec = new RecursoVo(salida.get("tituloRec").getAsString(),usuario.get("nomUsuario").getAsString(),salida.get("contenidoApoyo").getAsString(),salida.get("imagen").getAsString(),salida.get("fecha").getAsString(),salida.get("video").getAsString());
